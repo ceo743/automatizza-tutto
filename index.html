@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <title>Automatizza Tutto — Davide Caiazzo</title>
+  <meta name="description" content="Zero attività ripetitive. Ogni settimana un video con automazioni reali che puoi copiare. 497 euro al mese."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet"/>
+  <style>
+    /* ===== RESET ===== */
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:80px}
+    body{font-family:'Inter',sans-serif;background:#080b10;color:#fff;overflow-x:hidden}
+    a,button{cursor:pointer}
+    ::selection{background:rgba(212,175,55,0.3);color:#fff}
+    ::-webkit-scrollbar{width:4px}
+    ::-webkit-scrollbar-track{background:#080b10}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#D4AF37,#8B6914);border-radius:4px}
+
+    /* ===== CANVAS BG ===== */
+    #particleCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+    /* ===== TYPOGRAPHY ===== */
+    .h-hero{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,76px);font-weight:900;line-height:1.02;letter-spacing:-0.03em}
+    .h-lg{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,52px);font-weight:800;line-height:1.08;letter-spacing:-0.02em}
+    .h-md{font-size:clamp(17px,2vw,22px);font-weight:600;line-height:1.3}
+    .body-text{font-size:clamp(15px,1.1vw,17px);color:rgba(255,255,255,0.5);line-height:1.8;font-weight:300}
+    .label{font-size:11px;text-transform:uppercase;letter-spacing:4px;color:#D4AF37;font-weight:600}
+
+    /* ===== GOLD SHIMMER ===== */
+    .gold{background:linear-gradient(135deg,#BF953F 0%,#FCF6BA 25%,#B38728 50%,#FBF5B7 75%,#AA771C 100%);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:goldShimmer 6s ease infinite}
+    @keyframes goldShimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .gold-line{height:1px;background:linear-gradient(90deg,transparent 0%,rgba(212,175,55,0.08) 20%,rgba(212,175,55,0.3) 50%,rgba(212,175,55,0.08) 80%,transparent 100%)}
+
+    /* ===== BUTTONS ===== */
+    .btn-gold{display:inline-flex;align-items:center;gap:10px;padding:20px 48px;background:linear-gradient(135deg,#BF953F,#D4AF37);color:#000;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:2.5px;border:none;border-radius:60px;text-decoration:none;transition:all 0.5s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden;font-family:'Inter',sans-serif;box-shadow:0 4px 30px rgba(212,175,55,0.2)}
+    .btn-gold::before{content:'';position:absolute;inset:-2px;background:linear-gradient(135deg,#FCF6BA,#D4AF37,#BF953F,#FCF6BA);background-size:300% 300%;border-radius:60px;z-index:-1;animation:goldShimmer 4s ease infinite;filter:blur(8px);opacity:0;transition:opacity 0.5s}
+    .btn-gold:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 60px rgba(212,175,55,0.35)}
+    .btn-gold:hover::before{opacity:1}
+    .btn-gold span{position:relative;z-index:1}
+
+    /* ===== GLASS CARD ===== */
+    .glass{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:20px;position:relative;overflow:hidden;transition:transform 0.3s,background 0.3s}
+    .glass:hover{background:rgba(255,255,255,0.05);transform:translateY(-4px)}
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal{opacity:0;transform:translateY(60px);transition:all 1s cubic-bezier(0.16,1,0.3,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* ===== SECTIONS ===== */
+    .section{padding:140px 32px;position:relative;z-index:1}
+
+    /* ===== GLOW ORBS ===== */
+    .orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+
+    /* ===== NAV ===== */
+    .nav-link{color:rgba(255,255,255,0.45);text-decoration:none;font-size:13px;letter-spacing:0.5px;font-weight:400;transition:all 0.3s;position:relative}
+    .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#D4AF37;transition:width 0.3s}
+    .nav-link:hover{color:#D4AF37}
+    .nav-link:hover::after{width:100%}
+
+    /* ===== FORM ===== */
+    .form-field{width:100%;padding:18px 22px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;color:#fff;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:all 0.4s}
+    .form-field:focus{border-color:rgba(212,175,55,0.5);background:rgba(255,255,255,0.06);box-shadow:0 0 30px rgba(212,175,55,0.08)}
+    .form-field::placeholder{color:rgba(255,255,255,0.2)}
+
+    /* ===== BEFORE/AFTER ROWS ===== */
+    .ba-row{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;padding:24px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+    .ba-row:last-child{border-bottom:none}
+    .ba-before{text-align:right;color:rgba(255,255,255,0.4);font-size:15px;text-decoration:line-through;text-decoration-color:rgba(255,68,68,0.5)}
+    .ba-after{text-align:left;color:rgba(255,255,255,0.85);font-size:15px;font-weight:500}
+    .ba-arrow{color:#D4AF37;font-size:20px}
+
+    /* ===== ACCORDION ===== */
+    .accordion-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px;margin-bottom:12px;overflow:hidden;transition:all 0.3s}
+    .accordion-item:hover{border-color:rgba(212,175,55,0.15)}
+    .accordion-header{padding:20px 24px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all 0.3s;user-select:none}
+    .accordion-header:hover{background:rgba(212,175,55,0.04)}
+    .accordion-check{width:24px;height:24px;border-radius:8px;border:2px solid rgba(212,175,55,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s}
+    .accordion-item.checked .accordion-check{background:linear-gradient(135deg,#BF953F,#D4AF37);border-color:transparent}
+    .accordion-item.checked .accordion-check::after{content:'\2713';color:#000;font-size:14px;font-weight:700}
+    .accordion-title{font-size:16px;font-weight:600;flex:1;color:rgba(255,255,255,0.85)}
+    .accordion-arrow{color:rgba(255,255,255,0.2);font-size:20px;transition:transform 0.3s;flex-shrink:0}
+    .accordion-item.open .accordion-arrow{transform:rotate(180deg);color:#D4AF37}
+    .accordion-body{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1)}
+    .accordion-item.open .accordion-body{max-height:300px}
+    .accordion-body-inner{padding:0 24px 24px 64px;color:rgba(255,255,255,0.45);font-size:14px;line-height:1.8}
+
+    /* ===== MOCK SCREENSHOTS ===== */
+    .mock-email{background:linear-gradient(160deg,#1a1d2e,#12151c);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+    .mock-email-header{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:12px}
+    .mock-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#BF953F,#D4AF37);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#000}
+    .mock-email-body{padding:24px 20px}
+
+    .mock-report{background:linear-gradient(160deg,#1a1032,#12101c);border:1px solid rgba(140,80,255,0.12);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+    .mock-report-header{padding:20px 24px;border-bottom:1px solid rgba(140,80,255,0.1)}
+    .mock-report-body{padding:24px}
+    .mock-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+    .mock-stat{background:rgba(255,255,255,0.04);border-radius:12px;padding:16px;text-align:center}
+    .mock-stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:800}
+    .mock-stat-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.35);margin-top:4px}
+    .mock-table{width:100%;border-collapse:collapse}
+    .mock-table th{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.3);text-align:left;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .mock-table td{padding:12px;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.03)}
+    .mock-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+    .mock-badge.warm{background:rgba(255,180,0,0.15);color:#FFB400}
+    .mock-badge.hot{background:rgba(255,80,80,0.15);color:#FF5050}
+
+    .mock-calendar{background:linear-gradient(160deg,#1c1e2a,#12141e);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+    .mock-cal-header{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center}
+    .mock-cal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,0.03)}
+    .mock-cal-day{padding:8px;min-height:120px;background:#12141e}
+    .mock-cal-dayname{font-size:10px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+    .mock-cal-event{background:rgba(18,112,89,0.3);border-left:3px solid #127059;border-radius:4px;padding:4px 8px;margin-bottom:4px;font-size:10px;color:rgba(255,255,255,0.7)}
+    .mock-cal-event.confirmed{background:rgba(212,175,55,0.15);border-left-color:#D4AF37;color:rgba(212,175,55,0.9)}
+
+    /* ===== TESTIMONIAL CAROUSEL ===== */
+    @keyframes scrollTestimonials{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .testimonial-card{min-width:320px;max-width:320px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;cursor:pointer;transition:all 0.4s;flex-shrink:0}
+    .testimonial-card:hover{border-color:rgba(212,175,55,0.2);background:rgba(212,175,55,0.04)}
+    .tc-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+    .tc-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#BF953F,#D4AF37);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#000;font-family:'Playfair Display',serif;flex-shrink:0}
+    .tc-name{font-size:14px;font-weight:700;color:rgba(255,255,255,0.9)}
+    .tc-role{font-size:11px;color:rgba(255,255,255,0.3)}
+    .tc-stat{font-size:18px;font-weight:800;color:#D4AF37;margin-bottom:6px;font-family:'Playfair Display',serif}
+    .tc-numbers{font-size:12px;color:rgba(255,255,255,0.35);line-height:1.6;margin-bottom:10px}
+    .tc-link{font-size:11px;color:rgba(212,175,55,0.6);font-weight:600;letter-spacing:0.5px;transition:color 0.3s}
+    .testimonial-card:hover .tc-link{color:#D4AF37}
+
+    /* ===== PRICE CARD ===== */
+    .price-card{background:linear-gradient(160deg,rgba(212,175,55,0.08),rgba(212,175,55,0.02));border:1px solid rgba(212,175,55,0.15);border-radius:24px;padding:48px 40px;text-align:center;position:relative;overflow:hidden}
+    .price-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 30%,rgba(212,175,55,0.06),transparent 50%);pointer-events:none}
+    .price-amount{font-family:'Playfair Display',serif;font-size:72px;font-weight:900;line-height:1}
+    .price-period{font-size:18px;color:rgba(255,255,255,0.4);font-weight:400}
+
+    /* ===== AUDIO PLAYER ===== */
+    .audio-player{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;display:flex;align-items:center;gap:20px}
+    .audio-play-btn{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#BF953F,#D4AF37);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all 0.3s;box-shadow:0 4px 20px rgba(212,175,55,0.25)}
+    .audio-play-btn:hover{transform:scale(1.1);box-shadow:0 8px 30px rgba(212,175,55,0.4)}
+    .audio-play-btn svg{width:20px;height:20px;fill:#000;margin-left:3px}
+    .audio-wave{flex:1;height:40px;display:flex;align-items:center;gap:2px}
+    .audio-bar{width:3px;border-radius:2px;background:rgba(212,175,55,0.3);animation:audioWave 1.5s ease-in-out infinite}
+    @keyframes audioWave{0%,100%{height:8px;opacity:0.3}50%{height:100%;opacity:1}}
+
+    /* ===== COUNTDOWN ===== */
+    .countdown-wrap{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+    .countdown-item{text-align:center}
+    .countdown-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:#D4AF37;line-height:1}
+    .countdown-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-top:4px}
+    .countdown-sep{font-family:'Playfair Display',serif;font-size:36px;color:rgba(212,175,55,0.3);font-weight:800}
+
+    /* ===== CHECKBOX GROUP ===== */
+    .check-group{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .check-item{display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;cursor:pointer;transition:all 0.3s;user-select:none}
+    .check-item:hover{border-color:rgba(212,175,55,0.2);background:rgba(212,175,55,0.04)}
+    .check-item.selected{border-color:rgba(212,175,55,0.4);background:rgba(212,175,55,0.08)}
+    .check-item input[type="checkbox"]{accent-color:#D4AF37;width:18px;height:18px;flex-shrink:0}
+    .check-item label{font-size:13px;color:rgba(255,255,255,0.7);cursor:pointer;flex:1}
+
+    /* ===== RESPONSIVE ===== */
+    /* iPad / Tablet (up to 1024px) */
+    @media(max-width:1024px){
+      .hide-mobile{display:none!important}
+      .show-mobile{display:block!important}
+      .grid-3{grid-template-columns:repeat(2,1fr)!important}
+    }
+    /* Mobile (up to 768px) */
+    @media(max-width:768px){
+      .section{padding:80px 16px}
+      .grid-2{grid-template-columns:1fr!important}
+      .grid-3{grid-template-columns:1fr!important}
+      .grid-4{grid-template-columns:1fr!important}
+      .ba-row{grid-template-columns:1fr;gap:8px;text-align:center}
+      .ba-before,.ba-after{text-align:center}
+      .mock-stat-row{grid-template-columns:1fr 1fr}
+      .mock-cal-grid{grid-template-columns:repeat(2,1fr)!important}
+      .mock-cal-day:nth-child(5){display:none}
+      .check-group{grid-template-columns:1fr}
+      .countdown-num{font-size:36px}
+      .price-amount{font-size:56px}
+      .btn-gold{padding:16px 36px}
+      .testimonial-card{min-width:260px;max-width:260px}
+      .chi-sono-grid{grid-template-columns:1fr!important;text-align:center}
+      .chi-sono-grid>div:first-child{position:static!important;margin:0 auto}
+    }
+    /* Small mobile */
+    @media(max-width:480px){
+      .section{padding:60px 12px}
+      .h-hero{font-size:32px}
+      .mock-stat-row{grid-template-columns:1fr 1fr 1fr}
+      .mock-stat-num{font-size:20px!important}
+      .mock-stat{padding:10px!important}
+      .mock-cal-grid{grid-template-columns:1fr!important}
+      .mock-cal-day:nth-child(n+3){display:none}
+      .testimonial-card{min-width:240px;max-width:240px}
+      .price-amount{font-size:48px}
+    }
+    @media(min-width:1025px){.show-mobile{display:none!important}}
+  </style>
+</head>
+<body>
+
+<canvas id="particleCanvas"></canvas>
+
+<!-- ===== STICKY CTA BAR ===== -->
+<div id="stickyCta" style="position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(8,11,16,0.97);border-top:1px solid rgba(212,175,55,0.15);padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:20px;transform:translateY(100%);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)">
+  <p style="font-size:14px;color:rgba(255,255,255,0.6);font-weight:500" class="hide-mobile"><span class="gold" style="font-weight:700">497&euro;/mese</span> &mdash; Solo fino al 1 Maggio. Poi sale a <span style="color:#ff6b6b;font-weight:700">997&euro;</span>.</p>
+  <a href="#abbonati" class="btn-gold" style="padding:12px 28px;font-size:11px"><span>ABBONATI ORA &rarr;</span></a>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header id="header" style="position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:padding 0.3s;border-bottom:1px solid transparent;background:rgba(8,11,16,0.97)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between">
+    <a href="#" style="text-decoration:none;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:#fff;letter-spacing:1px;position:relative">
+      DAVIDE CAIAZZO
+      <span style="position:absolute;bottom:-2px;left:0;width:100%;height:1px;background:linear-gradient(90deg,#D4AF37,transparent);opacity:0.3"></span>
+    </a>
+    <nav class="hide-mobile" style="display:flex;gap:36px;align-items:center">
+      <a href="#come-funziona" class="nav-link">Come Funziona</a>
+      <a href="#automazioni" class="nav-link">Automazioni</a>
+      <a href="#esempi" class="nav-link">Esempi</a>
+      <a href="#abbonati" class="btn-gold" style="padding:10px 24px;font-size:12px"><span>ABBONATI ORA</span></a>
+    </nav>
+    <button class="show-mobile" id="menuBtn" onclick="toggleMenu()" style="background:none;border:none;z-index:101;padding:8px;position:relative;width:32px;height:32px" aria-label="Menu">
+      <span id="mb1" style="display:block;width:22px;height:1.5px;background:#fff;position:absolute;top:9px;left:5px;transition:all 0.4s"></span>
+      <span id="mb2" style="display:block;width:16px;height:1.5px;background:#D4AF37;position:absolute;top:16px;left:5px;transition:all 0.4s"></span>
+      <span id="mb3" style="display:block;width:22px;height:1.5px;background:#fff;position:absolute;top:23px;left:5px;transition:all 0.4s"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" style="position:fixed;inset:0;background:rgba(8,11,16,0.99);z-index:98;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;transform:translateX(100%);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)">
+  <a href="#come-funziona" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:28px;font-family:'Playfair Display',serif;opacity:0.8">Come Funziona</a>
+  <a href="#automazioni" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:28px;font-family:'Playfair Display',serif;opacity:0.8">Automazioni</a>
+  <a href="#esempi" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:28px;font-family:'Playfair Display',serif;opacity:0.8">Esempi</a>
+  <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.3),transparent)"></div>
+  <a href="#abbonati" onclick="closeMenu()" class="btn-gold"><span>ABBONATI ORA</span></a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section style="position:relative;overflow:hidden;padding:120px 32px 80px;min-height:90vh;display:flex;align-items:center">
+  <div class="orb" style="width:700px;height:700px;background:#D4AF37;top:-350px;right:-250px;opacity:0.06"></div>
+  <div class="orb" style="width:500px;height:500px;background:#127059;bottom:-250px;left:-200px;opacity:0.04;animation-delay:4s"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(212,175,55,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,0.015) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%)"></div>
+
+  <div style="max-width:960px;margin:0 auto;text-align:center;position:relative;z-index:2">
+    <p class="label reveal" style="margin-bottom:20px">Nuovo da Davide Caiazzo</p>
+    <h1 class="reveal" style="font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,72px);font-weight:900;line-height:1.05;margin-bottom:24px">
+      <span class="gold">Automatizza Tutto.</span><br>
+      <span style="font-size:clamp(20px,3vw,36px);color:rgba(255,255,255,0.6);font-weight:400;font-family:'Inter',sans-serif">Risparmia 20+ ore a settimana.</span>
+    </h1>
+    <p class="body-text reveal" style="max-width:640px;margin:0 auto 16px;font-size:clamp(16px,1.3vw,19px)">
+      Ogni settimana ti mostro un'automazione reale che uso nelle mie aziende.<br>Tu la copi in pochi minuti e non perdi mai più tempo a fare quel lavoro.
+    </p>
+    <p class="reveal" style="font-size:14px;color:rgba(255,255,255,0.3);margin-bottom:40px">
+      <strong style="color:#ff6b6b">497&euro;/mese solo fino al 1 Maggio</strong> &mdash; poi sale a 997&euro;/mese
+    </p>
+
+    <!-- Countdown -->
+    <div class="reveal" style="margin-bottom:48px">
+      <div style="background:rgba(255,68,68,0.06);border:1px solid rgba(255,68,68,0.2);border-radius:16px;padding:24px 32px;display:inline-block">
+        <p style="font-size:15px;color:#ff6b6b;font-weight:700;margin-bottom:6px">&#9200; 497&euro;/mese solo per chi si abbona prima del lancio</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:16px">Il 1 Maggio il prezzo sale a <strong style="color:#ff6b6b">997&euro;/mese</strong>. Mancano:</p>
+        <div class="countdown-wrap" id="countdown">
+        <div class="countdown-item"><div class="countdown-num" id="cd-days">--</div><div class="countdown-label">Giorni</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item"><div class="countdown-num" id="cd-hours">--</div><div class="countdown-label">Ore</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item"><div class="countdown-num" id="cd-mins">--</div><div class="countdown-label">Minuti</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item"><div class="countdown-num" id="cd-secs">--</div><div class="countdown-label">Secondi</div></div>
+      </div>
+      </div>
+    </div>
+
+    <a href="#abbonati" class="btn-gold reveal" style="font-size:14px;padding:20px 48px"><span>ABBONATI ORA A 497 &euro;/MESE &rarr;</span></a>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== IL PROBLEMA ===== -->
+<section class="section" style="position:relative">
+  <div class="orb" style="width:400px;height:400px;background:#ff4444;top:50%;left:-200px;transform:translateY(-50%);opacity:0.03"></div>
+  <div style="max-width:800px;margin:0 auto;text-align:center;position:relative;z-index:2">
+    <p class="label reveal" style="margin-bottom:16px">Lo sai già</p>
+    <h2 class="h-lg reveal" style="margin-bottom:32px">Stai perdendo ore ogni settimana<br>in <span style="color:#ff4444">lavoro che non dovresti fare tu.</span></h2>
+    <div class="reveal" style="display:grid;gap:16px;max-width:640px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
+        <span style="font-size:24px;flex-shrink:0">&#128236;</span>
+        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Ogni giorno fai le stesse cose: email, documenti, report, dati da copiare. Sempre uguali, sempre a mano.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
+        <span style="font-size:24px;flex-shrink:0">&#128203;</span>
+        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Contratti, preventivi, fatture, bandi di gara, due diligence, amministrazione. Lavoro che richiede concentrazione ma che si ripete identico ogni volta.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
+        <span style="font-size:24px;flex-shrink:0">&#128222;</span>
+        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Chiamate a freddo, profilazione lead, outbound, follow-up, comment marketing. Attività che funzionano ma ti mangiano le giornate.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
+        <span style="font-size:24px;flex-shrink:0">&#128176;</span>
+        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Il tuo tempo vale centinaia di euro l'ora. Ma lo stai spendendo per fare cose che una macchina farebbe meglio di te.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
+        <span style="font-size:24px;flex-shrink:0">&#9889;</span>
+        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Sai che l'AI potrebbe farti risparmiare ore. Ma non hai tempo di capire come. E intanto i tuoi concorrenti lo stanno già facendo.</p>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:32px;font-size:18px;color:rgba(255,255,255,0.7)">
+      Tutto questo <strong style="color:#fff">si può automatizzare</strong>. Io l'ho fatto.<br>E ogni settimana ti mostro <strong style="color:#D4AF37">come farlo anche tu.</strong>
+    </p>
+
+    <!-- PATTERN INTERRUPT — righe negative potenti -->
+    <div class="reveal" style="margin-top:48px;padding:32px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:20px">
+      <p style="font-size:clamp(15px,1.4vw,19px);color:rgba(255,255,255,0.35);line-height:2;text-align:center;font-weight:300">
+        Non ti insegno a usare ChatGPT.<br>
+        Non ti faccio vedere il tool del giorno.<br>
+        Non ti faccio fare i video con la faccia finta.<br>
+        Non ti racconto quello che ho letto su internet.
+      </p>
+      <p style="font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,40px);font-weight:900;color:#D4AF37;text-align:center;margin-top:24px;line-height:1.1">
+        Ti mostro quello che faccio io.<br>Tu lo copi.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== PRIMA/DOPO ===== -->
+<section id="automazioni" class="section" style="position:relative">
+  <div class="orb" style="width:500px;height:500px;background:#D4AF37;top:20%;right:-250px;opacity:0.04"></div>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:72px">
+      <p class="label reveal" style="margin-bottom:16px">Prima &amp; Dopo</p>
+      <h2 class="h-lg reveal">Quello che facevo a mano,<br>ora <span class="gold">lo fa l'AI per me</span></h2>
+      <p class="body-text reveal" style="margin-top:16px">Queste sono automazioni reali che uso ogni giorno nella mia azienda</p>
+    </div>
+
+    <div class="reveal" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px;overflow:hidden">
+      <div class="ba-row">
+        <div class="ba-before">Aprire le piattaforme ads, scaricare i dati, calcolare i costi, fare il report a mano</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">Ogni mattina alle 6 il report arriva nella mia email, già pronto con grafici e analisi</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before">Cercare contenuti virali su LinkedIn, Instagram e TikTok, tradurli, rifare la grafica, programmarli</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">L'AI li trova, li traduce, ricrea la grafica e li programma per la pubblicazione. Da sola.</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before">Rispondere al telefono, qualificare il lead, capire se è in target, prenotare la call</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">Un'AI chiama i lead, li qualifica con domande mirate e prenota la consulenza nel mio calendario</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before">Analizzare email e calendario per capire dove perdo tempo</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">Ogni lunedì alle 6 ricevo un report con le attività ripetitive da eliminare</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before">Scrivere script per i video social ogni volta partendo da zero</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">L'AI scrive gli script nel mio tono di voce, pronti da registrare</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before">Scrivere preventivi, proposte commerciali e documenti partendo ogni volta da zero</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">L'AI prende i dati dalla richiesta e genera il documento compilato in pochi secondi</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before">Mandare email di follow-up ai lead uno per uno dopo l'optin</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">Una sequenza automatica di email personalizzate parte da sola</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PER CHI È spostato dopo pricing -->
+<!-- SCREENSHOT rimossi per performance -->
+<!-- SKIP SCREENSHOTS
+<section id="esempi" class="section" style="position:relative">
+  <div style="max-width:1100px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:72px">
+      <p class="label reveal" style="margin-bottom:16px">Prove reali</p>
+      <h2 class="h-lg reveal">Questo è quello che ricevo<br><span class="gold">ogni mattina. In automatico.</span></h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px" class="grid-2">
+      <!-- Mock Report Lead Gen -->
+      <div class="reveal mock-report">
+        <div class="mock-report-header">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:18px">📊</span>
+            <div>
+              <p style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.85)">Report Lead Gen Ads</p>
+              <p style="font-size:11px;color:rgba(255,255,255,0.3)">Venerdi 3 aprile 2026 &mdash; Ultimi 7 giorni</p>
+            </div>
+          </div>
+        </div>
+        <div class="mock-report-body">
+          <!-- 6-stat grid like real report -->
+          <div class="mock-stat-row">
+            <div class="mock-stat"><div class="mock-stat-num" style="color:#a78bfa">41</div><div class="mock-stat-label">Lead totali</div></div>
+            <div class="mock-stat"><div class="mock-stat-num" style="color:#a78bfa;font-size:22px">&euro;1.247</div><div class="mock-stat-label">Spesa totale</div></div>
+            <div class="mock-stat"><div class="mock-stat-num" style="color:#22c55e">&euro;30.4</div><div class="mock-stat-label">CPL medio</div></div>
+          </div>
+          <div class="mock-stat-row">
+            <div class="mock-stat"><div class="mock-stat-num" style="color:#a78bfa">6</div><div class="mock-stat-label">Lead ieri</div></div>
+            <div class="mock-stat"><div class="mock-stat-num" style="color:#22c55e;font-size:16px">Scaling</div><div class="mock-stat-label">Fase campagna</div></div>
+            <div class="mock-stat"><div class="mock-stat-num" style="color:#FFB400">&euro;28.1</div><div class="mock-stat-label">CPL oggi</div></div>
+          </div>
+          <!-- Inserzioni -->
+          <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(140,80,255,0.08)">
+            <p style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.3);margin-bottom:10px">Inserzioni attive</p>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px">
+                <span style="font-size:12px;color:rgba(255,255,255,0.6)">[AI] Lead Gen - Broad IT v3</span>
+                <span style="font-size:11px;color:#22c55e">18 lead &middot; &euro;27.3</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px">
+                <span style="font-size:12px;color:rgba(255,255,255,0.6)">[AI] Lead Gen - Lookalike 2%</span>
+                <span style="font-size:11px;color:#22c55e">14 lead &middot; &euro;29.8</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px">
+                <span style="font-size:12px;color:rgba(255,255,255,0.6)">[AI] Lead Gen - Retargeting</span>
+                <span style="font-size:11px;color:#FFB400">9 lead &middot; &euro;36.2</span>
+              </div>
+            </div>
+          </div>
+          <!-- Demografici -->
+          <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(140,80,255,0.08)">
+            <p style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.3);margin-bottom:10px">Demografici</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div>
+                <p style="font-size:10px;color:rgba(255,255,255,0.25);margin-bottom:6px">Genere</p>
+                <div style="display:flex;gap:4px;align-items:end;height:32px">
+                  <div style="flex:1;background:rgba(140,80,255,0.3);border-radius:3px;height:85%"></div>
+                  <div style="flex:1;background:rgba(255,120,200,0.3);border-radius:3px;height:15%"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-top:4px">
+                  <span style="font-size:9px;color:rgba(255,255,255,0.3)">M 85%</span>
+                  <span style="font-size:9px;color:rgba(255,255,255,0.3)">F 15%</span>
+                </div>
+              </div>
+              <div>
+                <p style="font-size:10px;color:rgba(255,255,255,0.25);margin-bottom:6px">Età</p>
+                <div style="display:flex;gap:3px;align-items:end;height:32px">
+                  <div style="flex:1;background:rgba(140,80,255,0.15);border-radius:3px;height:20%"></div>
+                  <div style="flex:1;background:rgba(140,80,255,0.3);border-radius:3px;height:65%"></div>
+                  <div style="flex:1;background:rgba(140,80,255,0.5);border-radius:3px;height:100%"></div>
+                  <div style="flex:1;background:rgba(140,80,255,0.3);border-radius:3px;height:45%"></div>
+                  <div style="flex:1;background:rgba(140,80,255,0.15);border-radius:3px;height:10%"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-top:4px">
+                  <span style="font-size:8px;color:rgba(255,255,255,0.25)">25</span>
+                  <span style="font-size:8px;color:rgba(255,255,255,0.25)">35</span>
+                  <span style="font-size:8px;color:rgba(255,255,255,0.25)">45</span>
+                  <span style="font-size:8px;color:rgba(255,255,255,0.25)">55</span>
+                  <span style="font-size:8px;color:rgba(255,255,255,0.25)">65</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Note Strategiche -->
+          <div style="margin-top:16px;padding:14px;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.12);border-radius:10px">
+            <p style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#D4AF37;margin-bottom:8px">📋 Note strategiche</p>
+            <p style="font-size:11px;color:rgba(255,255,255,0.5);line-height:1.7">CPL in calo del 12% rispetto alla settimana precedente. La Broad IT v3 performa meglio della Lookalike. Consiglio: aumentare budget su Broad e ridurre Retargeting (CPL troppo alto).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mock Content Report -->
+      <div class="reveal mock-email">
+        <div class="mock-email-header">
+          <div class="mock-avatar">DC</div>
+          <div>
+            <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8)">Report Contenuti Social</p>
+            <p style="font-size:11px;color:rgba(255,255,255,0.3)">3 Aprile 2026, 09:09</p>
+          </div>
+        </div>
+        <div class="mock-email-body">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+            <span style="font-size:18px">🎯</span>
+            <p style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:#D4AF37">Report Contenuti Social &mdash; 3 Aprile 2026</p>
+          </div>
+          <p style="font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:20px;line-height:1.6">Ecco i 5 post pronti per oggi. <strong style="color:rgba(255,255,255,0.8)">Devi solo approvarli e pubblicarli.</strong></p>
+          <div style="background:rgba(255,255,255,0.03);border-radius:12px;padding:16px;margin-bottom:12px">
+            <p style="font-size:12px;font-weight:700;color:#D4AF37;margin-bottom:6px">POST 1 &mdash; Leadership</p>
+            <p style="font-size:13px;color:rgba(255,255,255,0.5);font-style:italic">"Smetti di inseguire il lavoro dei sogni."</p>
+            <p style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:6px">Fonte: Cicely Si<span style="filter:blur(3px)">mpson</span> (11.5k like)</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);border-radius:12px;padding:16px;margin-bottom:12px">
+            <p style="font-size:12px;font-weight:700;color:#D4AF37;margin-bottom:6px">POST 2 &mdash; Produttivita</p>
+            <p style="font-size:13px;color:rgba(255,255,255,0.5);font-style:italic">"Il successo non è lavorare di più, è lavorare meglio."</p>
+            <p style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:6px">Fonte: James Ro<span style="filter:blur(3px)">berts</span> (8.2k like)</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);border-radius:12px;padding:16px">
+            <p style="font-size:12px;font-weight:700;color:#D4AF37;margin-bottom:6px">POST 3 &mdash; Mindset</p>
+            <p style="font-size:13px;color:rgba(255,255,255,0.5);font-style:italic">"Non aspettare il momento perfetto. Crealo adesso."</p>
+            <p style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:6px">Fonte: Sarah St<span style="filter:blur(3px)">ewart</span> (6.7k like)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calendario Mock -->
+    <div class="reveal" style="margin-top:32px">
+      <p style="text-align:center;font-size:13px;color:rgba(255,255,255,0.3);margin-bottom:16px;letter-spacing:1px">IL MIO CALENDARIO &mdash; APPUNTAMENTI PRENOTATI DALL'AI</p>
+      <div class="mock-calendar">
+        <div class="mock-cal-header">
+          <span style="font-family:'Playfair Display',serif;font-size:18px;font-weight:800">Aprile 2026</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.3)">Settimana 15</span>
+        </div>
+        <div class="mock-cal-grid">
+          <div class="mock-cal-day">
+            <div class="mock-cal-dayname">Lun 6</div>
+            <div class="mock-cal-event">Consulenza &mdash; Luca Ma<span style="filter:blur(4px)">rchi</span></div>
+            <div class="mock-cal-event confirmed">Conferma &mdash; Andrea Ro<span style="filter:blur(4px)">ssi</span></div>
+            <div class="mock-cal-event">Consulenza &mdash; Giuseppe Be<span style="filter:blur(4px)">rti</span></div>
+            <div class="mock-cal-event confirmed">Conferma &mdash; Paolo Vi<span style="filter:blur(4px)">tali</span></div>
+          </div>
+          <div class="mock-cal-day">
+            <div class="mock-cal-dayname">Mar 7</div>
+            <div class="mock-cal-event">Consulenza &mdash; Fabio De<span style="filter:blur(4px)">luca</span></div>
+            <div class="mock-cal-event">Consulenza &mdash; Marco Te<span style="filter:blur(4px)">sta</span></div>
+            <div class="mock-cal-event confirmed">Conferma &mdash; Sara Lo<span style="filter:blur(4px)">ngo</span></div>
+            <div class="mock-cal-event">Consulenza &mdash; Roberto Co<span style="filter:blur(4px)">sta</span></div>
+            <div class="mock-cal-event confirmed">Conferma &mdash; Antonio Pa<span style="filter:blur(4px)">ce</span></div>
+            <div class="mock-cal-event">Consulenza &mdash; Davide Fe<span style="filter:blur(4px)">rro</span></div>
+          </div>
+          <div class="mock-cal-day">
+            <div class="mock-cal-dayname">Mer 8</div>
+            <div class="mock-cal-event">Consulenza &mdash; Nicola Ga<span style="filter:blur(4px)">llo</span></div>
+            <div class="mock-cal-event confirmed">Conferma &mdash; Elena Ma<span style="filter:blur(4px)">rini</span></div>
+            <div class="mock-cal-event">Consulenza &mdash; Valentina Sa<span style="filter:blur(4px)">la</span></div>
+            <div class="mock-cal-event confirmed">Conferma &mdash; Lorenzo Re<span style="filter:blur(4px)">ale</span></div>
+            <div class="mock-cal-event">Consulenza &mdash; Chiara Am<span style="filter:blur(4px)">ato</span></div>
+          </div>
+          <div class="mock-cal-day">
+            <div class="mock-cal-dayname">Gio 9</div>
+            <div class="mock-cal-event">Consulenza &mdash; Bruno Na<span style="filter:blur(4px)">poli</span></div>
+            <div class="mock-cal-event confirmed">Conferma &mdash; Tommaso Ca<span style="filter:blur(4px)">ruso</span></div>
+            <div class="mock-cal-event">Consulenza &mdash; Alessandro Vi<span style="filter:blur(4px)">lla</span></div>
+            <div class="mock-cal-event">Consulenza &mdash; Giulia Mo<span style="filter:blur(4px)">retti</span></div>
+          </div>
+          <div class="mock-cal-day">
+            <div class="mock-cal-dayname">Ven 10</div>
+            <div class="mock-cal-event confirmed">Conferma &mdash; Ivan Da<span style="filter:blur(4px)">mico</span></div>
+            <div class="mock-cal-event">Consulenza &mdash; Omar Ba<span style="filter:blur(4px)">ssi</span></div>
+            <div class="mock-cal-event">Consulenza &mdash; Francesca Pe<span style="filter:blur(4px)">sce</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+-->
+<div class="gold-line"></div>
+
+<!-- ===== COME FUNZIONA (con posizionamento integrato) ===== -->
+<section id="come-funziona" class="section" style="position:relative;overflow:hidden">
+  <div class="orb" style="width:600px;height:600px;background:#D4AF37;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.04"></div>
+  <div style="max-width:800px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:72px">
+      <div class="reveal" style="margin-bottom:40px">
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,56px);font-weight:900;line-height:1.1;margin-bottom:24px">
+          Ti vendo l'unica cosa<br>che <span class="gold">non puoi comprare.</span>
+        </h2>
+        <p style="font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,72px);font-weight:900;color:#D4AF37;line-height:1">
+          Il tempo.
+        </p>
+      </div>
+      <p class="label reveal" style="margin-bottom:16px">Come funziona</p>
+      <h3 class="h-lg reveal">Un video a settimana.<br><span class="gold">Un'automazione alla volta.</span></h3>
+    </div>
+    <div style="display:grid;gap:24px">
+      <div class="glass reveal" style="padding:36px 32px;display:flex;gap:24px;align-items:flex-start">
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#BF953F,#D4AF37);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:#000;flex-shrink:0">1</div>
+        <div>
+          <h3 class="h-md" style="margin-bottom:8px">Guardi il video</h3>
+          <p class="body-text" style="font-size:14px">Ogni settimana pubblico un video di 10-15 minuti dove mostro un'automazione reale che uso nella mia azienda. Niente teoria, solo pratica.</p>
+        </div>
+      </div>
+      <div class="glass reveal" style="padding:36px 32px;display:flex;gap:24px;align-items:flex-start">
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#BF953F,#D4AF37);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:#000;flex-shrink:0">2</div>
+        <div>
+          <h3 class="h-md" style="margin-bottom:8px">La copi</h3>
+          <p class="body-text" style="font-size:14px">Ti mostro passo passo come replicare l'automazione nel tuo lavoro. Non serve essere tecnici. Se sai usare un computer, puoi farlo.</p>
+        </div>
+      </div>
+      <div class="glass reveal" style="padding:36px 32px;display:flex;gap:24px;align-items:flex-start">
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#BF953F,#D4AF37);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:#000;flex-shrink:0">3</div>
+        <div>
+          <h3 class="h-md" style="margin-bottom:8px">Risparmi ore. Ogni settimana.</h3>
+          <p class="body-text" style="font-size:14px">Ogni automazione che aggiungi è tempo che non perdi più. Dopo un mese hai già eliminato ore di lavoro inutile ogni settimana. E si accumula.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== PRIMI VIDEO IN PROGRAMMA ===== -->
+<section class="section" style="position:relative">
+  <div class="orb" style="width:500px;height:500px;background:#D4AF37;bottom:-250px;right:-200px;opacity:0.04;animation-delay:3s"></div>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:56px">
+      <p class="label reveal" style="margin-bottom:16px">Anteprima</p>
+      <h2 class="h-lg reveal">Ecco cosa troverai<br><span class="gold">nei primi video.</span></h2>
+      <p class="body-text reveal" style="margin-top:16px">Queste sono le automazioni che pubblicherò dal 1 Maggio. Ognuna è qualcosa che uso ogni giorno.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="grid-2">
+      <div class="glass reveal" style="padding:28px 24px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
+          <div style="width:40px;height:40px;border-radius:12px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#D4AF37;flex-shrink:0">01</div>
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.25)">Settimana 1</p>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:8px">Contratti e documenti compilati in automatico</h3>
+        <p style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7">Dai un template e una richiesta (email, form, messaggio). L'AI estrae i dati e genera il documento compilato. Perfetto per bandi, preventivi, fatture.</p>
+      </div>
+
+      <div class="glass reveal" style="padding:28px 24px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
+          <div style="width:40px;height:40px;border-radius:12px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#D4AF37;flex-shrink:0">02</div>
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.25)">Settimana 2</p>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:8px">AI che chiama i lead e prenota consulenze</h3>
+        <p style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7">Un'AI telefona ai tuoi lead, li qualifica con domande mirate, e prenota l'appuntamento nel tuo calendario. Da sola. Senza segretaria.</p>
+      </div>
+
+      <div class="glass reveal" style="padding:28px 24px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
+          <div style="width:40px;height:40px;border-radius:12px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#D4AF37;flex-shrink:0">03</div>
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.25)">Settimana 3</p>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:8px">Post social trovati, tradotti e programmati dall'AI</h3>
+        <p style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7">L'AI cerca i post virali nel tuo settore, li traduce nel tuo stile, ricrea la grafica e li programma per la pubblicazione. Tu trovi tutto pronto.</p>
+      </div>
+
+      <div class="glass reveal" style="padding:28px 24px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
+          <div style="width:40px;height:40px;border-radius:12px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#D4AF37;flex-shrink:0">04</div>
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.25)">Settimana 4</p>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:8px">Outbound e profilazione lead automatizzata</h3>
+        <p style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7">L'AI profila i prospect, scrive messaggi personalizzati per ognuno e gestisce il follow-up. Outbound su scala senza assumere nessuno.</p>
+      </div>
+
+      <div class="glass reveal" style="padding:28px 24px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
+          <div style="width:40px;height:40px;border-radius:12px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#D4AF37;flex-shrink:0">05</div>
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.25)">Settimana 5</p>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:8px">Report automatico ogni mattina nella tua email</h3>
+        <p style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7">L'AI raccoglie dati da tutte le tue fonti (ads, analytics, gestionale), calcola KPI e trend, e ti manda il report pronto alle 6 di mattina. Ogni giorno. Senza toccare nulla.</p>
+      </div>
+
+      <div class="glass reveal" style="padding:28px 24px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
+          <div style="width:40px;height:40px;border-radius:12px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#D4AF37;flex-shrink:0">06</div>
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.25)">Settimana 6</p>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:8px">Comment marketing su LinkedIn con l'AI</h3>
+        <p style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7">L'AI monitora i post dei tuoi prospect, scrive commenti intelligenti e personalizzati nel tuo tono di voce. Tu diventi visibile senza perdere ore a scrollare.</p>
+      </div>
+    </div>
+
+    <p class="reveal" style="text-align:center;margin-top:32px;font-size:14px;color:rgba(255,255,255,0.3)">E ogni settimana se ne aggiunge una nuova. Pi&ugrave; resti, pi&ugrave; automazioni accumuli.</p>
+    <div class="reveal" style="text-align:center;margin-top:24px">
+      <a href="#abbonati" class="btn-gold" style="padding:16px 36px;font-size:12px"><span>ABBONATI ORA A 497 &euro;/MESE &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== QUANTO COSTA NON AUTOMATIZZARE ===== -->
+<section class="section" style="position:relative">
+  <div style="max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:2">
+    <p class="label reveal" style="margin-bottom:16px">Facciamo due conti</p>
+    <h2 class="h-lg reveal" style="margin-bottom:16px">Quanto ti costa<br><span style="color:#ff4444">NON</span> <span class="gold">automatizzare?</span></h2>
+    <p class="body-text reveal" style="margin-bottom:48px;max-width:640px;margin-left:auto;margin-right:auto">Oggi paghi persone per fare lavoro ripetitivo. L'AI non sostituisce il tuo team: lo libera per fare cose che contano davvero.</p>
+
+    <div class="reveal" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:40px 32px">
+      <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:24px">Quanto spendi oggi per queste attività</p>
+
+      <!-- Cost items -->
+      <div style="display:grid;gap:12px;max-width:600px;margin:0 auto;text-align:left">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.08);border-radius:12px">
+          <span style="font-size:14px;color:rgba(255,255,255,0.6)">Social media manager</span>
+          <span style="font-size:15px;font-weight:700;color:#ff6b6b">1.500&euro;/mese</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.08);border-radius:12px">
+          <span style="font-size:14px;color:rgba(255,255,255,0.6)">Amministrazione e fatturazione</span>
+          <span style="font-size:15px;font-weight:700;color:#ff6b6b">1.800&euro;/mese</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.08);border-radius:12px">
+          <span style="font-size:14px;color:rgba(255,255,255,0.6)">Setter / chiamate a freddo</span>
+          <span style="font-size:15px;font-weight:700;color:#ff6b6b">1.200&euro;/mese</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.08);border-radius:12px">
+          <span style="font-size:14px;color:rgba(255,255,255,0.6)">Report, analisi dati, controllo KPI</span>
+          <span style="font-size:15px;font-weight:700;color:#ff6b6b">1.000&euro;/mese</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.08);border-radius:12px">
+          <span style="font-size:14px;color:rgba(255,255,255,0.6)">Customer care e risposte clienti</span>
+          <span style="font-size:15px;font-weight:700;color:#ff6b6b">1.500&euro;/mese</span>
+        </div>
+      </div>
+
+      <!-- Totale vs 497 -->
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;margin-top:32px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06)" class="grid-2">
+        <div style="text-align:center">
+          <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.25);margin-bottom:12px">Costo attuale</p>
+          <p style="font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:#ff4444;line-height:1">7.000&euro;</p>
+          <p style="font-size:12px;color:rgba(255,68,68,0.5);margin-top:6px">al mese, minimo</p>
+        </div>
+        <div style="font-size:28px;color:rgba(255,255,255,0.15)">&rarr;</div>
+        <div style="text-align:center">
+          <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.25);margin-bottom:12px">Automatizza Tutto</p>
+          <p style="font-family:'Playfair Display',serif;font-size:42px;font-weight:900;line-height:1"><span class="gold">497&euro;</span></p>
+          <p style="font-size:12px;color:rgba(212,175,55,0.5);margin-top:6px">al mese, tutto incluso</p>
+        </div>
+      </div>
+
+      <!-- Nota importante -->
+      <div style="margin-top:24px;padding:20px 24px;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.12);border-radius:14px;margin-bottom:16px">
+        <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7">
+          <strong style="color:#D4AF37">Non devi licenziare nessuno.</strong> Automatizzi le attività ripetitive e il tuo team si concentra su quello che genera fatturato: vendere, chiudere clienti, far crescere l'azienda. Oppure fai tutto senza assumere nessuno.
+        </p>
+      </div>
+      <div style="padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
+        <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7">
+          <strong style="color:rgba(255,255,255,0.85)">E no, non è "copia-incolla su ChatGPT".</strong> L'AI scansiona le email ogni ora e ti manda le bozze di risposta. Tu dici solo "ok". Dopo una settimana che le approvi tutte, non devi più dire nemmeno ok: ti arriva solo un recap a fine giornata con quello che ha fatto. Questo per ogni attività. Sistemi che girano da soli, 24/7.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== COSA NON SI PUÒ AUTOMATIZZARE ===== -->
+<section class="section" style="position:relative">
+  <div style="max-width:800px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:48px">
+      <p class="label reveal" style="margin-bottom:16px">Onestà totale</p>
+      <h2 class="h-lg reveal">Cosa <span style="color:#ff4444">non</span> si può<br><span class="gold">automatizzare?</span></h2>
+      <p class="body-text reveal" style="margin-top:16px;max-width:600px;margin-left:auto;margin-right:auto">L'AI è potente, ma non fa tutto. Queste cose richiedono te. E sono le uniche cose su cui dovresti spendere il tuo tempo.</p>
+    </div>
+
+    <div class="reveal" style="display:grid;gap:14px;max-width:640px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
+        <span style="font-size:22px;flex-shrink:0">&#129504;</span>
+        <div>
+          <p style="font-size:15px;color:rgba(255,255,255,0.85);font-weight:600">Prendere decisioni strategiche</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:4px">Dove investire, quale mercato aggredire, chi assumere. Questo è il tuo lavoro.</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
+        <span style="font-size:22px;flex-shrink:0">&#129309;</span>
+        <div>
+          <p style="font-size:15px;color:rgba(255,255,255,0.85);font-weight:600">Costruire relazioni vere</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:4px">La stretta di mano, la cena col cliente, la fiducia. Nessuna AI sostituisce la tua presenza.</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
+        <span style="font-size:22px;flex-shrink:0">&#127919;</span>
+        <div>
+          <p style="font-size:15px;color:rgba(255,255,255,0.85);font-weight:600">Chiudere vendite complesse</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:4px">L'AI qualifica i lead e prenota le call. Ma chiudere il contratto da 50k? Quello lo fai tu.</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
+        <span style="font-size:22px;flex-shrink:0">&#128161;</span>
+        <div>
+          <p style="font-size:15px;color:rgba(255,255,255,0.85);font-weight:600">Avere idee originali</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:4px">L'AI esegue, rielabora, velocizza. Ma la visione, l'intuizione, il colpo di genio vengono da te.</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
+        <span style="font-size:22px;flex-shrink:0">&#128119;</span>
+        <div>
+          <p style="font-size:15px;color:rgba(255,255,255,0.85);font-weight:600">Guidare le persone</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:4px">Motivare il team, gestire i conflitti, ispirare. La leadership non si delega a una macchina.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="text-align:center;margin-top:40px;padding:24px 32px;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.12);border-radius:16px;max-width:640px;margin-left:auto;margin-right:auto">
+      <p style="font-size:16px;color:rgba(255,255,255,0.7);line-height:1.7">
+        <strong style="color:#D4AF37">Tutto il resto?</strong> Report, email, documenti, fatture, contenuti, chiamate, follow-up, profilazione, analisi dati...<br>
+        <strong style="color:#fff">Quello lo fa l'AI. Meglio di te e in una frazione del tempo.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== AUDIO DEMO STEFANIA ===== -->
+<section class="section" style="position:relative">
+  <div style="max-width:800px;margin:0 auto;text-align:center;position:relative;z-index:2">
+    <p class="label reveal" style="margin-bottom:16px">Ascolta</p>
+    <h2 class="h-lg reveal" style="margin-bottom:12px">Questa è <span class="gold">Stefania.</span></h2>
+    <p class="body-text reveal" style="margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto">
+      È un'AI che chiama i nostri lead al telefono, li qualifica con domande mirate e prenota le consulenze nel calendario. In 3 minuti fa quello che un setter farebbe in 15. Questo è solo <strong style="color:#fff">uno degli esempi</strong> di cosa imparerai ad automatizzare.
+    </p>
+    <div class="reveal" style="max-width:600px;margin:0 auto">
+      <audio id="stefaniaAudio" src="stefania-demo.mp3" preload="metadata"></audio>
+      <div class="audio-player" id="audioPlayerWrap">
+        <div class="audio-play-btn" id="audioPlayBtn" onclick="toggleAudio()">
+          <svg viewBox="0 0 24 24" id="audioIcon" style="width:20px;height:20px;fill:#000;margin-left:3px"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+          <div style="position:relative;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;cursor:pointer" id="audioProgress" onclick="seekAudio(event)">
+            <div id="audioBar" style="height:100%;width:0%;background:linear-gradient(90deg,#BF953F,#D4AF37);border-radius:3px;transition:width 0.1s"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span style="font-size:11px;color:rgba(255,255,255,0.25)" id="audioCurrentTime">0:00</span>
+            <span style="font-size:11px;color:rgba(255,255,255,0.25)" id="audioDuration">--:--</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="reveal" style="font-size:12px;color:rgba(255,255,255,0.2);margin-top:16px">Registrazione reale di una chiamata di test con Stefania AI</p>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ACCORDION RIMOSSO — ridondante con "Primi Video" -->
+<!-- SKIP TO
+<section class="section" style="position:relative">
+  <div style="max-width:800px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:72px">
+      <p class="label reveal" style="margin-bottom:16px">Esempi pratici</p>
+      <h2 class="h-lg reveal">Non sai cosa puoi automatizzare?<br><span class="gold">Guarda qui.</span></h2>
+      <p class="body-text reveal" style="margin-top:16px">Clicca su ogni voce per scoprire come funziona nella pratica</p>
+    </div>
+
+    <div class="reveal">
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Compilare fatture, preventivi e documenti</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Hai un PDF del fornitore? L'AI lo legge, estrae i dati (nome, importi, date, codici) e compila la fattura nel tuo gestionale. Hai 50 fatture uguali con importi diversi? Gli dai il file e te le genera tutte in 2 minuti. Tuo padre che perde ore a copiare dati dal documento alla fattura? Non deve più farlo.
+        </div></div>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Copiare dati da un file all'altro</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Prendi dati da un PDF e li metti in un foglio? Copi numeri da un'email e li incolli nel gestionale? L'AI legge qualsiasi formato (documenti, email, immagini, fogli di calcolo) e sposta i dati dove servono. Tu non tocchi nulla. E non sbaglia mai un numero.
+        </div></div>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Scrivere email di risposta sempre uguali</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Ricevi 20 email al giorno con la stessa domanda? L'AI legge l'email, capisce cosa serve, e scrive la risposta personalizzata con il tuo tono di voce. Tu la leggi, approvi con un click e invii. Da 10 minuti per email a 10 secondi.
+        </div></div>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Creare report con dati da fonti diverse</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Ogni settimana apri 5 tab, scarichi dati, fai calcoli, impagini il report. L'AI prende i dati da tutte le fonti (ads, analytics, gestionale, fogli di calcolo), li elabora e ti manda il report finito con grafici e analisi. Nella tua email. Ogni mattina.
+        </div></div>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Scrivere post e contenuti per i social</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          L'AI analizza i post virali nel tuo settore, li traduce, li adatta al tuo stile, ricrea le grafiche e li programma per la pubblicazione. Tu trovi 5 bozze pronte ogni mattina. Devi solo approvare e pubblicare. O non fare nemmeno quello.
+        </div></div>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Compilare contratti da template</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Fai 30 contratti uguali cambiando solo nomi, date e importi? L'AI prende i dati dalla richiesta (email, form, messaggio) e genera il contratto compilato in 10 secondi. Perfetto per avvocati, commercialisti, HR, assicuratori, agenzie.
+        </div></div>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Rispondere a commenti e messaggi</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          L'AI legge i commenti sui tuoi post, capisce il contesto e scrive risposte intelligenti e personalizzate. Non risposte generiche da bot, ma risposte che sembrano scritte da te. Funziona su qualsiasi piattaforma: social, email, messaggistica.
+        </div></div>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Cercare informazioni e riassumerle</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Devi preparare una riunione e ti servono dati su un'azienda? L'AI cerca online, analizza il sito, i social, le news e ti prepara un briefing completo in 2 minuti. Perfetto per venditori, consulenti e chiunque debba prepararsi prima di una call.
+        </div></div>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Gestire appuntamenti e follow-up clienti</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          L'AI chiama i lead, li qualifica, prenota l'appuntamento e manda il messaggio di conferma. Se non rispondono, fa il follow-up dopo 24h. Tu apri il calendario e trovi gli appuntamenti già fissati con persone qualificate.
+        </div></div>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Analizzare dati e fare calcoli ricorrenti</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Ogni fine mese passi ore a calcolare KPI, margini, percentuali? L'AI prende i dati grezzi, fa tutti i calcoli, identifica trend e anomalie, e ti presenta i risultati in un dashboard chiaro. Zero errori. Zero tempo perso.
+        </div></div>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Scrivere script per video e ads</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          L'AI conosce il tuo tono di voce, il tuo pubblico e i tuoi obiettivi. Le dici "scrivi uno script per un video sulle automazioni" e in 30 secondi hai lo script pronto. Vuoi 10 varianti per le ads? Le genera tutte. Tu scegli la migliore.
+        </div></div>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Customer care e risposte ai clienti</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          I clienti fanno sempre le stesse domande? L'AI conosce i tuoi prodotti, le tue policy, i tuoi prezzi. Risponde in modo preciso e personalizzato via email, chat o messaggistica. Le domande complesse te le gira. Quelle semplici le gestisce da sola.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+-->
+<div class="gold-line"></div>
+
+<!-- ===== TESTIMONIAL CAROUSEL ===== -->
+<section class="section" style="position:relative;overflow:hidden">
+  <div style="max-width:1200px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:56px">
+      <p class="label reveal" style="margin-bottom:16px">Risultati verificabili</p>
+      <h2 class="h-lg reveal">Oltre 100 professionisti<br>che <span class="gold">si fidano di Davide</span></h2>
+    </div>
+
+    <!-- Scrolling testimonial strip -->
+    <div class="reveal" style="position:relative">
+      <div style="overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)">
+        <div class="testimonial-track" style="display:flex;gap:20px;animation:scrollTestimonials 45s linear infinite;width:max-content">
+          <!-- Set 1 — DATI REALI VERIFICABILI -->
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">AP</div><div><h4 class="tc-name">Andrea Pietrini</h4><p class="tc-role">Presidente YourGroup</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">+100 clienti premium</p>
+            <p class="tc-numbers">26k &rarr; 62k follower &middot; 1M views su un post &middot; 53 &rarr; 14.723 consiglia</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">AB</div><div><h4 class="tc-name">Alfio Bardolla</h4><p class="tc-role">Investitore, Autore Bestseller</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">+9.000% engagement</p>
+            <p class="tc-numbers">23 &rarr; 476 interazioni medie per post</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">RR</div><div><h4 class="tc-name">Roberto Re</h4><p class="tc-role">Formatore N.1 in Europa</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">+5.000% consiglia</p>
+            <p class="tc-numbers">141 &rarr; 5.346 consiglia in pochi mesi</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">CR</div><div><h4 class="tc-name">Carlo Russo</h4><p class="tc-role">Fondatore affariesteri.it</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">+31.000 follower</p>
+            <p class="tc-numbers">2.118 &rarr; 33.202 follower &middot; 113 &rarr; 5.594 consiglia</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">LZ</div><div><h4 class="tc-name">Luca Zerbini</h4><p class="tc-role">VC Growth Investor</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">+100M EUR raccolti</p>
+            <p class="tc-numbers">8.208 &rarr; 16.416 follower &middot; LinkedIn canale N.1 per deal flow</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">GM</div><div><h4 class="tc-name">Graziano Marcuccio</h4><p class="tc-role">Chief Officer People, De Nora</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">+3.000% in 10 post</p>
+            <p class="tc-numbers">Crescita esponenziale dell'engagement fin dal primo mese</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">AC</div><div><h4 class="tc-name">Andrea Campagnolo</h4><p class="tc-role">CEO LeaveYourS / NATURALBOOM</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">Video testimonianza</p>
+            <p class="tc-numbers">LinkedIn diventato il primo canale di acquisizione clienti</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">FD</div><div><h4 class="tc-name">Francesca De Caro</h4><p class="tc-role">Chirurgo Ortopedico</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">Video testimonianza</p>
+            <p class="tc-numbers">Nuovi pazienti acquisiti grazie alla visibilità su LinkedIn</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">CM</div><div><h4 class="tc-name">Claudia Marchi</h4><p class="tc-role">CEO Air Sea Italia</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">Video testimonianza</p>
+            <p class="tc-numbers">35+ anni di esperienza, crescita LinkedIn con DC Academy</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <!-- Set 2 (duplicate for infinite scroll) -->
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">AP</div><div><h4 class="tc-name">Andrea Pietrini</h4><p class="tc-role">Presidente YourGroup</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">+100 clienti premium</p>
+            <p class="tc-numbers">26k &rarr; 62k follower &middot; 1M views su un post &middot; 53 &rarr; 14.723 consiglia</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">AB</div><div><h4 class="tc-name">Alfio Bardolla</h4><p class="tc-role">Investitore, Autore Bestseller</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">+9.000% engagement</p>
+            <p class="tc-numbers">23 &rarr; 476 interazioni medie per post</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">RR</div><div><h4 class="tc-name">Roberto Re</h4><p class="tc-role">Formatore N.1 in Europa</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">+5.000% consiglia</p>
+            <p class="tc-numbers">141 &rarr; 5.346 consiglia in pochi mesi</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">CR</div><div><h4 class="tc-name">Carlo Russo</h4><p class="tc-role">Fondatore affariesteri.it</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">+31.000 follower</p>
+            <p class="tc-numbers">2.118 &rarr; 33.202 follower &middot; 113 &rarr; 5.594 consiglia</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">LZ</div><div><h4 class="tc-name">Luca Zerbini</h4><p class="tc-role">VC Growth Investor</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">+100M EUR raccolti</p>
+            <p class="tc-numbers">8.208 &rarr; 16.416 follower &middot; LinkedIn canale N.1 per deal flow</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">GM</div><div><h4 class="tc-name">Graziano Marcuccio</h4><p class="tc-role">Chief Officer People, De Nora</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">+3.000% in 10 post</p>
+            <p class="tc-numbers">Crescita esponenziale dell'engagement fin dal primo mese</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">AC</div><div><h4 class="tc-name">Andrea Campagnolo</h4><p class="tc-role">CEO LeaveYourS / NATURALBOOM</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">Video testimonianza</p>
+            <p class="tc-numbers">LinkedIn diventato il primo canale di acquisizione clienti</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+          <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
+            <div class="tc-header"><div class="tc-avatar">FD</div><div><h4 class="tc-name">Francesca De Caro</h4><p class="tc-role">Chirurgo Ortopedico</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+            <p class="tc-stat">Video testimonianza</p>
+            <p class="tc-numbers">Nuovi pazienti acquisiti grazie alla visibilità su LinkedIn</p>
+            <p class="tc-link">Verifica i risultati &rarr;</p>
+          </a>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:8px;font-size:11px;color:rgba(255,255,255,0.2)">Tutti i dati sono verificabili &mdash; clicca per vedere le testimonianze</p>
+    </div>
+
+    <p class="reveal" style="text-align:center;margin-top:32px">
+      <a href="https://www.davidecaiazzo.it/testimonianze" target="_blank" style="color:#D4AF37;font-size:13px;text-decoration:none;border-bottom:1px solid rgba(212,175,55,0.3)">Vedi tutte le testimonianze &rarr;</a>
+    </p>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== CREDIBILITÀ (Speech + Stampa compatti) ===== -->
+<section class="section" style="padding:80px 32px;position:relative">
+  <div style="max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:2">
+    <p class="label reveal" style="margin-bottom:16px">Credibilità</p>
+    <h2 class="h-lg reveal" style="margin-bottom:12px">Non parlo di AI<br>perché <span class="gold">va di moda.</span></h2>
+    <p class="body-text reveal" style="margin-bottom:48px;max-width:600px;margin-left:auto;margin-right:auto">Ne parlo perché la uso ogni giorno per far girare le mie aziende. E i risultati si vedono.</p>
+
+    <!-- Stats compatte -->
+    <div class="reveal grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px">
+      <div style="padding:28px 20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px">
+        <p style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:#D4AF37;margin-bottom:8px">10M+</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);line-height:1.5">Exit My Governance acquisita da Zucchetti</p>
+      </div>
+      <div style="padding:28px 20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px">
+        <p style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:#D4AF37;margin-bottom:8px">50+</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);line-height:1.5">Speech al Senato, Camera dei Deputati e palchi nazionali</p>
+      </div>
+      <div style="padding:28px 20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px">
+        <p style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:#D4AF37;margin-bottom:8px">100+</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);line-height:1.5">Imprenditori e professionisti seguiti con DC Academy</p>
+      </div>
+    </div>
+
+    <!-- Loghi stampa compatti -->
+    <p class="reveal" style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:rgba(255,255,255,0.2);margin-bottom:20px">Parlano di me</p>
+    <div class="reveal" style="display:flex;flex-wrap:wrap;justify-content:center;gap:24px;align-items:center;opacity:0.4">
+      <span style="font-size:15px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.7)">Il Sole 24 Ore</span>
+      <span style="color:rgba(255,255,255,0.15)">&bull;</span>
+      <span style="font-size:15px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.7)">Vanity Fair</span>
+      <span style="color:rgba(255,255,255,0.15)">&bull;</span>
+      <span style="font-size:15px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.7)">Affaritaliani</span>
+      <span style="color:rgba(255,255,255,0.15)">&bull;</span>
+      <span style="font-size:15px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.7)">Il Tempo</span>
+      <span style="color:rgba(255,255,255,0.15)">&bull;</span>
+      <span style="font-size:15px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.7)">Leggo</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING + FORM ===== -->
+<section id="abbonati" class="section" style="position:relative">
+  <div class="orb" style="width:600px;height:600px;background:#D4AF37;top:-200px;left:50%;transform:translateX(-50%);opacity:0.05"></div>
+  <div style="max-width:560px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:48px">
+      <p class="label reveal" style="margin-bottom:16px">Abbonati</p>
+      <h2 class="h-lg reveal" style="margin-bottom:24px"><span class="gold">Automatizza Tutto</span></h2>
+    </div>
+
+    <div class="reveal price-card" style="margin-bottom:48px">
+      <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:8px;text-transform:uppercase;letter-spacing:2px">Abbonamento mensile</p>
+      <div class="price-amount"><span class="gold">497&euro;</span></div>
+      <div class="price-period">/mese</div>
+      <!-- VALUE STACK -->
+      <div style="margin:32px 0;text-align:left;display:inline-block;width:100%">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">
+          <div style="display:flex;align-items:center;gap:12px"><span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">4 video/mese con automazioni reali pronte da copiare</span></div>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);text-decoration:line-through;white-space:nowrap">val. 2.000&euro;</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">
+          <div style="display:flex;align-items:center;gap:12px"><span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Accesso a tutto l'archivio video (cresce ogni settimana)</span></div>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);text-decoration:line-through;white-space:nowrap">val. 5.000&euro;+</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">
+          <div style="display:flex;align-items:center;gap:12px"><span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Istruzioni passo passo per replicare ogni automazione</span></div>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);text-decoration:line-through;white-space:nowrap">val. 500&euro;</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">
+          <div style="display:flex;align-items:center;gap:12px"><span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Aggiornamenti quando cambia la tecnologia</span></div>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);white-space:nowrap">incluso</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div style="display:flex;align-items:center;gap:12px"><span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Cancelli quando vuoi, zero vincoli</span></div>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);white-space:nowrap">incluso</span>
+        </div>
+      </div>
+      <div style="padding:12px 20px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:10px;margin-top:8px">
+        <p style="font-size:13px;color:rgba(255,255,255,0.4)">Valore totale: <span style="text-decoration:line-through">7.500&euro;+/mese</span></p>
+        <p style="font-size:16px;font-weight:700;color:#D4AF37;margin-top:4px">Il tuo prezzo oggi: 497&euro;/mese</p>
+      </div>
+      <p style="font-size:12px;color:rgba(255,255,255,0.25);margin-top:20px">Contenuti disponibili dal 1 Maggio 2026</p>
+
+      <!-- BLOCCA GRATIS - ben visibile -->
+      <div style="margin-top:16px;padding:16px 24px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:14px;text-align:center">
+        <p style="font-size:15px;font-weight:700;color:#22c55e">&#128274; Blocca il prezzo GRATIS &mdash; paghi solo dal 1 Maggio</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:4px">Iscrivendoti oggi blocchi 497&euro;/mese per sempre. Il primo addebito avviene il 1 Maggio 2026.</p>
+      </div>
+
+      <!-- URGENZA / SCARSITA -->
+      <div style="margin-top:32px;padding:20px 24px;background:rgba(255,68,68,0.06);border:1px solid rgba(255,68,68,0.15);border-radius:14px">
+        <p style="font-size:14px;font-weight:700;color:#ff6b6b;margin-bottom:6px">Il prezzo sale il 1 Maggio.</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7">
+          497&euro;/mese è il prezzo di lancio. Il <strong style="color:rgba(255,255,255,0.8)">1 Maggio 2026</strong> sale a <strong style="color:#ff6b6b">997&euro;/mese</strong>. Dopo salirà a <strong style="color:#ff6b6b">1.500&euro;/mese</strong>.<br>
+          Chi si abbona adesso blocca 497&euro;/mese <strong style="color:rgba(255,255,255,0.8)">per sempre</strong>.
+        </p>
+      </div>
+
+      <!-- GARANZIA -->
+      <div style="margin-top:16px;padding:20px 24px;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.15);border-radius:14px;text-align:center">
+        <p style="font-size:28px;margin-bottom:8px">&#128170;</p>
+        <p style="font-size:15px;font-weight:700;color:#D4AF37;margin-bottom:6px">Garanzia 100% Soddisfatto o Rimborsato</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7">
+          Provi per 30 giorni. Se non sei soddisfatto, ti rimborso il 100% senza fare domande. Zero rischio per te.
+        </p>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="reveal" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:36px 32px">
+      <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;text-align:center;margin-bottom:6px">Iscriviti ora</h3>
+      <p style="text-align:center;font-size:13px;color:rgba(255,255,255,0.35);margin-bottom:28px">Blocca il tuo posto al prezzo di lancio</p>
+      <form id="subscribeForm" onsubmit="submitForm(event)" novalidate style="display:flex;flex-direction:column;gap:14px">
+        <input type="text" name="name" class="form-field" placeholder="Nome e Cognome" required/>
+        <input type="email" name="email" class="form-field" placeholder="Email" required/>
+        <input type="tel" name="phone" class="form-field" placeholder="Cellulare" required/>
+        <input type="text" name="job" class="form-field" placeholder="Che lavoro fai?"/>
+
+        <div style="margin-top:8px">
+          <p style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:12px;font-weight:600">Quale di queste attività fai ripetutamente?</p>
+          <div class="check-group">
+            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="fatture"/><span>Fatture e preventivi</span></label>
+            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="dati"/><span>Copiare dati tra file</span></label>
+            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="email"/><span>Email ripetitive</span></label>
+            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="report"/><span>Report e analisi</span></label>
+            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="social"/><span>Post e social media</span></label>
+            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="contratti"/><span>Contratti e documenti</span></label>
+            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="clienti"/><span>Gestione clienti</span></label>
+            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="ricerca"/><span>Ricerca informazioni</span></label>
+          </div>
+          <input type="text" name="other_activity" class="form-field" placeholder="Altro: descrivi la tua attività ripetitiva..." style="margin-top:10px"/>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+          <label style="display:flex;align-items:flex-start;gap:10px">
+            <input type="checkbox" id="privacyCheck" required style="margin-top:3px;accent-color:#D4AF37;width:16px;height:16px;flex-shrink:0"/>
+            <span style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.5">Accetto la <a href="https://docs.google.com/document/d/1qUNgRcZ0W9aZxutDu1Fv2k5aM6Nti4V0/edit" target="_blank" style="color:#D4AF37;text-decoration:underline">Privacy Policy</a> e acconsento al trattamento dei dati personali <span style="color:#ff4444">*</span></span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:10px">
+            <input type="checkbox" id="termsCheck" required style="margin-top:3px;accent-color:#D4AF37;width:16px;height:16px;flex-shrink:0"/>
+            <span style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.5">Accetto le <a href="https://docs.google.com/document/d/1K6WGjt9aFTRN-zWMvEOh5bw2A32nNag-/edit?usp=sharing&ouid=101002448876750781490&rtpof=true&sd=true" target="_blank" style="color:#D4AF37;text-decoration:underline">Condizioni Generali di Vendita</a> <span style="color:#ff4444">*</span></span>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:10px">
+            <input type="checkbox" id="newsletterCheck" style="margin-top:3px;accent-color:#D4AF37;width:16px;height:16px;flex-shrink:0"/>
+            <span style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.5">Desidero ricevere aggiornamenti, contenuti e offerte via email <span style="color:rgba(255,255,255,0.15)">(facoltativo)</span></span>
+          </label>
+        </div>
+
+        <p id="formError" style="color:#ff4444;font-size:12px;text-align:center;display:none">Compila tutti i campi obbligatori e accetta privacy policy e condizioni di vendita</p>
+
+        <button type="submit" class="btn-gold" style="width:100%;justify-content:center;margin-top:8px"><span>ABBONATI A 497&euro;/MESE &rarr;</span></button>
+        <p style="text-align:center;font-size:10px;color:rgba(255,255,255,0.15);margin-top:4px">&#128274; Pagamento sicuro con Stripe. Cancelli quando vuoi.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== PER CHI È / PER CHI NON È ===== -->
+<section class="section" style="position:relative">
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:56px">
+      <p class="label reveal" style="margin-bottom:16px">Chiarezza totale</p>
+      <h2 class="h-lg reveal">Questo <span class="gold">non è per tutti.</span></h2>
+    </div>
+    <div class="reveal grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div style="background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.15);border-radius:20px;padding:32px">
+        <p style="font-size:14px;font-weight:700;color:#22c55e;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px">&#10003; Per chi è</p>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Imprenditori e professionisti che perdono ore in attività ripetitive</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi ha un team e vuole liberare tempo alle persone chiave</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi perde giornate in compiti ad alta concentrazione: bandi, contratti, due diligence, fatturazione</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi vuole risultati pratici, non teoria sull'intelligenza artificiale</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi sa che il futuro è l'automazione e vuole arrivarci prima dei concorrenti</p></div>
+        </div>
+      </div>
+      <div style="background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.15);border-radius:20px;padding:32px">
+        <p style="font-size:14px;font-weight:700;color:#ff4444;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px">&#10007; Per chi NON è</p>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6">Chi cerca corsi teorici sull'AI senza applicazione pratica</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6">Chi vuole solo guardare video senza implementare nulla</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6">Chi non ha attività ripetitive da automatizzare (beato te)</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6">Chi pensa che 497&euro;/mese sia "tanto" ma butta migliaia in stipendi per attività ripetitive</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6">Chi aspetta il "momento giusto" invece di agire adesso</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ===== CHI SONO ===== -->
+<section class="section" style="position:relative">
+  <div style="max-width:1000px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:56px">
+      <p class="label reveal" style="margin-bottom:16px">Chi sono</p>
+      <h2 class="h-lg reveal">Davide <span class="gold">Caiazzo</span></h2>
+    </div>
+    <div class="reveal chi-sono-grid" style="display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:start">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;position:sticky;top:120px">
+        <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/2152023621/settings_images/xgQpjwJKRwysR3Wee7uQ_Screenshot_2022-10-31_alle_07.53.56.png" alt="Davide Caiazzo" style="width:140px;height:140px;border-radius:50%;object-fit:cover;box-shadow:0 12px 40px rgba(212,175,55,0.25);border:3px solid rgba(212,175,55,0.3)"/>
+        <div style="text-align:center">
+          <p style="font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:1px;text-transform:uppercase">CEO</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.5)">DC Academy S.r.l.</p>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <p style="font-size:17px;color:rgba(255,255,255,0.7);line-height:1.9;font-weight:300">
+          Ho costruito un'azienda che genera milioni di euro usando LinkedIn e l'intelligenza artificiale. Ho scritto un libro (<em style="color:rgba(255,255,255,0.85)">Il Potere di LinkedIn</em>), sono stato su Il Sole 24 Ore, Vanity Fair, Leggo, Affaritaliani e decine di altre testate.
+        </p>
+        <p style="font-size:17px;color:rgba(255,255,255,0.7);line-height:1.9;font-weight:300">
+          La mia azienda precedente, My Governance, è stata acquisita da Zucchetti per una valutazione superiore ai 10 milioni di euro. Prima ancora ho vinto il premio "Impresa Etica e Innovativa" e gli Oscar del FinTech con il Sole 24 Ore.
+        </p>
+        <p style="font-size:17px;color:rgba(255,255,255,0.7);line-height:1.9;font-weight:300">
+          Oggi uso l'intelligenza artificiale ogni giorno per automatizzare tutto quello che posso nella mia vita lavorativa. Non parlo di teoria. Ogni automazione che vedrai in Automatizza Tutto è qualcosa che uso io, nelle mie aziende, ogni singolo giorno.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px">
+          <div style="text-align:center;padding:20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
+            <p style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#D4AF37">15+</p>
+            <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px">Anni di imprenditoria</p>
+          </div>
+          <div style="text-align:center;padding:20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
+            <p style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#D4AF37">3</p>
+            <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px">Aziende fondate</p>
+          </div>
+          <div style="text-align:center;padding:20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
+            <p style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#D4AF37">1</p>
+            <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px">Libro pubblicato</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<div class="gold-line"></div>
+<section class="section" style="position:relative">
+  <div style="max-width:800px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:56px">
+      <p class="label reveal" style="margin-bottom:16px">Domande frequenti</p>
+      <h2 class="h-lg reveal">Hai <span class="gold">domande?</span></h2>
+    </div>
+
+    <div class="reveal" style="display:flex;flex-direction:column;gap:12px">
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Posso cancellare l'abbonamento quando voglio?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Si, puoi cancellare in qualsiasi momento con un click. Nessun vincolo, nessuna penale, nessuna domanda. Se cancelli, mantieni l'accesso fino alla fine del mese pagato.
+        </div></div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Serve essere tecnici?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          No. Se sai usare un computer e navigare su internet, puoi replicare tutte le automazioni. Ogni video è passo passo, con istruzioni chiare. Non serve saper programmare.
+        </div></div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Che formato hanno i video?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Video di 10-15 minuti dove mostro lo schermo e spiego ogni passaggio. Niente slide noiose, niente teoria. Vedi esattamente quello che faccio io e lo replichi nel tuo lavoro.
+        </div></div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Funziona anche per il mio settore?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Le automazioni che insegno funzionano per qualsiasi professionista o imprenditore che fa attività ripetitive: fatture, email, report, gestione clienti, contenuti social. Se perdi tempo a fare cose che si ripetono, funziona per te.
+        </div></div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Se mi abbono adesso ma i contenuti escono il 1 Maggio, pago subito?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Ti iscrivi ora per bloccare il prezzo di lancio a 497&euro;/mese. Il primo addebito avviene il 1 Maggio 2026, quando i contenuti saranno disponibili. Non paghi nulla prima.
+        </div></div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">E se non sono soddisfatto?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Garanzia 100% soddisfatto o rimborsato per 30 giorni. Se non ti piace, ti rimborso tutto senza fare domande. Zero rischio.
+        </div></div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Perché costa 497&euro;/mese e non di meno?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Perché una sola automazione ti fa risparmiare ore ogni settimana. Se il tuo tempo vale anche solo 50&euro;/ora, dopo una settimana hai già ripagato l'abbonamento. In più il prezzo salirà a 997&euro; e poi a 1.500&euro;/mese. Chi entra adesso blocca 497&euro; per sempre.
+        </div></div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Ho accesso a tutti i video passati?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Si, finché sei abbonato hai accesso a tutto l'archivio completo. Ogni settimana si aggiunge un nuovo video. Più resti, più automazioni accumuli.
+        </div></div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Quanto tempo serve per implementare ogni automazione?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Dipende dall'automazione, ma in media dai 15 minuti a un'ora. Ogni video mostra passo passo cosa fare, quindi non perdi tempo a cercare informazioni o a capire come funziona. Segui i passaggi e hai finito.
+        </div></div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Servono tool a pagamento aggiuntivi?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Alcune automazioni usano strumenti gratuiti, altre richiedono tool con piani a basso costo (pochi euro al mese). In ogni video specifico esattamente cosa serve e quanto costa. Nessuna sorpresa.
+        </div></div>
+      </div>
+    </div>
+
+    <!-- CTA finale dopo FAQ -->
+    <div class="reveal" style="text-align:center;margin-top:56px">
+      <p style="font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:24px">Altre domande? Scrivimi su <a href="https://www.linkedin.com/in/davidecaiazzo/" target="_blank" style="color:#D4AF37;text-decoration:none;border-bottom:1px solid rgba(212,175,55,0.3)">LinkedIn</a></p>
+      <a href="#abbonati" class="btn-gold" style="font-size:14px;padding:20px 48px"><span>ABBONATI ORA A 497 &euro;/MESE &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer style="padding:40px 32px;border-top:1px solid rgba(255,255,255,0.04);text-align:center;position:relative;z-index:1">
+  <p style="font-size:12px;color:rgba(255,255,255,0.15);margin-bottom:8px">DC Academy S.r.l. &mdash; P.IVA 16916171009</p>
+  <p style="font-size:11px;color:rgba(255,255,255,0.1)">
+    <a href="https://docs.google.com/document/d/1qUNgRcZ0W9aZxutDu1Fv2k5aM6Nti4V0/edit" target="_blank" style="color:rgba(255,255,255,0.15);text-decoration:none">Privacy Policy</a> &nbsp;|&nbsp;
+    <a href="https://docs.google.com/document/d/1K6WGjt9aFTRN-zWMvEOh5bw2A32nNag-/edit?usp=sharing&ouid=101002448876750781490&rtpof=true&sd=true" target="_blank" style="color:rgba(255,255,255,0.15);text-decoration:none">Condizioni di Vendita</a> &nbsp;|&nbsp;
+    <a href="https://www.davidecaiazzo.it/trasparenza" target="_blank" style="color:rgba(255,255,255,0.15);text-decoration:none">Trasparenza</a>
+  </p>
+</footer>
+
+<script>
+// ===== PARTICLE CANVAS =====
+// Particles — static dots, no animation loop (performance)
+const canvas=document.getElementById('particleCanvas');const ctx=canvas.getContext('2d');
+function drawParticles(){canvas.width=window.innerWidth;canvas.height=document.body.scrollHeight;const n=Math.min(30,Math.floor(window.innerWidth/40));for(let i=0;i<n;i++){const x=Math.random()*canvas.width,y=Math.random()*canvas.height,s=Math.random()*1.2+0.3,o=Math.random()*0.15+0.03;ctx.beginPath();ctx.arc(x,y,s,0,Math.PI*2);ctx.fillStyle='rgba(212,175,55,'+o+')';ctx.fill()}}
+drawParticles();window.addEventListener('resize',drawParticles);
+
+// ===== SCROLL REVEAL =====
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ===== MOBILE MENU =====
+let menuOpen=false;
+function toggleMenu(){menuOpen=!menuOpen;document.getElementById('mobileMenu').style.transform=menuOpen?'translateX(0)':'translateX(100%)';const b1=document.getElementById('mb1'),b2=document.getElementById('mb2'),b3=document.getElementById('mb3');if(menuOpen){b1.style.transform='rotate(45deg) translate(5px,5px)';b2.style.opacity='0';b3.style.transform='rotate(-45deg) translate(5px,-5px)'}else{b1.style.transform='';b2.style.opacity='1';b3.style.transform=''}}
+function closeMenu(){menuOpen=false;document.getElementById('mobileMenu').style.transform='translateX(100%)';document.getElementById('mb1').style.transform='';document.getElementById('mb2').style.opacity='1';document.getElementById('mb3').style.transform=''}
+
+// ===== COUNTDOWN TO MAY 1 2026 =====
+function updateCountdown(){
+  const target=new Date('2026-05-01T00:00:00+02:00').getTime();
+  const now=new Date().getTime();
+  const diff=target-now;
+  if(diff<=0){document.getElementById('cd-days').textContent='0';document.getElementById('cd-hours').textContent='0';document.getElementById('cd-mins').textContent='0';document.getElementById('cd-secs').textContent='0';return}
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((diff%(1000*60*60))/(1000*60));
+  const s=Math.floor((diff%(1000*60))/1000);
+  document.getElementById('cd-days').textContent=d;
+  document.getElementById('cd-hours').textContent=String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent=String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent=String(s).padStart(2,'0');
+}
+updateCountdown();setInterval(updateCountdown,1000);
+
+// ===== ACCORDION =====
+function toggleAccordion(el){
+  const wasOpen=el.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.accordion-item').forEach(item=>item.classList.remove('open'));
+  // Open clicked (if it wasn't open)
+  if(!wasOpen){el.classList.add('open');el.classList.add('checked')}
+}
+
+// ===== AUDIO PLAYER =====
+const audio=document.getElementById('stefaniaAudio');
+let audioPlaying=false;
+audio.addEventListener('loadedmetadata',()=>{
+  const m=Math.floor(audio.duration/60);
+  const s=Math.floor(audio.duration%60);
+  document.getElementById('audioDuration').textContent=m+':'+String(s).padStart(2,'0');
+});
+audio.addEventListener('timeupdate',()=>{
+  const pct=(audio.currentTime/audio.duration)*100;
+  document.getElementById('audioBar').style.width=pct+'%';
+  const m=Math.floor(audio.currentTime/60);
+  const s=Math.floor(audio.currentTime%60);
+  document.getElementById('audioCurrentTime').textContent=m+':'+String(s).padStart(2,'0');
+});
+audio.addEventListener('ended',()=>{
+  audioPlaying=false;
+  document.getElementById('audioIcon').innerHTML='<polygon points="5,3 19,12 5,21"/>';
+});
+function toggleAudio(){
+  audioPlaying=!audioPlaying;
+  if(audioPlaying){audio.play();document.getElementById('audioIcon').innerHTML='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';}
+  else{audio.pause();document.getElementById('audioIcon').innerHTML='<polygon points="5,3 19,12 5,21"/>';}
+}
+function seekAudio(e){
+  const rect=e.currentTarget.getBoundingClientRect();
+  const pct=(e.clientX-rect.left)/rect.width;
+  audio.currentTime=pct*audio.duration;
+}
+
+// ===== FORM SUBMIT =====
+function submitForm(e){
+  e.preventDefault();
+  const form=document.getElementById('subscribeForm');
+  const name=form.querySelector('[name="name"]').value.trim();
+  const email=form.querySelector('[name="email"]').value.trim();
+  const phone=form.querySelector('[name="phone"]').value.trim();
+  const privacy=document.getElementById('privacyCheck').checked;
+  const terms=document.getElementById('termsCheck').checked;
+
+  if(!name||!email||!phone||!privacy||!terms){
+    document.getElementById('formError').style.display='block';
+    return;
+  }
+  document.getElementById('formError').style.display='none';
+
+  // Collect activities
+  const activities=[];
+  form.querySelectorAll('[name="activity"]:checked').forEach(cb=>activities.push(cb.value));
+  const otherActivity=form.querySelector('[name="other_activity"]').value.trim();
+  const job=form.querySelector('[name="job"]').value.trim();
+  const newsletter=document.getElementById('newsletterCheck').checked;
+
+  const data={name,email,phone,job,activities:activities.join(', '),other_activity:otherActivity,newsletter:newsletter?'si':'no'};
+
+  // Disable button while sending
+  const btn=form.querySelector('button[type="submit"]');
+  btn.disabled=true;
+  btn.innerHTML='<span>INVIO IN CORSO...</span>';
+
+  // Send to Zapier webhook → Kajabi
+  const ZAPIER_WEBHOOK='https://hooks.zapier.com/hooks/catch/6421650/u7opnws/';
+  fetch(ZAPIER_WEBHOOK,{method:'POST',body:JSON.stringify(data)})
+    .then(()=>{
+      // Redirect to Kajabi checkout for payment
+      window.location.href='https://www.davidecaiazzo.it/offers/w4YJSpBz';
+    })
+    .catch(()=>{
+      btn.disabled=false;
+      btn.innerHTML='<span>ABBONATI A 497&euro;/MESE &rarr;</span>';
+      document.getElementById('formError').textContent='Errore durante l\'invio. Riprova.';
+      document.getElementById('formError').style.display='block';
+    });
+}
+
+// ===== HEADER SCROLL + STICKY CTA =====
+window.addEventListener('scroll',()=>{
+  const h=document.getElementById('header');
+  const sticky=document.getElementById('stickyCta');
+  const formSection=document.getElementById('abbonati');
+  const formTop=formSection?formSection.getBoundingClientRect().top:9999;
+  if(window.scrollY>50){h.style.borderBottomColor='rgba(255,255,255,0.04)';h.style.padding='12px 0'}
+  else{h.style.borderBottomColor='transparent';h.style.padding='18px 0'}
+  // Show sticky bar after 600px scroll, hide when form is visible
+  if(window.scrollY>600 && formTop>window.innerHeight){sticky.style.transform='translateY(0)'}
+  else{sticky.style.transform='translateY(100%)'}
+});
+</script>
+
+</body>
+</html>
