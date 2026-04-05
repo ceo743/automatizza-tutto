@@ -1640,7 +1640,7 @@ function submitForm(e){
 
   // Send to Zapier webhook → Kajabi
   const ZAPIER_WEBHOOK='https://hooks.zapier.com/hooks/catch/6421650/u7opnws/';
-  fetch(ZAPIER_WEBHOOK,{method:'POST',body:JSON.stringify(data)})
+  fetch(ZAPIER_WEBHOOK,{method:'POST',body:new URLSearchParams(data)})
     .then(()=>{
       // Redirect to Kajabi checkout for payment
       window.location.href='https://www.davidecaiazzo.it/offers/w4YJSpBz';
