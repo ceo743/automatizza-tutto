@@ -164,6 +164,14 @@
     .check-item input[type="checkbox"]{accent-color:#D4AF37;width:18px;height:18px;flex-shrink:0}
     .check-item label{font-size:13px;color:rgba(255,255,255,0.7);cursor:pointer;flex:1}
 
+    /* ===== CALENDLY MODAL ===== */
+    #calendlyOverlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
+    #calendlyOverlay.active{display:flex}
+    #calendlyModal{position:relative;width:100%;max-width:480px;height:min(720px,90vh);background:#fff;border-radius:16px;overflow:hidden}
+    #calendlyClose{position:absolute;top:12px;right:12px;z-index:10001;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.6);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.3s}
+    #calendlyClose:hover{background:rgba(0,0,0,0.8)}
+    #calendlyModal .calendly-inline-widget{width:100%;height:100%}
+
     /* ===== RESPONSIVE ===== */
     /* iPad / Tablet (up to 1024px) */
     @media(max-width:1024px){
@@ -212,7 +220,7 @@
 <!-- ===== STICKY CTA BAR ===== -->
 <div id="stickyCta" style="position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(8,11,16,0.97);border-top:1px solid rgba(212,175,55,0.15);padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:20px;transform:translateY(100%);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)">
   <p style="font-size:14px;color:rgba(255,255,255,0.6);font-weight:500" class="hide-mobile"><span class="gold" style="font-weight:700">Analisi Funzionale</span> &mdash; 497&euro; + IVA, pagamento unico</p>
-  <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold" style="padding:12px 28px;font-size:11px"><span>PRENOTA ORA &rarr;</span></a>
+  <a href="#" onclick="openCalendly(event)" class="btn-gold" style="padding:12px 28px;font-size:11px"><span>PRENOTA ORA &rarr;</span></a>
 </div>
 
 <!-- ===== HEADER ===== -->
@@ -225,7 +233,7 @@
     <nav class="hide-mobile" style="display:flex;gap:36px;align-items:center">
       <a href="#come-funziona" class="nav-link">Come Funziona</a>
       <a href="#automazioni" class="nav-link">Automazioni</a>
-      <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold" style="padding:10px 24px;font-size:12px"><span>PRENOTA ORA</span></a>
+      <a href="#" onclick="openCalendly(event)" class="btn-gold" style="padding:10px 24px;font-size:12px"><span>PRENOTA ORA</span></a>
     </nav>
     <button class="show-mobile" id="menuBtn" onclick="toggleMenu()" style="background:none;border:none;z-index:101;padding:8px;position:relative;width:32px;height:32px" aria-label="Menu">
       <span id="mb1" style="display:block;width:22px;height:1.5px;background:#fff;position:absolute;top:9px;left:5px;transition:all 0.4s"></span>
@@ -240,7 +248,7 @@
   <a href="#come-funziona" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:28px;font-family:'Playfair Display',serif;opacity:0.8">Come Funziona</a>
   <a href="#automazioni" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:28px;font-family:'Playfair Display',serif;opacity:0.8">Automazioni</a>
   <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.3),transparent)"></div>
-  <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" onclick="closeMenu()" class="btn-gold"><span>PRENOTA ORA</span></a>
+  <a href="#" onclick="openCalendly(event)" onclick="closeMenu()" class="btn-gold"><span>PRENOTA ORA</span></a>
 </div>
 
 <!-- ===== HERO ===== -->
@@ -262,7 +270,7 @@
       <strong style="color:#D4AF37">Analisi Funzionale 497&euro;</strong> &mdash; pagamento unico, risultato concreto
     </p>
 
-    <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold reveal" style="font-size:14px;padding:20px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
+    <a href="#" onclick="openCalendly(event)" class="btn-gold reveal" style="font-size:14px;padding:20px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
   </div>
 </section>
 
@@ -662,7 +670,7 @@
 
     <p class="reveal" style="text-align:center;margin-top:32px;font-size:14px;color:rgba(255,255,255,0.3)">E queste sono solo alcune. L'analisi funzionale scopre quelle specifiche per il tuo business.</p>
     <div class="reveal" style="text-align:center;margin-top:24px">
-      <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold" style="padding:16px 36px;font-size:12px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
+      <a href="#" onclick="openCalendly(event)" class="btn-gold" style="padding:16px 36px;font-size:12px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
     </div>
   </div>
 </section>
@@ -1178,7 +1186,7 @@
 
       <!-- CTA -->
       <div style="margin-top:32px;text-align:center">
-        <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold" style="width:100%;justify-content:center;font-size:14px;padding:22px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &mdash; 497&euro; &rarr;</span></a>
+        <a href="#" onclick="openCalendly(event)" class="btn-gold" style="width:100%;justify-content:center;font-size:14px;padding:22px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &mdash; 497&euro; &rarr;</span></a>
         <p style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:12px">Pagamento sicuro di 497&euro; + IVA direttamente su Calendly</p>
       </div>
     </div>
@@ -1345,10 +1353,19 @@
     <!-- CTA finale dopo FAQ -->
     <div class="reveal" style="text-align:center;margin-top:56px">
       <p style="font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:24px">Altre domande? Scrivimi su <a href="https://www.linkedin.com/in/davidecaiazzo/" target="_blank" style="color:#D4AF37;text-decoration:none;border-bottom:1px solid rgba(212,175,55,0.3)">LinkedIn</a></p>
-      <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold" style="font-size:14px;padding:20px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
+      <a href="#" onclick="openCalendly(event)" class="btn-gold" style="font-size:14px;padding:20px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
     </div>
   </div>
 </section>
+
+<!-- ===== CALENDLY MODAL ===== -->
+<div id="calendlyOverlay" onclick="closeCalendly(event)">
+  <div id="calendlyModal">
+    <button id="calendlyClose" onclick="closeCalendly(event)" aria-label="Chiudi">&times;</button>
+    <div class="calendly-inline-widget" data-url="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni?hide_event_type_details=1&hide_gdpr_banner=1" style="min-width:320px;height:100%"></div>
+  </div>
+</div>
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 <!-- ===== FOOTER ===== -->
 <footer style="padding:40px 32px;border-top:1px solid rgba(255,255,255,0.04);text-align:center;position:relative;z-index:1">
@@ -1417,7 +1434,21 @@ function seekAudio(e){
   audio.currentTime=pct*audio.duration;
 }
 
-// Form removed — payment via Calendly
+// ===== CALENDLY MODAL =====
+function openCalendly(e){
+  e.preventDefault();
+  document.getElementById('calendlyOverlay').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeCalendly(e){
+  if(e.target.id==='calendlyOverlay'||e.target.id==='calendlyClose'){
+    document.getElementById('calendlyOverlay').classList.remove('active');
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){document.getElementById('calendlyOverlay').classList.remove('active');document.body.style.overflow='';}
+});
 
 // ===== HEADER SCROLL + STICKY CTA =====
 window.addEventListener('scroll',()=>{
