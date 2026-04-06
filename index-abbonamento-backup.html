@@ -211,8 +211,8 @@
 
 <!-- ===== STICKY CTA BAR ===== -->
 <div id="stickyCta" style="position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(8,11,16,0.97);border-top:1px solid rgba(212,175,55,0.15);padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:20px;transform:translateY(100%);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)">
-  <p style="font-size:14px;color:rgba(255,255,255,0.6);font-weight:500" class="hide-mobile"><span class="gold" style="font-weight:700">Analisi Funzionale</span> &mdash; 497&euro; + IVA, pagamento unico</p>
-  <a href="#abbonati" class="btn-gold" style="padding:12px 28px;font-size:11px"><span>PRENOTA ORA &rarr;</span></a>
+  <p style="font-size:14px;color:rgba(255,255,255,0.6);font-weight:500" class="hide-mobile"><span class="gold" style="font-weight:700">497&euro;/mese</span> &mdash; Solo fino al 1 Maggio. Poi sale a <span style="color:#ff6b6b;font-weight:700">997&euro;</span>.</p>
+  <a href="#abbonati" class="btn-gold" style="padding:12px 28px;font-size:11px"><span>ABBONATI ORA &rarr;</span></a>
 </div>
 
 <!-- ===== HEADER ===== -->
@@ -226,7 +226,7 @@
       <a href="#come-funziona" class="nav-link">Come Funziona</a>
       <a href="#automazioni" class="nav-link">Automazioni</a>
       <a href="#esempi" class="nav-link">Esempi</a>
-      <a href="#abbonati" class="btn-gold" style="padding:10px 24px;font-size:12px"><span>PRENOTA ORA</span></a>
+      <a href="#abbonati" class="btn-gold" style="padding:10px 24px;font-size:12px"><span>ABBONATI ORA</span></a>
     </nav>
     <button class="show-mobile" id="menuBtn" onclick="toggleMenu()" style="background:none;border:none;z-index:101;padding:8px;position:relative;width:32px;height:32px" aria-label="Menu">
       <span id="mb1" style="display:block;width:22px;height:1.5px;background:#fff;position:absolute;top:9px;left:5px;transition:all 0.4s"></span>
@@ -242,7 +242,7 @@
   <a href="#automazioni" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:28px;font-family:'Playfair Display',serif;opacity:0.8">Automazioni</a>
   <a href="#esempi" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:28px;font-family:'Playfair Display',serif;opacity:0.8">Esempi</a>
   <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.3),transparent)"></div>
-  <a href="#abbonati" onclick="closeMenu()" class="btn-gold"><span>PRENOTA ORA</span></a>
+  <a href="#abbonati" onclick="closeMenu()" class="btn-gold"><span>ABBONATI ORA</span></a>
 </div>
 
 <!-- ===== HERO ===== -->
@@ -258,13 +258,30 @@
       <span style="font-size:clamp(20px,3vw,36px);color:rgba(255,255,255,0.6);font-weight:400;font-family:'Inter',sans-serif">Risparmia 20+ ore a settimana.</span>
     </h1>
     <p class="body-text reveal" style="max-width:640px;margin:0 auto 16px;font-size:clamp(16px,1.3vw,19px)">
-      Analizziamo i tuoi processi, mappiamo le automazioni possibili e ti consegniamo un piano operativo completo. Tu risparmi ore ogni settimana.
+      Ogni settimana ti mostro un'automazione reale che uso nelle mie aziende.<br>Tu la copi in pochi minuti e non perdi mai più tempo a fare quel lavoro.
     </p>
     <p class="reveal" style="font-size:14px;color:rgba(255,255,255,0.3);margin-bottom:40px">
-      <strong style="color:#D4AF37">Analisi Funzionale 497&euro;</strong> &mdash; pagamento unico, risultato concreto
+      <strong style="color:#ff6b6b">497&euro;/mese solo fino al 1 Maggio</strong> &mdash; poi sale a 997&euro;/mese
     </p>
 
-    <a href="#abbonati" class="btn-gold reveal" style="font-size:14px;padding:20px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
+    <!-- Countdown -->
+    <div class="reveal" style="margin-bottom:48px">
+      <div style="background:rgba(255,68,68,0.06);border:1px solid rgba(255,68,68,0.2);border-radius:16px;padding:24px 32px;display:inline-block">
+        <p style="font-size:15px;color:#ff6b6b;font-weight:700;margin-bottom:6px">&#9200; 497&euro;/mese solo per chi si abbona prima del lancio</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:16px">Il 1 Maggio il prezzo sale a <strong style="color:#ff6b6b">997&euro;/mese</strong>. Mancano:</p>
+        <div class="countdown-wrap" id="countdown">
+        <div class="countdown-item"><div class="countdown-num" id="cd-days">--</div><div class="countdown-label">Giorni</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item"><div class="countdown-num" id="cd-hours">--</div><div class="countdown-label">Ore</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item"><div class="countdown-num" id="cd-mins">--</div><div class="countdown-label">Minuti</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item"><div class="countdown-num" id="cd-secs">--</div><div class="countdown-label">Secondi</div></div>
+      </div>
+      </div>
+    </div>
+
+    <a href="#abbonati" class="btn-gold reveal" style="font-size:14px;padding:20px 48px"><span>ABBONATI ORA A 497 &euro;/MESE &rarr;</span></a>
   </div>
 </section>
 
@@ -664,7 +681,7 @@
 
     <p class="reveal" style="text-align:center;margin-top:32px;font-size:14px;color:rgba(255,255,255,0.3)">E ogni settimana se ne aggiunge una nuova. Pi&ugrave; resti, pi&ugrave; automazioni accumuli.</p>
     <div class="reveal" style="text-align:center;margin-top:24px">
-      <a href="#abbonati" class="btn-gold" style="padding:16px 36px;font-size:12px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
+      <a href="#abbonati" class="btn-gold" style="padding:16px 36px;font-size:12px"><span>ABBONATI ORA A 497 &euro;/MESE &rarr;</span></a>
     </div>
   </div>
 </section>
@@ -1132,60 +1149,131 @@
   </div>
 </section>
 
+<!-- ===== SCEGLI IL TUO PERCORSO ===== -->
+<section class="section" style="position:relative;overflow:hidden">
+  <div class="orb" style="width:600px;height:600px;background:#D4AF37;top:-200px;left:50%;transform:translateX(-50%);opacity:0.05"></div>
+  <div style="max-width:960px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:48px">
+      <p class="label reveal" style="margin-bottom:16px">Due strade, stesso risultato</p>
+      <h2 class="h-lg reveal" style="margin-bottom:16px">Scegli come <span class="gold">automatizzare</span></h2>
+      <p class="body-text reveal" style="max-width:600px;margin:0 auto">Puoi imparare a farlo tu con i nostri video, oppure lo facciamo noi per te. In entrambi i casi, risparmi ore ogni settimana.</p>
+    </div>
+
+    <div class="reveal grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:64px">
+      <!-- CARD 1: FAI DA TE -->
+      <div style="background:rgba(255,255,255,0.02);border:2px solid rgba(212,175,55,0.25);border-radius:20px;padding:36px 28px;position:relative;display:flex;flex-direction:column">
+        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#BF953F,#D4AF37);padding:4px 20px;border-radius:20px">
+          <span style="font-size:11px;font-weight:800;color:#000;letter-spacing:1px;text-transform:uppercase">Più popolare</span>
+        </div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px">Fai da te</p>
+        <h3 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#D4AF37;margin-bottom:4px">497&euro;<span style="font-size:16px;color:rgba(255,255,255,0.35);font-weight:400">/mese</span></h3>
+        <p style="font-size:13px;color:rgba(255,255,255,0.3);margin-bottom:24px">Cancelli quando vuoi</p>
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="color:#D4AF37;font-size:14px">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">4 video/mese con automazioni pronte da copiare</span></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="color:#D4AF37;font-size:14px">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Accesso a tutto l'archivio (cresce ogni settimana)</span></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="color:#D4AF37;font-size:14px">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Istruzioni passo passo per replicare tutto</span></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="color:#D4AF37;font-size:14px">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Aggiornamenti quando cambia la tecnologia</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="color:#D4AF37;font-size:14px">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Tu copi, il tuo business risparmia ore ogni giorno</span></div>
+        </div>
+        <div style="margin-top:28px;padding:12px 16px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.15);border-radius:10px;margin-bottom:20px">
+          <p style="font-size:12px;color:rgba(255,255,255,0.4)">&#128274; Blocca il prezzo di lancio: il <strong style="color:rgba(255,255,255,0.7)">1 Maggio</strong> sale a 997&euro;</p>
+        </div>
+        <a href="#abbonati" class="btn-gold" style="width:100%;justify-content:center;font-size:14px"><span>ABBONATI ORA A 497 &euro;/MESE &rarr;</span></a>
+      </div>
+
+      <!-- CARD 2: FATTO PER TE -->
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(18,112,89,0.3);border-radius:20px;padding:36px 28px;display:flex;flex-direction:column">
+        <p style="font-size:12px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px">Fatto per te</p>
+        <h3 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#1a9e7a;margin-bottom:4px">da 500&euro;<span style="font-size:16px;color:rgba(255,255,255,0.35);font-weight:400"> + IVA</span></h3>
+        <p style="font-size:13px;color:rgba(255,255,255,0.3);margin-bottom:24px">Progetto una tantum</p>
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="color:#1a9e7a;font-size:14px">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Analisi funzionale dei tuoi processi (45 min)</span></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="color:#1a9e7a;font-size:14px">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Mappatura completa delle automazioni possibili</span></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="color:#1a9e7a;font-size:14px">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Preventivo dettagliato con ROI stimato</span></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="color:#1a9e7a;font-size:14px">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Implementazione chiavi in mano (1.500&euro; &ndash; 7.500&euro;)</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="color:#1a9e7a;font-size:14px">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">I 500&euro; dell'analisi scalati dal preventivo</span></div>
+        </div>
+        <div style="margin-top:28px;padding:12px 16px;background:rgba(18,112,89,0.08);border:1px solid rgba(18,112,89,0.15);border-radius:10px;margin-bottom:20px">
+          <p style="font-size:12px;color:rgba(255,255,255,0.4)">Non hai tempo di farlo tu? <strong style="color:#1a9e7a">Lo costruiamo noi</strong></p>
+        </div>
+        <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold" style="width:100%;justify-content:center;font-size:14px;background:linear-gradient(135deg,#127059,#1a9e7a)"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="gold-line"></div>
 
-<!-- ===== ANALISI FUNZIONALE + FORM ===== -->
-<section id="abbonati" class="section" style="position:relative;overflow:hidden">
-  <div class="orb" style="width:600px;height:600px;background:#D4AF37;top:-200px;left:50%;transform:translateX(-50%);opacity:0.05"></div>
+<!-- ===== PRICING + FORM ===== -->
+<section id="abbonati" class="section" style="position:relative">
   <div style="max-width:560px;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:48px">
-      <p class="label reveal" style="margin-bottom:16px">Inizia da qui</p>
-      <h2 class="h-lg reveal" style="margin-bottom:24px"><span class="gold">Analisi Funzionale</span></h2>
+      <p class="label reveal" style="margin-bottom:16px">Fai da te</p>
+      <h2 class="h-lg reveal" style="margin-bottom:24px"><span class="gold">Automatizza Tutto</span> &mdash; 497&euro;/mese</h2>
     </div>
 
     <div class="reveal price-card" style="margin-bottom:48px">
-      <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:8px;text-transform:uppercase;letter-spacing:2px">Pagamento unico</p>
+      <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:8px;text-transform:uppercase;letter-spacing:2px">Abbonamento mensile</p>
       <div class="price-amount"><span class="gold">497&euro;</span></div>
-      <div class="price-period">+ IVA</div>
+      <div class="price-period">/mese</div>
       <!-- VALUE STACK -->
       <div style="margin:32px 0;text-align:left;display:inline-block;width:100%">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">
-          <span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Sessione dedicata di 45 minuti con un nostro esperto</span>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">
+          <div style="display:flex;align-items:center;gap:12px"><span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">4 video/mese con automazioni reali pronte da copiare</span></div>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);text-decoration:line-through;white-space:nowrap">val. 2.000&euro;</span>
         </div>
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">
-          <span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Analisi completa dei tuoi processi aziendali</span>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">
+          <div style="display:flex;align-items:center;gap:12px"><span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Accesso a tutto l'archivio video (cresce ogni settimana)</span></div>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);text-decoration:line-through;white-space:nowrap">val. 5.000&euro;+</span>
         </div>
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">
-          <span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Mappatura di tutte le automazioni possibili</span>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">
+          <div style="display:flex;align-items:center;gap:12px"><span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Istruzioni passo passo per replicare ogni automazione</span></div>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);text-decoration:line-through;white-space:nowrap">val. 500&euro;</span>
         </div>
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">
-          <span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Preventivo dettagliato con ROI stimato per ogni automazione</span>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">
+          <div style="display:flex;align-items:center;gap:12px"><span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Aggiornamenti quando cambia la tecnologia</span></div>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);white-space:nowrap">incluso</span>
         </div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">I 497&euro; vengono scalati dal preventivo se procedi con l'implementazione</span>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div style="display:flex;align-items:center;gap:12px"><span style="color:#D4AF37">&#10003;</span><span style="font-size:14px;color:rgba(255,255,255,0.7)">Cancelli quando vuoi, zero vincoli</span></div>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);white-space:nowrap">incluso</span>
         </div>
       </div>
+      <div style="padding:12px 20px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:10px;margin-top:8px">
+        <p style="font-size:13px;color:rgba(255,255,255,0.4)">Valore totale: <span style="text-decoration:line-through">7.500&euro;+/mese</span></p>
+        <p style="font-size:16px;font-weight:700;color:#D4AF37;margin-top:4px">Il tuo prezzo oggi: 497&euro;/mese</p>
+      </div>
+      <p style="font-size:12px;color:rgba(255,255,255,0.25);margin-top:20px">Contenuti disponibili dal 1 Maggio 2026</p>
 
-      <!-- IMPLEMENTAZIONE -->
-      <div style="padding:16px 20px;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.12);border-radius:14px;margin-top:8px">
-        <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7">
-          <strong style="color:#D4AF37">Se procedi con l'implementazione</strong>, costruiamo tutto noi chiavi in mano (da 1.500&euro; a 7.500&euro; + IVA in base alla complessità). I 497&euro; dell'analisi sono inclusi.
+      <!-- BLOCCA GRATIS - ben visibile -->
+      <div style="margin-top:16px;padding:16px 24px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:14px;text-align:center">
+        <p style="font-size:15px;font-weight:700;color:#22c55e">&#128274; Blocca il prezzo GRATIS &mdash; paghi solo dal 1 Maggio</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:4px">Iscrivendoti oggi blocchi 497&euro;/mese per sempre. Il primo addebito avviene il 1 Maggio 2026.</p>
+      </div>
+
+      <!-- URGENZA / SCARSITA -->
+      <div style="margin-top:32px;padding:20px 24px;background:rgba(255,68,68,0.06);border:1px solid rgba(255,68,68,0.15);border-radius:14px">
+        <p style="font-size:14px;font-weight:700;color:#ff6b6b;margin-bottom:6px">Il prezzo sale il 1 Maggio.</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7">
+          497&euro;/mese è il prezzo di lancio. Il <strong style="color:rgba(255,255,255,0.8)">1 Maggio 2026</strong> sale a <strong style="color:#ff6b6b">997&euro;/mese</strong>. Dopo salirà a <strong style="color:#ff6b6b">1.500&euro;/mese</strong>.<br>
+          Chi si abbona adesso blocca 497&euro;/mese <strong style="color:rgba(255,255,255,0.8)">per sempre</strong>.
         </p>
       </div>
 
       <!-- GARANZIA -->
       <div style="margin-top:16px;padding:20px 24px;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.15);border-radius:14px;text-align:center">
-        <p style="font-size:15px;font-weight:700;color:#D4AF37;margin-bottom:6px">Zero rischio</p>
+        <p style="font-size:28px;margin-bottom:8px">&#128170;</p>
+        <p style="font-size:15px;font-weight:700;color:#D4AF37;margin-bottom:6px">Garanzia 100% Soddisfatto o Rimborsato</p>
         <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7">
-          Anche se non procedi con l'implementazione, tieni il documento con la mappatura completa dei tuoi processi e le automazioni consigliate.
+          Provi per 30 giorni. Se non sei soddisfatto, ti rimborso il 100% senza fare domande. Zero rischio per te.
         </p>
       </div>
     </div>
 
     <!-- FORM -->
     <div class="reveal" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:36px 32px">
-      <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;text-align:center;margin-bottom:6px">Prenota l'analisi</h3>
-      <p style="text-align:center;font-size:13px;color:rgba(255,255,255,0.35);margin-bottom:28px">Compila i dati e procedi al pagamento di 497&euro; + IVA</p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;text-align:center;margin-bottom:6px">Iscriviti ora</h3>
+      <p style="text-align:center;font-size:13px;color:rgba(255,255,255,0.35);margin-bottom:28px">Blocca il tuo posto al prezzo di lancio</p>
       <form id="subscribeForm" onsubmit="submitForm(event)" novalidate style="display:flex;flex-direction:column;gap:14px">
         <input type="text" name="name" class="form-field" placeholder="Nome e Cognome" required/>
         <input type="email" name="email" class="form-field" placeholder="Email" required/>
@@ -1224,8 +1312,8 @@
 
         <p id="formError" style="color:#ff4444;font-size:12px;text-align:center;display:none">Compila tutti i campi obbligatori e accetta privacy policy e condizioni di vendita</p>
 
-        <button type="submit" class="btn-gold" style="width:100%;justify-content:center;margin-top:8px"><span>ACQUISTA L'ANALISI FUNZIONALE &mdash; 497&euro; &rarr;</span></button>
-        <p style="text-align:center;font-size:10px;color:rgba(255,255,255,0.15);margin-top:4px">&#128274; Pagamento sicuro con Stripe. Riceverai la conferma via email.</p>
+        <button type="submit" class="btn-gold" style="width:100%;justify-content:center;margin-top:8px"><span>ABBONATI A 497&euro;/MESE &rarr;</span></button>
+        <p style="text-align:center;font-size:10px;color:rgba(255,255,255,0.15);margin-top:4px">&#128274; Pagamento sicuro con Stripe. Cancelli quando vuoi.</p>
       </form>
     </div>
   </div>
@@ -1257,7 +1345,7 @@
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6">Chi cerca corsi teorici sull'AI senza applicazione pratica</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6">Chi vuole solo guardare video senza implementare nulla</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6">Chi non ha attività ripetitive da automatizzare (beato te)</p></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6">Chi pensa che 497&euro; sia "tanto" ma butta migliaia in stipendi per attività ripetitive</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6">Chi pensa che 497&euro;/mese sia "tanto" ma butta migliaia in stipendi per attività ripetitive</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6">Chi aspetta il "momento giusto" invece di agire adesso</p></div>
         </div>
       </div>
@@ -1335,11 +1423,22 @@
       <div class="accordion-item" onclick="toggleAccordion(this)">
         <div class="accordion-header">
           <div class="accordion-check"></div>
-          <span class="accordion-title">Come funziona l'analisi funzionale?</span>
+          <span class="accordion-title">Serve essere tecnici?</span>
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          Dopo il pagamento fissiamo una sessione di 45 minuti in cui un nostro esperto analizza i tuoi processi aziendali. Mappiamo ogni attività ripetitiva, calcoliamo il tempo perso e identifichiamo le automazioni ad alto impatto. Ricevi un documento completo con la mappatura e il preventivo dettagliato.
+          No. Se sai usare un computer e navigare su internet, puoi replicare tutte le automazioni. Ogni video è passo passo, con istruzioni chiare. Non serve saper programmare.
+        </div></div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Che formato hanno i video?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Video di 10-15 minuti dove mostro lo schermo e spiego ogni passaggio. Niente slide noiose, niente teoria. Vedi esattamente quello che faccio io e lo replichi nel tuo lavoro.
         </div></div>
       </div>
 
@@ -1350,51 +1449,73 @@
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          L'analisi funzionale è pensata per qualsiasi professionista o imprenditore che ha attività ripetitive: fatture, email, report, gestione clienti, contenuti, bandi, contratti. Se perdi tempo a fare cose che si ripetono, funziona per te.
+          Le automazioni che insegno funzionano per qualsiasi professionista o imprenditore che fa attività ripetitive: fatture, email, report, gestione clienti, contenuti social. Se perdi tempo a fare cose che si ripetono, funziona per te.
         </div></div>
       </div>
 
       <div class="accordion-item" onclick="toggleAccordion(this)">
         <div class="accordion-header">
           <div class="accordion-check"></div>
-          <span class="accordion-title">Cosa succede dopo l'analisi?</span>
+          <span class="accordion-title">Se mi abbono adesso ma i contenuti escono il 1 Maggio, pago subito?</span>
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          Ricevi un documento con tutte le automazioni consigliate, i tempi e i costi di implementazione. Se vuoi procedere, costruiamo tutto noi chiavi in mano (da 1.500&euro; a 7.500&euro; + IVA). I 497&euro; dell'analisi vengono scalati dal preventivo. Se non procedi, tieni comunque il documento.
+          Ti iscrivi ora per bloccare il prezzo di lancio a 497&euro;/mese. Il primo addebito avviene il 1 Maggio 2026, quando i contenuti saranno disponibili. Non paghi nulla prima.
         </div></div>
       </div>
 
       <div class="accordion-item" onclick="toggleAccordion(this)">
         <div class="accordion-header">
           <div class="accordion-check"></div>
-          <span class="accordion-title">Perché costa 497&euro;?</span>
+          <span class="accordion-title">E se non sono soddisfatto?</span>
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          Perché una sola automazione ben fatta ti fa risparmiare ore ogni settimana. Se il tuo tempo vale anche solo 50&euro;/ora, l'analisi si ripaga in pochi giorni. E se procedi con l'implementazione, i 497&euro; sono inclusi nel prezzo.
+          Garanzia 100% soddisfatto o rimborsato per 30 giorni. Se non ti piace, ti rimborso tutto senza fare domande. Zero rischio.
         </div></div>
       </div>
 
       <div class="accordion-item" onclick="toggleAccordion(this)">
         <div class="accordion-header">
           <div class="accordion-check"></div>
-          <span class="accordion-title">Serve essere tecnici?</span>
+          <span class="accordion-title">Perché costa 497&euro;/mese e non di meno?</span>
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          No. L'analisi la facciamo noi, tu devi solo raccontarci come lavori. Se poi scegli l'implementazione, costruiamo tutto noi e te lo consegniamo funzionante. Zero competenze tecniche richieste.
+          Perché una sola automazione ti fa risparmiare ore ogni settimana. Se il tuo tempo vale anche solo 50&euro;/ora, dopo una settimana hai già ripagato l'abbonamento. In più il prezzo salirà a 997&euro; e poi a 1.500&euro;/mese. Chi entra adesso blocca 497&euro; per sempre.
         </div></div>
       </div>
 
       <div class="accordion-item" onclick="toggleAccordion(this)">
         <div class="accordion-header">
           <div class="accordion-check"></div>
-          <span class="accordion-title">Quanto tempo ci vuole?</span>
+          <span class="accordion-title">Ho accesso a tutti i video passati?</span>
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          La sessione di analisi dura 45 minuti. Il documento con la mappatura e il preventivo lo ricevi entro 48 ore. Se procedi con l'implementazione, i tempi dipendono dalla complessità del progetto.
+          Si, finché sei abbonato hai accesso a tutto l'archivio completo. Ogni settimana si aggiunge un nuovo video. Più resti, più automazioni accumuli.
+        </div></div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Quanto tempo serve per implementare ogni automazione?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Dipende dall'automazione, ma in media dai 15 minuti a un'ora. Ogni video mostra passo passo cosa fare, quindi non perdi tempo a cercare informazioni o a capire come funziona. Segui i passaggi e hai finito.
+        </div></div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          <div class="accordion-check"></div>
+          <span class="accordion-title">Servono tool a pagamento aggiuntivi?</span>
+          <span class="accordion-arrow">&#9660;</span>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner">
+          Alcune automazioni usano strumenti gratuiti, altre richiedono tool con piani a basso costo (pochi euro al mese). In ogni video specifico esattamente cosa serve e quanto costa. Nessuna sorpresa.
         </div></div>
       </div>
     </div>
@@ -1402,7 +1523,7 @@
     <!-- CTA finale dopo FAQ -->
     <div class="reveal" style="text-align:center;margin-top:56px">
       <p style="font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:24px">Altre domande? Scrivimi su <a href="https://www.linkedin.com/in/davidecaiazzo/" target="_blank" style="color:#D4AF37;text-decoration:none;border-bottom:1px solid rgba(212,175,55,0.3)">LinkedIn</a></p>
-      <a href="#abbonati" class="btn-gold" style="font-size:14px;padding:20px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
+      <a href="#abbonati" class="btn-gold" style="font-size:14px;padding:20px 48px"><span>ABBONATI ORA A 497 &euro;/MESE &rarr;</span></a>
     </div>
   </div>
 </section>
@@ -1433,7 +1554,22 @@ let menuOpen=false;
 function toggleMenu(){menuOpen=!menuOpen;document.getElementById('mobileMenu').style.transform=menuOpen?'translateX(0)':'translateX(100%)';const b1=document.getElementById('mb1'),b2=document.getElementById('mb2'),b3=document.getElementById('mb3');if(menuOpen){b1.style.transform='rotate(45deg) translate(5px,5px)';b2.style.opacity='0';b3.style.transform='rotate(-45deg) translate(5px,-5px)'}else{b1.style.transform='';b2.style.opacity='1';b3.style.transform=''}}
 function closeMenu(){menuOpen=false;document.getElementById('mobileMenu').style.transform='translateX(100%)';document.getElementById('mb1').style.transform='';document.getElementById('mb2').style.opacity='1';document.getElementById('mb3').style.transform=''}
 
-// Countdown removed — single purchase, no deadline
+// ===== COUNTDOWN TO MAY 1 2026 =====
+function updateCountdown(){
+  const target=new Date('2026-05-01T00:00:00+02:00').getTime();
+  const now=new Date().getTime();
+  const diff=target-now;
+  if(diff<=0){document.getElementById('cd-days').textContent='0';document.getElementById('cd-hours').textContent='0';document.getElementById('cd-mins').textContent='0';document.getElementById('cd-secs').textContent='0';return}
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((diff%(1000*60*60))/(1000*60));
+  const s=Math.floor((diff%(1000*60))/1000);
+  document.getElementById('cd-days').textContent=d;
+  document.getElementById('cd-hours').textContent=String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent=String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent=String(s).padStart(2,'0');
+}
+updateCountdown();setInterval(updateCountdown,1000);
 
 // ===== ACCORDION =====
 function toggleAccordion(el){
@@ -1503,7 +1639,6 @@ function submitForm(e){
   const btn=form.querySelector('button[type="submit"]');
   btn.disabled=true;
   btn.innerHTML='<span>INVIO IN CORSO...</span>';
-  btn.style.pointerEvents='none';
 
   // Send to Zapier webhook → Kajabi
   const ZAPIER_WEBHOOK='https://hooks.zapier.com/hooks/catch/6421650/u7opnws/';
@@ -1514,8 +1649,7 @@ function submitForm(e){
     })
     .catch(()=>{
       btn.disabled=false;
-      btn.innerHTML='<span>ACQUISTA L\'ANALISI FUNZIONALE &mdash; 497&euro; &rarr;</span>';
-      btn.style.pointerEvents='';
+      btn.innerHTML='<span>ABBONATI A 497&euro;/MESE &rarr;</span>';
       document.getElementById('formError').textContent='Errore durante l\'invio. Riprova.';
       document.getElementById('formError').style.display='block';
     });
