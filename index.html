@@ -212,7 +212,7 @@
 <!-- ===== STICKY CTA BAR ===== -->
 <div id="stickyCta" style="position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(8,11,16,0.97);border-top:1px solid rgba(212,175,55,0.15);padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:20px;transform:translateY(100%);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)">
   <p style="font-size:14px;color:rgba(255,255,255,0.6);font-weight:500" class="hide-mobile"><span class="gold" style="font-weight:700">Analisi Funzionale</span> &mdash; 497&euro; + IVA, pagamento unico</p>
-  <a href="#abbonati" class="btn-gold" style="padding:12px 28px;font-size:11px"><span>PRENOTA ORA &rarr;</span></a>
+  <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold" style="padding:12px 28px;font-size:11px"><span>PRENOTA ORA &rarr;</span></a>
 </div>
 
 <!-- ===== HEADER ===== -->
@@ -226,7 +226,7 @@
       <a href="#come-funziona" class="nav-link">Come Funziona</a>
       <a href="#automazioni" class="nav-link">Automazioni</a>
       <a href="#esempi" class="nav-link">Esempi</a>
-      <a href="#abbonati" class="btn-gold" style="padding:10px 24px;font-size:12px"><span>PRENOTA ORA</span></a>
+      <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold" style="padding:10px 24px;font-size:12px"><span>PRENOTA ORA</span></a>
     </nav>
     <button class="show-mobile" id="menuBtn" onclick="toggleMenu()" style="background:none;border:none;z-index:101;padding:8px;position:relative;width:32px;height:32px" aria-label="Menu">
       <span id="mb1" style="display:block;width:22px;height:1.5px;background:#fff;position:absolute;top:9px;left:5px;transition:all 0.4s"></span>
@@ -242,7 +242,7 @@
   <a href="#automazioni" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:28px;font-family:'Playfair Display',serif;opacity:0.8">Automazioni</a>
   <a href="#esempi" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:28px;font-family:'Playfair Display',serif;opacity:0.8">Esempi</a>
   <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.3),transparent)"></div>
-  <a href="#abbonati" onclick="closeMenu()" class="btn-gold"><span>PRENOTA ORA</span></a>
+  <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" onclick="closeMenu()" class="btn-gold"><span>PRENOTA ORA</span></a>
 </div>
 
 <!-- ===== HERO ===== -->
@@ -264,7 +264,7 @@
       <strong style="color:#D4AF37">Analisi Funzionale 497&euro;</strong> &mdash; pagamento unico, risultato concreto
     </p>
 
-    <a href="#abbonati" class="btn-gold reveal" style="font-size:14px;padding:20px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
+    <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold reveal" style="font-size:14px;padding:20px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
   </div>
 </section>
 
@@ -664,7 +664,7 @@
 
     <p class="reveal" style="text-align:center;margin-top:32px;font-size:14px;color:rgba(255,255,255,0.3)">E ogni settimana se ne aggiunge una nuova. Pi&ugrave; resti, pi&ugrave; automazioni accumuli.</p>
     <div class="reveal" style="text-align:center;margin-top:24px">
-      <a href="#abbonati" class="btn-gold" style="padding:16px 36px;font-size:12px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
+      <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold" style="padding:16px 36px;font-size:12px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
     </div>
   </div>
 </section>
@@ -1180,53 +1180,12 @@
           Anche se non procedi con l'implementazione, tieni il documento con la mappatura completa dei tuoi processi e le automazioni consigliate.
         </p>
       </div>
-    </div>
 
-    <!-- FORM -->
-    <div class="reveal" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:36px 32px">
-      <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;text-align:center;margin-bottom:6px">Prenota l'analisi</h3>
-      <p style="text-align:center;font-size:13px;color:rgba(255,255,255,0.35);margin-bottom:28px">Compila i dati e procedi al pagamento di 497&euro; + IVA</p>
-      <form id="subscribeForm" onsubmit="submitForm(event)" novalidate style="display:flex;flex-direction:column;gap:14px">
-        <input type="text" name="name" class="form-field" placeholder="Nome e Cognome" required/>
-        <input type="email" name="email" class="form-field" placeholder="Email" required/>
-        <input type="tel" name="phone" class="form-field" placeholder="Cellulare" required/>
-        <input type="text" name="job" class="form-field" placeholder="Che lavoro fai?"/>
-
-        <div style="margin-top:8px">
-          <p style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:12px;font-weight:600">Quale di queste attività fai ripetutamente?</p>
-          <div class="check-group">
-            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="fatture"/><span>Fatture e preventivi</span></label>
-            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="dati"/><span>Copiare dati tra file</span></label>
-            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="email"/><span>Email ripetitive</span></label>
-            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="report"/><span>Report e analisi</span></label>
-            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="social"/><span>Post e social media</span></label>
-            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="contratti"/><span>Contratti e documenti</span></label>
-            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="clienti"/><span>Gestione clienti</span></label>
-            <label class="check-item" onclick="this.classList.toggle('selected')"><input type="checkbox" name="activity" value="ricerca"/><span>Ricerca informazioni</span></label>
-          </div>
-          <input type="text" name="other_activity" class="form-field" placeholder="Altro: descrivi la tua attività ripetitiva..." style="margin-top:10px"/>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
-          <label style="display:flex;align-items:flex-start;gap:10px">
-            <input type="checkbox" id="privacyCheck" required style="margin-top:3px;accent-color:#D4AF37;width:16px;height:16px;flex-shrink:0"/>
-            <span style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.5">Accetto la <a href="https://docs.google.com/document/d/1qUNgRcZ0W9aZxutDu1Fv2k5aM6Nti4V0/edit" target="_blank" style="color:#D4AF37;text-decoration:underline">Privacy Policy</a> e acconsento al trattamento dei dati personali <span style="color:#ff4444">*</span></span>
-          </label>
-          <label style="display:flex;align-items:flex-start;gap:10px">
-            <input type="checkbox" id="termsCheck" required style="margin-top:3px;accent-color:#D4AF37;width:16px;height:16px;flex-shrink:0"/>
-            <span style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.5">Accetto le <a href="https://docs.google.com/document/d/1K6WGjt9aFTRN-zWMvEOh5bw2A32nNag-/edit?usp=sharing&ouid=101002448876750781490&rtpof=true&sd=true" target="_blank" style="color:#D4AF37;text-decoration:underline">Condizioni Generali di Vendita</a> <span style="color:#ff4444">*</span></span>
-          </label>
-          <label style="display:flex;align-items:flex-start;gap:10px">
-            <input type="checkbox" id="newsletterCheck" style="margin-top:3px;accent-color:#D4AF37;width:16px;height:16px;flex-shrink:0"/>
-            <span style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.5">Desidero ricevere aggiornamenti, contenuti e offerte via email <span style="color:rgba(255,255,255,0.15)">(facoltativo)</span></span>
-          </label>
-        </div>
-
-        <p id="formError" style="color:#ff4444;font-size:12px;text-align:center;display:none">Compila tutti i campi obbligatori e accetta privacy policy e condizioni di vendita</p>
-
-        <button type="submit" class="btn-gold" style="width:100%;justify-content:center;margin-top:8px"><span>ACQUISTA L'ANALISI FUNZIONALE &mdash; 497&euro; &rarr;</span></button>
-        <p style="text-align:center;font-size:10px;color:rgba(255,255,255,0.15);margin-top:4px">&#128274; Pagamento sicuro con Stripe. Riceverai la conferma via email.</p>
-      </form>
+      <!-- CTA -->
+      <div style="margin-top:32px;text-align:center">
+        <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold" style="width:100%;justify-content:center;font-size:14px;padding:22px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &mdash; 497&euro; &rarr;</span></a>
+        <p style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:12px">Pagamento sicuro di 497&euro; + IVA direttamente su Calendly</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1402,7 +1361,7 @@
     <!-- CTA finale dopo FAQ -->
     <div class="reveal" style="text-align:center;margin-top:56px">
       <p style="font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:24px">Altre domande? Scrivimi su <a href="https://www.linkedin.com/in/davidecaiazzo/" target="_blank" style="color:#D4AF37;text-decoration:none;border-bottom:1px solid rgba(212,175,55,0.3)">LinkedIn</a></p>
-      <a href="#abbonati" class="btn-gold" style="font-size:14px;padding:20px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
+      <a href="https://calendly.com/dc-academy-team/analisi-funzionale-automazioni" target="_blank" class="btn-gold" style="font-size:14px;padding:20px 48px"><span>PRENOTA L'ANALISI FUNZIONALE &rarr;</span></a>
     </div>
   </div>
 </section>
@@ -1474,52 +1433,7 @@ function seekAudio(e){
   audio.currentTime=pct*audio.duration;
 }
 
-// ===== FORM SUBMIT =====
-function submitForm(e){
-  e.preventDefault();
-  const form=document.getElementById('subscribeForm');
-  const name=form.querySelector('[name="name"]').value.trim();
-  const email=form.querySelector('[name="email"]').value.trim();
-  const phone=form.querySelector('[name="phone"]').value.trim();
-  const privacy=document.getElementById('privacyCheck').checked;
-  const terms=document.getElementById('termsCheck').checked;
-
-  if(!name||!email||!phone||!privacy||!terms){
-    document.getElementById('formError').style.display='block';
-    return;
-  }
-  document.getElementById('formError').style.display='none';
-
-  // Collect activities
-  const activities=[];
-  form.querySelectorAll('[name="activity"]:checked').forEach(cb=>activities.push(cb.value));
-  const otherActivity=form.querySelector('[name="other_activity"]').value.trim();
-  const job=form.querySelector('[name="job"]').value.trim();
-  const newsletter=document.getElementById('newsletterCheck').checked;
-
-  const data={name,email,phone,job,activities:activities.join(', '),other_activity:otherActivity,newsletter:newsletter?'si':'no'};
-
-  // Disable button while sending
-  const btn=form.querySelector('button[type="submit"]');
-  btn.disabled=true;
-  btn.innerHTML='<span>INVIO IN CORSO...</span>';
-  btn.style.pointerEvents='none';
-
-  // Send to Zapier webhook → Kajabi
-  const ZAPIER_WEBHOOK='https://hooks.zapier.com/hooks/catch/6421650/u7opnws/';
-  fetch(ZAPIER_WEBHOOK,{method:'POST',body:new URLSearchParams(data)})
-    .then(()=>{
-      // Redirect to Kajabi checkout for payment
-      window.location.href='https://www.davidecaiazzo.it/offers/w4YJSpBz';
-    })
-    .catch(()=>{
-      btn.disabled=false;
-      btn.innerHTML='<span>ACQUISTA L\'ANALISI FUNZIONALE &mdash; 497&euro; &rarr;</span>';
-      btn.style.pointerEvents='';
-      document.getElementById('formError').textContent='Errore durante l\'invio. Riprova.';
-      document.getElementById('formError').style.display='block';
-    });
-}
+// Form removed — payment via Calendly
 
 // ===== HEADER SCROLL + STICKY CTA =====
 window.addEventListener('scroll',()=>{
