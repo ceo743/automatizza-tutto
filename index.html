@@ -47,7 +47,7 @@
     .btn-gold span{position:relative;z-index:1}
 
     /* ===== GLASS CARD ===== */
-    .glass{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:20px;position:relative;overflow:hidden;transition:transform 0.3s,background 0.3s}
+    .glass{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:20px;position:relative;overflow:visible;transition:transform 0.3s,background 0.3s}
     .glass:hover{background:rgba(255,255,255,0.05);transform:translateY(-4px)}
 
     /* ===== SCROLL REVEAL ===== */
@@ -197,6 +197,15 @@
       .testimonial-card{min-width:260px;max-width:260px}
       .chi-sono-grid{grid-template-columns:1fr!important;text-align:center}
       .chi-sono-grid>div:first-child{position:static!important;margin:0 auto}
+      /* Glass cards: reduce padding on mobile */
+      .glass{padding:20px 16px!important;border-radius:16px}
+      /* "Come Funziona" step cards: stack circle + text vertically */
+      .glass[style*="display:flex"][style*="gap:24px"]{flex-direction:column!important;align-items:center!important;text-align:center}
+      .glass[style*="display:flex"][style*="gap:24px"] .body-text{text-align:center}
+      /* Esempio PRIMA/DOPO internal grids: ensure 1 column */
+      .glass .grid-2{grid-template-columns:1fr!important}
+      /* Confronto costi grid fix */
+      .glass [style*="grid-template-columns:1fr auto 1fr"]{grid-template-columns:1fr!important;gap:16px;text-align:center}
     }
     /* Small mobile */
     @media(max-width:480px){
@@ -209,6 +218,10 @@
       .mock-cal-day:nth-child(n+3){display:none}
       .testimonial-card{min-width:240px;max-width:240px}
       .price-amount{font-size:48px}
+      /* Glass cards: even tighter on small screens */
+      .glass{padding:16px 12px!important}
+      /* Smaller font for example descriptions */
+      .glass p[style*="font-size:14px"]{font-size:13px!important}
     }
     @media(min-width:1025px){.show-mobile{display:none!important}}
   </style>
@@ -1718,7 +1731,7 @@ window.addEventListener('scroll',()=>{
 });
 </script>
 <!-- DC Academy Chatbot Widget -->
-<script src="https://dc-chatbot-vswb.onrender.com/widget.js" data-bot="automazioni"></script>
+<script src="https://dc-chatbot-vswb.onrender.com/widget.js" data-bot="automazioni" data-auto-open="false"></script>
 
 </body>
 </html>
