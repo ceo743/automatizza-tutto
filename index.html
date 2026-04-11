@@ -180,14 +180,14 @@
     #calendlyModal .calendly-inline-widget{width:100%;height:100%}
 
     /* ===== RESPONSIVE ===== */
-    /* iPad / Tablet (up to 1024px) */
+    /* Tablet layout adjustments (up to 1024px) — nav stays desktop */
     @media(max-width:1024px){
-      .hide-mobile{display:none!important}
-      .show-mobile{display:block!important}
       .grid-3{grid-template-columns:repeat(2,1fr)!important}
     }
-    /* Mobile (up to 768px) */
+    /* Mobile/Tablet (up to 768px) — switch to hamburger nav */
     @media(max-width:768px){
+      .hide-mobile{display:none!important}
+      .show-mobile{display:block!important}
       .section{padding:80px 16px}
       .grid-2{grid-template-columns:1fr!important}
       .grid-3{grid-template-columns:1fr!important}
@@ -230,7 +230,7 @@
       /* Smaller font for example descriptions */
       .glass p[style*="font-size:14px"]{font-size:13px!important}
     }
-    @media(min-width:1025px){.show-mobile{display:none!important}}
+    @media(min-width:769px){.show-mobile{display:none!important}}
   </style>
 </head>
 <body>
@@ -251,9 +251,13 @@
       DAVIDE CAIAZZO
       <span style="position:absolute;bottom:-2px;left:0;width:100%;height:1px;background:linear-gradient(90deg,#D4AF37,transparent);opacity:0.3"></span>
     </a>
-    <nav class="hide-mobile" style="display:flex;gap:36px;align-items:center">
+    <nav class="hide-mobile" style="display:flex;gap:24px;align-items:center">
       <a href="#come-funziona" class="nav-link">Come Funziona</a>
-      <a href="#automazioni" class="nav-link">Automazioni</a>
+      <a href="#esempi" class="nav-link">Esempi</a>
+      <a href="#automazioni" class="nav-link">Prima/Dopo</a>
+      <a href="#testimonianze" class="nav-link">Risultati</a>
+      <a href="#abbonati" class="nav-link">Prezzi</a>
+      <a href="#faq" class="nav-link">FAQ</a>
       <a href="#" onclick="openCalendly(event)" class="btn-gold" style="padding:10px 24px;font-size:12px"><span>PRENOTA ORA</span></a>
     </nav>
     <button class="show-mobile" id="menuBtn" onclick="toggleMenu()" style="background:none;border:none;z-index:101;padding:8px;position:relative;width:32px;height:32px" aria-label="Menu">
@@ -270,11 +274,15 @@
 </div>
 
 <!-- Mobile Menu -->
-<div id="mobileMenu" style="position:fixed;inset:0;background:rgba(8,11,16,0.99);z-index:98;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;transform:translateX(100%);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)">
-  <a href="#come-funziona" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:28px;font-family:'Playfair Display',serif;opacity:0.8">Come Funziona</a>
-  <a href="#automazioni" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:28px;font-family:'Playfair Display',serif;opacity:0.8">Automazioni</a>
+<div id="mobileMenu" style="position:fixed;inset:0;background:rgba(8,11,16,0.99);z-index:98;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transform:translateX(100%);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)">
+  <a href="#come-funziona" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:26px;font-family:'Playfair Display',serif;opacity:0.8">Come Funziona</a>
+  <a href="#esempi" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:26px;font-family:'Playfair Display',serif;opacity:0.8">Esempi</a>
+  <a href="#automazioni" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:26px;font-family:'Playfair Display',serif;opacity:0.8">Prima/Dopo</a>
+  <a href="#testimonianze" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:26px;font-family:'Playfair Display',serif;opacity:0.8">Risultati</a>
+  <a href="#abbonati" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:26px;font-family:'Playfair Display',serif;opacity:0.8">Prezzi</a>
+  <a href="#faq" onclick="closeMenu()" style="color:#fff;text-decoration:none;font-size:26px;font-family:'Playfair Display',serif;opacity:0.8">FAQ</a>
   <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.3),transparent)"></div>
-  <a href="#" onclick="openCalendly(event)" onclick="closeMenu()" class="btn-gold"><span>PRENOTA ORA</span></a>
+  <a href="#" onclick="openCalendly(event);closeMenu()" class="btn-gold"><span>PRENOTA ORA</span></a>
 </div>
 
 <!-- ===== HERO ===== -->
@@ -810,7 +818,7 @@
 <div class="gold-line"></div>
 
 <!-- ===== ESEMPI DI AUTOMAZIONI CHE COSTRUIAMO ===== -->
-<section class="section" style="position:relative">
+<section id="esempi" class="section" style="position:relative">
   <div class="orb" style="width:500px;height:500px;background:#D4AF37;bottom:-250px;right:-200px;opacity:0.04;animation-delay:3s"></div>
   <div style="max-width:900px;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:56px">
@@ -1175,7 +1183,7 @@
 <div class="gold-line"></div>
 
 <!-- ===== TESTIMONIAL CAROUSEL ===== -->
-<section class="section" style="position:relative;overflow:hidden">
+<section id="testimonianze" class="section" style="position:relative;overflow:hidden">
   <div style="max-width:1200px;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:56px">
       <p class="label reveal" style="margin-bottom:16px">Risultati verificabili</p>
@@ -1500,7 +1508,7 @@
 
 <!-- ===== FAQ ===== -->
 <div class="gold-line"></div>
-<section class="section" style="position:relative">
+<section id="faq" class="section" style="position:relative">
   <div style="max-width:800px;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:56px">
       <p class="label reveal" style="margin-bottom:16px">Domande frequenti</p>
