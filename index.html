@@ -51,11 +51,11 @@
     .glass:hover{background:rgba(255,255,255,0.05);transform:translateY(-4px)}
 
     /* ===== SCROLL REVEAL ===== */
-    .reveal{opacity:0;transform:translateY(60px);transition:all 1s cubic-bezier(0.16,1,0.3,1)}
+    .reveal{opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(0.16,1,0.3,1)}
     .reveal.visible{opacity:1;transform:translateY(0)}
 
     /* ===== SECTIONS ===== */
-    .section{padding:80px 40px;position:relative;z-index:1}
+    .section{padding:72px 40px;position:relative;z-index:1}
     .wrap{max-width:1080px;margin:0 auto;width:100%}
     .wrap-sm{max-width:720px;margin:0 auto;width:100%}
 
@@ -190,7 +190,7 @@
     @media(max-width:768px){
       .hide-mobile{display:none!important}
       .show-mobile{display:block!important}
-      .section{padding:64px 20px}
+      .section{padding:56px 20px}
       .grid-2{grid-template-columns:1fr!important}
       .grid-3{grid-template-columns:1fr!important}
       .grid-4{grid-template-columns:1fr!important}
@@ -233,8 +233,14 @@
       .glass p[style*="font-size:14px"]{font-size:13px!important}
     }
     @media(min-width:769px){.show-mobile{display:none!important}}
-    @media(max-width:900px){
+    @media(max-width:720px){
       .grid-2{grid-template-columns:1fr!important}
+    }
+    @media(min-width:1280px){
+      .section{padding:80px 80px}
+    }
+    @media(min-width:1600px){
+      .section{padding:80px 120px}
     }
     .btn-gold{white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
   </style>
@@ -257,7 +263,7 @@
       DAVIDE CAIAZZO
       <span style="position:absolute;bottom:-2px;left:0;width:100%;height:1px;background:linear-gradient(90deg,#D4AF37,transparent);opacity:0.3"></span>
     </a>
-    <nav class="hide-mobile" style="display:flex;gap:24px;align-items:center">
+    <nav class="hide-mobile" style="display:flex;gap:28px;align-items:center">
       <a href="#come-funziona" class="nav-link">Come Funziona</a>
       <a href="#esempi" class="nav-link">Esempi</a>
       <a href="#automazioni" class="nav-link">Prima/Dopo</a>
@@ -275,8 +281,8 @@
 </header>
 
 <!-- ===== DISCLAIMER (scorre con la pagina) ===== -->
-<div id="disclaimer" style="margin-top:80px;padding:12px 32px;text-align:center;background:#000;border-bottom:1px solid rgba(255,255,255,0.05)">
-  <p style="font-size:13px;font-family:monospace;color:rgba(255,255,255,0.4);line-height:1.6;max-width:900px;margin:0 auto">I contenuti di questo sito hanno natura pubblicitaria a favore della DC Academy S.r.l. &middot; Per qualsiasi approfondimento sui nostri servizi, clienti, testimonianze, testate e sui numeri citati su questo sito visita la pagina: www.davidecaiazzo.it/trasparenza</p>
+<div id="disclaimer" style="margin-top:80px;padding:8px 32px;text-align:center;background:#000;border-bottom:1px solid rgba(255,255,255,0.05)">
+  <p style="font-size:11px;font-family:monospace;color:rgba(255,255,255,0.4);line-height:1.6;max-width:1200px;margin:0 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">I contenuti di questo sito hanno natura pubblicitaria a favore della DC Academy S.r.l. &middot; Per qualsiasi approfondimento sui nostri servizi, clienti, testimonianze, testate e sui numeri citati su questo sito visita la pagina: www.davidecaiazzo.it/trasparenza</p>
 </div>
 
 <!-- Mobile Menu -->
@@ -292,12 +298,12 @@
 </div>
 
 <!-- ===== HERO ===== -->
-<section style="position:relative;overflow:hidden;padding:100px 40px 72px;min-height:85vh;display:flex;align-items:center">
+<section style="position:relative;overflow:hidden;padding:72px 40px 80px;display:flex;align-items:flex-start">
   <div class="orb" style="width:700px;height:700px;background:#D4AF37;top:-350px;right:-250px;opacity:0.06"></div>
   <div class="orb" style="width:500px;height:500px;background:#127059;bottom:-250px;left:-200px;opacity:0.04;animation-delay:4s"></div>
   <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(212,175,55,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,0.015) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%)"></div>
 
-  <div style="max-width:960px;margin:0 auto;text-align:center;position:relative;z-index:2">
+  <div style="max-width:1000px;margin:0 auto;text-align:center;position:relative;z-index:2;width:100%">
     <!-- AUTHORITY BADGES -->
     <div class="reveal" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:28px">
       <span style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.22);border-radius:100px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);letter-spacing:0.5px">
@@ -385,7 +391,7 @@
 
 <!-- ===== COSA SIGNIFICA IN PRATICA ===== -->
 <section class="section" style="position:relative">
-  <div style="max-width:900px;margin:0 auto;position:relative;z-index:2">
+  <div style="max-width:1000px;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:40px">
       <p class="label reveal" style="margin-bottom:16px">In parole semplici</p>
       <h2 class="h-lg reveal">"Automatizzare" vuol dire<br><span class="gold">che non lo fai pi&ugrave; tu.</span></h2>
@@ -567,8 +573,8 @@
 <!-- ===== PRIMA/DOPO ===== -->
 <section id="automazioni" class="section" style="position:relative">
   <div class="orb" style="width:500px;height:500px;background:#D4AF37;top:20%;right:-250px;opacity:0.04"></div>
-  <div style="max-width:900px;margin:0 auto;position:relative;z-index:2">
-    <div style="text-align:center;margin-bottom:48px">
+  <div style="max-width:1000px;margin:0 auto;position:relative;z-index:2">
+    <div style="text-align:center;margin-bottom:40px">
       <p class="label reveal" style="margin-bottom:16px">Prima &amp; Dopo</p>
       <h2 class="h-lg reveal">Quello che facevo a mano,<br>ora <span class="gold">lo fa l'AI per me</span></h2>
       <p class="body-text reveal" style="margin-top:16px">Queste sono automazioni reali che uso ogni giorno nella mia azienda</p>
@@ -800,7 +806,7 @@
 <!-- ===== COME FUNZIONA (con posizionamento integrato) ===== -->
 <section id="come-funziona" class="section" style="position:relative;overflow:hidden">
   <div class="orb" style="width:600px;height:600px;background:#D4AF37;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.04"></div>
-  <div style="max-width:900px;margin:0 auto;position:relative;z-index:2">
+  <div style="max-width:1000px;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:48px">
       <div class="reveal" style="margin-bottom:40px">
         <h2 style="font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,56px);font-weight:900;line-height:1.1;margin-bottom:24px">
@@ -844,7 +850,7 @@
 <!-- ===== ESEMPI DI AUTOMAZIONI CHE COSTRUIAMO ===== -->
 <section id="esempi" class="section" style="position:relative">
   <div class="orb" style="width:500px;height:500px;background:#D4AF37;bottom:-250px;right:-200px;opacity:0.04;animation-delay:3s"></div>
-  <div style="max-width:900px;margin:0 auto;position:relative;z-index:2">
+  <div style="max-width:1000px;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:40px">
       <p class="label reveal" style="margin-bottom:16px">Esempi concreti</p>
       <h2 class="h-lg reveal">Ecco cosa possiamo<br><span class="gold">automatizzare per te.</span></h2>
@@ -981,7 +987,7 @@
 
 <!-- ===== COSA NON SI PUÒ AUTOMATIZZARE ===== -->
 <section class="section" style="position:relative">
-  <div style="max-width:900px;margin:0 auto;position:relative;z-index:2">
+  <div style="max-width:1000px;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:48px">
       <p class="label reveal" style="margin-bottom:16px">Onestà totale</p>
       <h2 class="h-lg reveal">Cosa <span style="color:#ff4444">non</span> si può<br><span class="gold">automatizzare?</span></h2>
@@ -1467,7 +1473,7 @@
 
 <!-- ===== PER CHI È / PER CHI NON È ===== -->
 <section class="section" style="position:relative">
-  <div style="max-width:900px;margin:0 auto;position:relative;z-index:2">
+  <div style="max-width:1000px;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:40px">
       <p class="label reveal" style="margin-bottom:16px">Chiarezza totale</p>
       <h2 class="h-lg reveal">Questo <span class="gold">non è per tutti.</span></h2>
@@ -1501,7 +1507,7 @@
 
 <!-- ===== CHI SONO ===== -->
 <section class="section" style="position:relative">
-  <div style="max-width:1080px;margin:0 auto;position:relative;z-index:2">
+  <div style="max-width:1120px;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:40px">
       <p class="label reveal" style="margin-bottom:16px">Chi sono</p>
       <h2 class="h-lg reveal">Davide <span class="gold">Caiazzo</span></h2>
@@ -1558,7 +1564,7 @@
 <!-- ===== FAQ ===== -->
 <div class="gold-line"></div>
 <section id="faq" class="section" style="position:relative">
-  <div style="max-width:900px;margin:0 auto;position:relative;z-index:2">
+  <div style="max-width:1000px;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:40px">
       <p class="label reveal" style="margin-bottom:16px">Domande frequenti</p>
       <h2 class="h-lg reveal">Hai <span class="gold">domande?</span></h2>
