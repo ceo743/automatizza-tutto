@@ -14,261 +14,181 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet"/>
   <style>
-    /* ===== RESET ===== */
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:80px;overflow-x:hidden}
-    body{font-family:'Inter',sans-serif;background:#080b10;color:#fff;overflow-x:hidden}
-    a,button{cursor:pointer}
-    ::selection{background:rgba(212,175,55,0.3);color:#fff}
-    ::-webkit-scrollbar{width:4px}
-    ::-webkit-scrollbar-track{background:#080b10}
-    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#D4AF37,#8B6914);border-radius:4px}
-
-    /* ===== CANVAS BG ===== */
-    #particleCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-
-    /* ===== TYPOGRAPHY ===== */
-    .h-hero{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,76px);font-weight:900;line-height:1.02;letter-spacing:-0.03em}
-    .h-lg{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,52px);font-weight:800;line-height:1.08;letter-spacing:-0.02em}
-    .h-md{font-size:clamp(17px,2vw,22px);font-weight:600;line-height:1.3}
-    .body-text{font-size:clamp(15px,1.1vw,17px);color:rgba(255,255,255,0.75);line-height:1.8;font-weight:300}
-    .label{font-size:11px;text-transform:uppercase;letter-spacing:4px;color:#D4AF37;font-weight:600}
-
-    /* ===== GOLD SHIMMER ===== */
-    .gold{background:linear-gradient(135deg,#BF953F 0%,#FCF6BA 25%,#B38728 50%,#FBF5B7 75%,#AA771C 100%);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:goldShimmer 6s ease infinite}
-    @keyframes goldShimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    .gold-line{height:1px;background:linear-gradient(90deg,transparent 0%,rgba(212,175,55,0.08) 20%,rgba(212,175,55,0.3) 50%,rgba(212,175,55,0.08) 80%,transparent 100%)}
-
-    /* ===== BUTTONS ===== */
-    .btn-gold{display:inline-flex;align-items:center;gap:10px;padding:20px 48px;background:linear-gradient(135deg,#BF953F,#D4AF37);color:#000;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:2.5px;border:none;border-radius:60px;text-decoration:none;transition:all 0.5s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden;font-family:'Inter',sans-serif;box-shadow:0 4px 30px rgba(212,175,55,0.2)}
-    .btn-gold::before{content:'';position:absolute;inset:-2px;background:linear-gradient(135deg,#FCF6BA,#D4AF37,#BF953F,#FCF6BA);background-size:300% 300%;border-radius:60px;z-index:-1;animation:goldShimmer 4s ease infinite;filter:blur(8px);opacity:0;transition:opacity 0.5s}
-    .btn-gold:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 60px rgba(212,175,55,0.35)}
-    .btn-gold:hover::before{opacity:1}
-    .btn-gold span{position:relative;z-index:1}
-
-    /* ===== GLASS CARD ===== */
-    .glass{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:20px;position:relative;overflow:visible;transition:transform 0.3s,background 0.3s}
-    .glass:hover{background:rgba(255,255,255,0.05);transform:translateY(-4px)}
-
-    /* ===== SCROLL REVEAL ===== */
-    .reveal{opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(0.16,1,0.3,1)}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-
-    /* ===== SECTIONS ===== */
-    .section{padding:56px 40px;position:relative;z-index:1}
-    .wrap{max-width:1080px;margin:0 auto;width:100%}
-    .wrap-sm{max-width:720px;margin:0 auto;width:100%}
-
-    /* ===== GLOW ORBS ===== */
-    .orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
-
-    /* ===== NAV ===== */
-    .nav-link{color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;letter-spacing:0.5px;font-weight:400;transition:all 0.3s;position:relative}
-    .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#D4AF37;transition:width 0.3s}
-    .nav-link:hover{color:#D4AF37}
-    .nav-link:hover::after{width:100%}
-
-    /* ===== FORM ===== */
-    .form-field{width:100%;padding:18px 22px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;color:#fff;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:all 0.4s}
-    .form-field:focus{border-color:rgba(212,175,55,0.5);background:rgba(255,255,255,0.06);box-shadow:0 0 30px rgba(212,175,55,0.08)}
-    .form-field::placeholder{color:rgba(255,255,255,0.2)}
-
-    /* ===== BEFORE/AFTER ROWS ===== */
-    .ba-row{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;padding:24px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
-    .ba-row:last-child{border-bottom:none}
-    .ba-before{text-align:right;color:rgba(255,255,255,0.4);font-size:15px;text-decoration:line-through;text-decoration-color:rgba(255,68,68,0.5)}
-    .ba-after{text-align:left;color:rgba(255,255,255,0.85);font-size:15px;font-weight:500}
-    .ba-arrow{color:#D4AF37;font-size:20px}
-
-    /* ===== FOOTER ===== */
-    .footer-link{color:#D4AF37;text-decoration:none;transition:all 0.3s;opacity:0.7}
-    .footer-link:hover{opacity:1;text-shadow:0 0 8px rgba(212,175,55,0.4)}
-    .social-icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;text-decoration:none;transition:all 0.3s;opacity:0.8}
-    .social-icon:hover{opacity:1;transform:translateY(-3px);box-shadow:0 4px 15px rgba(0,0,0,0.4)}
-    #trailCanvas{position:fixed;inset:0;z-index:9999;pointer-events:none}
-
-    /* ===== ACCORDION ===== */
-    .accordion-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px;margin-bottom:12px;overflow:hidden;transition:all 0.3s}
-    .accordion-item:hover{border-color:rgba(212,175,55,0.15)}
-    .accordion-header{padding:20px 24px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all 0.3s;user-select:none}
-    .accordion-header:hover{background:rgba(212,175,55,0.04)}
-    .accordion-check{width:24px;height:24px;border-radius:8px;border:2px solid rgba(212,175,55,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s}
-    .accordion-item.checked .accordion-check{background:linear-gradient(135deg,#BF953F,#D4AF37);border-color:transparent}
-    .accordion-item.checked .accordion-check::after{content:'\2713';color:#000;font-size:14px;font-weight:700}
-    .accordion-title{font-size:16px;font-weight:600;flex:1;color:rgba(255,255,255,0.85)}
-    .accordion-arrow{color:rgba(255,255,255,0.2);font-size:20px;transition:transform 0.3s;flex-shrink:0}
-    .accordion-item.open .accordion-arrow{transform:rotate(180deg);color:#D4AF37}
-    .accordion-body{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1)}
-    .accordion-item.open .accordion-body{max-height:300px}
-    .accordion-body-inner{padding:0 24px 24px 64px;color:rgba(255,255,255,0.75);font-size:14px;line-height:1.8}
-
-    /* ===== MOCK SCREENSHOTS ===== */
-    .mock-email{background:linear-gradient(160deg,#1a1d2e,#12151c);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
-    .mock-email-header{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:12px}
-    .mock-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#BF953F,#D4AF37);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#000}
-    .mock-email-body{padding:24px 20px}
-
-    .mock-report{background:linear-gradient(160deg,#1a1032,#12101c);border:1px solid rgba(140,80,255,0.12);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
-    .mock-report-header{padding:20px 24px;border-bottom:1px solid rgba(140,80,255,0.1)}
-    .mock-report-body{padding:24px}
-    .mock-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
-    .mock-stat{background:rgba(255,255,255,0.04);border-radius:12px;padding:16px;text-align:center}
-    .mock-stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:800}
-    .mock-stat-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.35);margin-top:4px}
-    .mock-table{width:100%;border-collapse:collapse}
-    .mock-table th{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.3);text-align:left;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.06)}
-    .mock-table td{padding:12px;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.03)}
-    .mock-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
-    .mock-badge.warm{background:rgba(255,180,0,0.15);color:#FFB400}
-    .mock-badge.hot{background:rgba(255,80,80,0.15);color:#FF5050}
-
-    .mock-calendar{background:linear-gradient(160deg,#1c1e2a,#12141e);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
-    .mock-cal-header{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center}
-    .mock-cal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,0.03)}
-    .mock-cal-day{padding:8px;min-height:120px;background:#12141e}
-    .mock-cal-dayname{font-size:10px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-    .mock-cal-event{background:rgba(18,112,89,0.3);border-left:3px solid #127059;border-radius:4px;padding:4px 8px;margin-bottom:4px;font-size:10px;color:rgba(255,255,255,0.7)}
-    .mock-cal-event.confirmed{background:rgba(212,175,55,0.15);border-left-color:#D4AF37;color:rgba(212,175,55,0.9)}
-
-    /* ===== TESTIMONIAL CAROUSEL ===== */
-    @keyframes scrollTestimonials{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-    .testimonial-card{min-width:320px;max-width:320px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;cursor:pointer;transition:all 0.4s;flex-shrink:0}
-    .testimonial-card:hover{border-color:rgba(212,175,55,0.2);background:rgba(212,175,55,0.04)}
-    .tc-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-    .tc-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#BF953F,#D4AF37);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#000;font-family:'Playfair Display',serif;flex-shrink:0}
-    .tc-name{font-size:14px;font-weight:700;color:rgba(255,255,255,0.9)}
-    .tc-role{font-size:11px;color:rgba(255,255,255,0.3)}
-    .tc-stat{font-size:18px;font-weight:800;color:#D4AF37;margin-bottom:6px;font-family:'Playfair Display',serif}
-    .tc-numbers{font-size:12px;color:rgba(255,255,255,0.35);line-height:1.6;margin-bottom:10px}
-    .tc-link{font-size:11px;color:rgba(212,175,55,0.6);font-weight:600;letter-spacing:0.5px;transition:color 0.3s}
-    .testimonial-card:hover .tc-link{color:#D4AF37}
-
-    /* ===== PRICE CARD ===== */
-    .price-card{background:linear-gradient(160deg,rgba(212,175,55,0.08),rgba(212,175,55,0.02));border:1px solid rgba(212,175,55,0.15);border-radius:24px;padding:48px 40px;text-align:center;position:relative;overflow:hidden}
-    .price-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 30%,rgba(212,175,55,0.06),transparent 50%);pointer-events:none}
-    .price-amount{font-family:'Playfair Display',serif;font-size:72px;font-weight:900;line-height:1}
-    .price-period{font-size:18px;color:rgba(255,255,255,0.7);font-weight:400}
-
-    /* ===== AUDIO PLAYER ===== */
-    .audio-player{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;display:flex;align-items:center;gap:20px}
-    .audio-play-btn{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#BF953F,#D4AF37);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all 0.3s;box-shadow:0 4px 20px rgba(212,175,55,0.25)}
-    .audio-play-btn:hover{transform:scale(1.1);box-shadow:0 8px 30px rgba(212,175,55,0.4)}
-    .audio-play-btn svg{width:20px;height:20px;fill:#000;margin-left:3px}
-    .audio-wave{flex:1;height:40px;display:flex;align-items:center;gap:2px}
-    .audio-bar{width:3px;border-radius:2px;background:rgba(212,175,55,0.3);animation:audioWave 1.5s ease-in-out infinite}
-    @keyframes audioWave{0%,100%{height:8px;opacity:0.3}50%{height:100%;opacity:1}}
-
-    /* ===== COUNTDOWN ===== */
-    .countdown-wrap{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
-    .countdown-item{text-align:center}
-    .countdown-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:#D4AF37;line-height:1}
-    .countdown-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-top:4px}
-    .countdown-sep{font-family:'Playfair Display',serif;font-size:36px;color:rgba(212,175,55,0.3);font-weight:800}
-
-    /* ===== CHECKBOX GROUP ===== */
-    .check-group{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .check-item{display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;cursor:pointer;transition:all 0.3s;user-select:none}
-    .check-item:hover{border-color:rgba(212,175,55,0.2);background:rgba(212,175,55,0.04)}
-    .check-item.selected{border-color:rgba(212,175,55,0.4);background:rgba(212,175,55,0.08)}
-    .check-item input[type="checkbox"]{accent-color:#D4AF37;width:18px;height:18px;flex-shrink:0}
-    .check-item label{font-size:13px;color:rgba(255,255,255,0.7);cursor:pointer;flex:1}
-
-    /* ===== CALENDLY MODAL ===== */
-    #calendlyOverlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
-    #calendlyOverlay.active{display:flex}
-    #calendlyModal{position:relative;width:100%;max-width:480px;height:min(720px,90vh);background:#fff;border-radius:16px;overflow:hidden}
-    #calendlyClose{position:absolute;top:12px;right:12px;z-index:10001;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.6);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.3s}
-    #calendlyClose:hover{background:rgba(0,0,0,0.8)}
-    #calendlyModal .calendly-inline-widget{width:100%;height:100%}
-
-    /* ===== RESPONSIVE ===== */
-    /* Tablet layout adjustments (up to 1024px) Ã¢ÂÂ nav stays desktop */
-    /* ========================================
-       RESPONSIVE SYSTEM — 27" / 15" / 13"
-       ======================================== */
-
-    /* Fluid section padding */
-    .section{padding:clamp(48px,5vw,80px) clamp(24px,5vw,100px)}
-
-    /* Containers */
-    .wrap{max-width:clamp(900px,82vw,1280px)}
-    .wrap-sm{max-width:clamp(600px,60vw,760px)}
-
-    /* Large desktop 1280-1600px (13" e 15") */
-    @media(min-width:1280px){
-      .section-inner-md{max-width:1200px!important}
-      .section-inner-lg{max-width:1400px!important}
-    }
-
-    /* XL desktop 1600-2100px */
-    @media(min-width:1600px){
-      .wrap{max-width:1400px}
-    }
-
-    /* 2K/4K 2100px+ (27") */
-    @media(min-width:2100px){
-      .wrap{max-width:1700px}
-      [style*="max-width:680px"]{max-width:min(820px,100%)!important}
-      [style*="max-width:860px"]{max-width:min(1100px,100%)!important}
-      [style*="max-width:900px"]:not([id]){max-width:min(1140px,100%)!important}
-    }
-
-    /* Tablet 769-1024px */
-    @media(min-width:769px) and (max-width:1024px){
-      .show-mobile{display:none!important}
-      .grid-3{grid-template-columns:repeat(2,1fr)!important}
-      .grid-4{grid-template-columns:repeat(2,1fr)!important}
-      .section{padding:52px 32px}
-    }
-
-    @media(max-width:1024px){
-      .grid-3{grid-template-columns:repeat(2,1fr)!important}
-    }
-
-    @media(max-width:768px){
-      .hide-mobile{display:none!important}
-      .show-mobile{display:block!important}
-      .grid-2{grid-template-columns:1fr!important}
-      .grid-3{grid-template-columns:1fr!important}
-      .grid-4{grid-template-columns:1fr!important}
-      .ba-row{grid-template-columns:1fr;gap:8px;text-align:center}
-      .ba-before,.ba-after{text-align:center}
-      .mock-stat-row{grid-template-columns:1fr 1fr}
-      .mock-cal-grid{grid-template-columns:repeat(2,1fr)!important}
-      .mock-cal-day:nth-child(5){display:none}
-      .check-group{grid-template-columns:1fr}
-      .countdown-num{font-size:36px}
-      .price-amount{font-size:56px}
-      .btn-gold{padding:16px 36px}
-      .testimonial-card{min-width:260px;max-width:260px}
-      .chi-sono-grid{grid-template-columns:1fr!important;text-align:center}
-      .chi-sono-grid>div:first-child{position:static!important;margin:0 auto}
-      .glass{padding:20px 16px!important;border-radius:16px}
-      .glass[style*="display:flex"][style*="gap:24px"]{flex-direction:column!important;align-items:center!important;text-align:center}
-      .glass[style*="display:flex"][style*="gap:24px"] .body-text{text-align:center}
-      .glass .grid-2{grid-template-columns:1fr!important}
-      .glass [style*="grid-template-columns:1fr auto 1fr"]{grid-template-columns:1fr!important;gap:16px;text-align:center}
-    }
-
-    @media(max-width:480px){
-      .h-hero{font-size:clamp(28px,8vw,36px)}
-      .mock-stat-row{grid-template-columns:1fr 1fr 1fr}
-      .mock-stat-num{font-size:20px!important}
-      .mock-stat{padding:10px!important}
-      .mock-cal-grid{grid-template-columns:1fr!important}
-      .mock-cal-day:nth-child(n+3){display:none}
-      .testimonial-card{min-width:240px;max-width:240px}
-      .price-amount{font-size:48px}
-      .glass{padding:16px 12px!important}
-      .glass p[style*="font-size:14px"]{font-size:13px!important}
-    }
-
-    @media(min-width:769px){.show-mobile{display:none!important}}
-    @media(max-width:720px){.grid-2{grid-template-columns:1fr!important}}
-
-    .btn-gold{white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
-    @media(max-width:900px){.hero-photo{display:none!important}}
-  </style>
+  /* ===================================================
+     DESIGN TOKENS — single source of truth
+     =================================================== */
+  :root {
+    --gold: #D4AF37;
+    --gold2: #BF953F;
+    --red: #ff4444;
+    --bg: #080b10;
+    --surface: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.07);
+    --ctr-w:      clamp(320px, 92vw, 1540px);
+    --ctr-text-w: clamp(300px, 72vw, 980px);
+    --text-w:     clamp(280px, 55vw, 760px);
+    --sec-x: clamp(20px, 5vw, 100px);
+    --sec-y: clamp(44px, 5.5vw, 88px);
+    --gap-xs: clamp(8px,1vw,14px);
+    --gap-sm: clamp(12px,1.5vw,20px);
+    --gap-md: clamp(20px,2.5vw,36px);
+    --gap-lg: clamp(32px,4vw,64px);
+    --fs-hero: clamp(32px,5.5vw,80px);
+    --fs-h2:  clamp(26px,3.8vw,54px);
+    --fs-h3:  clamp(17px,1.8vw,23px);
+    --fs-body:clamp(14px,1.1vw,17px);
+    --fs-sm:  clamp(12px,0.85vw,14px);
+    --fs-label:clamp(10px,0.7vw,12px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:80px;overflow-x:hidden}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
+  a,button{cursor:pointer}
+  ::selection{background:rgba(212,175,55,0.3);color:#fff}
+  ::-webkit-scrollbar{width:4px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#D4AF37,#8B6914);border-radius:4px}
+  #particleCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+  #trailCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .h-hero{font-family:'Playfair Display',serif;font-size:var(--fs-hero);font-weight:900;line-height:1.02;letter-spacing:-0.03em}
+  .h-lg{font-family:'Playfair Display',serif;font-size:var(--fs-h2);font-weight:800;line-height:1.08;letter-spacing:-0.02em}
+  .h-md{font-size:var(--fs-h3);font-weight:600;line-height:1.3}
+  .body-text{font-size:var(--fs-body);color:rgba(255,255,255,0.75);line-height:1.8;font-weight:300}
+  .label{font-size:var(--fs-label);text-transform:uppercase;letter-spacing:4px;color:var(--gold);font-weight:600}
+  .gold{color:var(--gold)}
+  .section{padding:var(--sec-y) var(--sec-x);position:relative;z-index:1}
+  .section-hero{padding:var(--sec-y) var(--sec-x);position:relative;overflow:hidden;display:flex;align-items:flex-start}
+  .ctr{max-width:var(--ctr-w);width:100%;margin:0 auto;position:relative;z-index:2}
+  .ctr-text{max-width:var(--ctr-text-w);width:100%;margin:0 auto}
+  .ctr-narrow{max-width:var(--text-w);width:100%;margin:0 auto}
+  .section > div[style*="max-width:1500px"],.section > div[style*="max-width:1400px"]{max-width:var(--ctr-w)!important}
+  .section-hero > div[style*="max-width:1500px"]{max-width:var(--ctr-w)!important}
+  .section [style*="max-width:900px"],.section [style*="max-width:860px"],.section [style*="max-width:920px"]{max-width:var(--ctr-text-w)!important}
+  .section [style*="max-width:680px"]{max-width:var(--text-w)!important}
+  .wrap{max-width:var(--ctr-text-w);margin:0 auto;width:100%}
+  .wrap-sm{max-width:var(--text-w);margin:0 auto;width:100%}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap-md)}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap-md)}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap-md)}
+  .gold-line{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.15),transparent);position:relative;z-index:1}
+  #header{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:all 0.5s cubic-bezier(0.4,0,0.2,1)}
+  .header-inner{max-width:var(--ctr-w);width:100%;margin:0 auto;padding:0 var(--sec-x);display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:'Playfair Display',serif;font-size:clamp(15px,1.2vw,19px);font-weight:800;letter-spacing:0.08em;color:#fff;text-decoration:none;text-transform:uppercase}
+  .nav-link{color:rgba(255,255,255,0.7);text-decoration:none;font-size:var(--fs-sm);letter-spacing:0.5px;font-weight:400;transition:all 0.3s;position:relative}
+  .nav-link:hover{color:#fff}
+  .nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s}
+  .nav-link:hover::after{width:100%}
+  .hide-mobile{display:block}
+  .show-mobile{display:none}
+  .btn-gold{display:inline-flex;align-items:center;gap:10px;padding:clamp(14px,1.2vw,20px) clamp(28px,3vw,48px);background:linear-gradient(135deg,var(--gold2),var(--gold));color:#000;font-weight:700;font-size:var(--fs-sm);text-transform:uppercase;letter-spacing:2.5px;border:none;border-radius:60px;text-decoration:none;transition:all 0.5s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden;font-family:'Inter',sans-serif;box-shadow:0 4px 30px rgba(212,175,55,0.2);cursor:pointer;white-space:nowrap}
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(212,175,55,0.35)}
+  .btn-gold::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.6s}
+  .btn-gold:hover::before{left:100%}
+  .glass{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:clamp(20px,2.5vw,36px);backdrop-filter:blur(10px);transition:all 0.4s cubic-bezier(0.4,0,0.2,1)}
+  .glass:hover{background:rgba(255,255,255,0.04);border-color:rgba(212,175,55,0.15);transform:translateY(-2px)}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1),transform 0.7s cubic-bezier(0.4,0,0.2,1)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+  .ba-row{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--gap-md);align-items:center;padding:clamp(16px,2vw,24px) 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .ba-before{text-align:right;color:rgba(255,255,255,0.4);font-size:var(--fs-body);text-decoration:line-through;text-decoration-color:rgba(255,68,68,0.5)}
+  .ba-after{text-align:left;color:rgba(255,255,255,0.85);font-size:var(--fs-body);font-weight:500}
+  .ba-arrow{color:var(--gold);font-size:clamp(16px,1.5vw,22px)}
+  .accordion-item{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.3s}
+  .accordion-item.open{border-color:rgba(212,175,55,0.2)}
+  .accordion-header{padding:clamp(16px,1.5vw,22px) clamp(18px,2vw,28px);display:flex;align-items:center;gap:16px;cursor:pointer;transition:all 0.3s;user-select:none}
+  .accordion-header:hover{background:rgba(255,255,255,0.02)}
+  .accordion-icon{width:clamp(32px,3vw,44px);height:clamp(32px,3vw,44px);border-radius:50%;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.15);display:flex;align-items:center;justify-content:center;font-size:clamp(14px,1.3vw,18px);flex-shrink:0}
+  .accordion-title{font-size:var(--fs-h3);font-weight:600;flex:1;color:rgba(255,255,255,0.85)}
+  .accordion-arrow{color:rgba(255,255,255,0.2);font-size:clamp(16px,1.5vw,22px);transition:transform 0.3s;flex-shrink:0}
+  .accordion-item.open .accordion-arrow{transform:rotate(180deg);color:var(--gold)}
+  .accordion-body{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1)}
+  .accordion-item.open .accordion-body{max-height:2000px}
+  .accordion-body-inner{padding:0 clamp(18px,2vw,28px) clamp(18px,2vw,24px) clamp(56px,5vw,72px);color:rgba(255,255,255,0.75);font-size:var(--fs-body);line-height:1.8}
+  .mock-email-header{padding:clamp(12px,1.2vw,16px) clamp(16px,1.5vw,20px);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:12px}
+  .mock-email-body{padding:clamp(16px,2vw,24px) clamp(16px,1.5vw,20px)}
+  .mock-report-header{padding:clamp(16px,1.5vw,20px) clamp(18px,2vw,24px);border-bottom:1px solid rgba(140,80,255,0.1)}
+  .mock-report-body{padding:clamp(18px,2vw,24px)}
+  .mock-stat{background:rgba(255,255,255,0.04);border-radius:12px;padding:clamp(10px,1.2vw,16px);text-align:center}
+  .mock-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap-sm)}
+  .mock-stat-num{font-family:'Playfair Display',serif;font-size:clamp(20px,2.2vw,28px);font-weight:800}
+  .mock-stat-label{font-size:clamp(9px,0.8vw,11px);text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.35);margin-top:4px}
+  .mock-table th{font-size:clamp(9px,0.8vw,11px);text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.3);text-align:left;padding:8px clamp(8px,1vw,12px);border-bottom:1px solid rgba(255,255,255,0.06)}
+  .mock-table td{padding:clamp(8px,1vw,12px);font-size:var(--fs-sm);border-bottom:1px solid rgba(255,255,255,0.03)}
+  .mock-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:var(--fs-sm);font-weight:700}
+  .mock-cal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:8px}
+  .mock-cal-day{padding:8px;min-height:clamp(80px,8vw,120px);background:#12141e}
+  .mock-cal-dayname{font-size:clamp(9px,0.75vw,11px);color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+  .mock-cal-event{background:rgba(18,112,89,0.3);border-left:3px solid #127059;border-radius:4px;padding:4px 8px;margin-bottom:4px;font-size:clamp(9px,0.75vw,11px);color:rgba(255,255,255,0.7)}
+  .testimonial-track{display:flex;gap:var(--gap-md);overflow-x:auto;padding-bottom:16px;scrollbar-width:none;-ms-overflow-style:none;cursor:grab}
+  .testimonial-track::-webkit-scrollbar{display:none}
+  .testimonial-card{min-width:clamp(260px,28vw,320px);max-width:clamp(260px,28vw,320px);background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:clamp(18px,2vw,24px);cursor:pointer;transition:all 0.4s;flex-shrink:0}
+  .testimonial-card:hover{background:rgba(255,255,255,0.04);border-color:rgba(212,175,55,0.2);transform:translateY(-4px)}
+  .tc-name{font-size:var(--fs-body);font-weight:700;color:rgba(255,255,255,0.9)}
+  .tc-role{font-size:var(--fs-sm);color:rgba(255,255,255,0.3)}
+  .tc-stat{font-size:clamp(16px,1.8vw,20px);font-weight:800;color:var(--gold);margin-bottom:6px;font-family:'Playfair Display',serif}
+  .tc-numbers{font-size:var(--fs-sm);color:rgba(255,255,255,0.35);line-height:1.6;margin-bottom:10px}
+  .tc-link{font-size:var(--fs-sm);color:rgba(212,175,55,0.6);font-weight:600;letter-spacing:0.5px;transition:color 0.3s}
+  .price-card{background:linear-gradient(160deg,rgba(212,175,55,0.08),rgba(212,175,55,0.02));border:1px solid rgba(212,175,55,0.15);border-radius:24px;padding:clamp(32px,4vw,56px) clamp(24px,4vw,48px);text-align:center;position:relative;overflow:hidden}
+  .price-amount{font-family:'Playfair Display',serif;font-size:clamp(52px,6vw,80px);font-weight:900;line-height:1}
+  .price-period{font-size:clamp(15px,1.3vw,19px);color:rgba(255,255,255,0.7);font-weight:400}
+  .audio-player{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:clamp(16px,2vw,24px);display:flex;align-items:center;gap:clamp(14px,1.5vw,20px)}
+  .play-btn{width:clamp(44px,4vw,56px);height:clamp(44px,4vw,56px);border-radius:50%;background:linear-gradient(135deg,var(--gold2),var(--gold));border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all 0.3s;box-shadow:0 4px 20px rgba(212,175,55,0.3)}
+  .play-btn:hover{transform:scale(1.05)}
+  .progress-bar{flex:1;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;cursor:pointer;position:relative}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:2px;transition:width 0.1s linear}
+  .audio-info{flex:1;min-width:0}
+  .audio-title{font-size:var(--fs-body);font-weight:600;color:rgba(255,255,255,0.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .audio-time{font-size:var(--fs-sm);color:rgba(255,255,255,0.35);margin-top:4px;font-family:monospace}
+  .countdown-num{font-family:'Playfair Display',serif;font-size:clamp(36px,4vw,56px);font-weight:900;color:var(--gold);line-height:1}
+  .countdown-label{font-size:var(--fs-sm);text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-top:4px}
+  .countdown-sep{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,40px);color:rgba(212,175,55,0.3);font-weight:800}
+  .check-group{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap-sm)}
+  .check-item{display:flex;align-items:center;gap:10px;padding:clamp(10px,1.2vw,14px) clamp(12px,1.5vw,16px);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;cursor:pointer;transition:all 0.3s;user-select:none}
+  .check-item.selected{background:rgba(212,175,55,0.06);border-color:rgba(212,175,55,0.2)}
+  .check-box{width:clamp(18px,1.6vw,22px);height:clamp(18px,1.6vw,22px);border-radius:6px;border:2px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;transition:all 0.3s;flex-shrink:0}
+  .check-item.selected .check-box{background:var(--gold);border-color:var(--gold)}
+  .check-item label{font-size:var(--fs-sm);color:rgba(255,255,255,0.7);cursor:pointer;flex:1}
+  #calendlyOverlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999;display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+  #calendlyOverlay.active{display:flex}
+  #calendlyModal{position:relative;width:100%;max-width:480px;height:min(720px,90vh);background:#fff;border-radius:16px;overflow:hidden}
+  #calendlyClose{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.6);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:all 0.3s}
+  #stickyCta{position:fixed;bottom:0;left:0;right:0;z-index:90;transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1)}
+  #stickyCta .sticky-inner{display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,24px);padding:clamp(10px,1.2vw,14px) var(--sec-x);background:rgba(8,11,16,0.95);border-top:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(20px)}
+  .chi-sono-grid{display:grid;grid-template-columns:auto 1fr;gap:var(--gap-lg);align-items:start}
+  .form-field{width:100%;padding:clamp(14px,1.5vw,18px) clamp(16px,1.8vw,22px);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;color:#fff;font-size:var(--fs-body);font-family:'Inter',sans-serif;outline:none;transition:all 0.4s}
+  .form-field:focus{border-color:rgba(212,175,55,0.3);background:rgba(255,255,255,0.06)}
+  .hero-photo{position:absolute;right:0;top:0;bottom:0;width:40%;height:100%;object-fit:cover;object-position:center top;z-index:1;pointer-events:none;-webkit-mask-image:linear-gradient(to left,rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.5) 50%,transparent 100%);mask-image:linear-gradient(to left,rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.5) 50%,transparent 100%)}
+  @media(min-width:769px) and (max-width:1024px){.show-mobile{display:none!important}.grid-3{grid-template-columns:repeat(2,1fr)!important}.grid-4{grid-template-columns:repeat(2,1fr)!important}}
+  @media(max-width:1024px){.grid-3{grid-template-columns:repeat(2,1fr)!important}}
+  @media(max-width:768px){
+    .hide-mobile{display:none!important}.show-mobile{display:block!important}
+    .grid-2,.grid-3,.grid-4{grid-template-columns:1fr!important}
+    .ba-row{grid-template-columns:1fr;gap:8px;text-align:center}
+    .ba-before,.ba-after{text-align:center}
+    .mock-stat-row{grid-template-columns:1fr 1fr}
+    .mock-cal-grid{grid-template-columns:repeat(2,1fr)!important}
+    .mock-cal-day:nth-child(5){display:none}
+    .check-group{grid-template-columns:1fr}
+    .glass{padding:clamp(16px,4vw,24px)!important;border-radius:16px}
+    .glass[style*="display:flex"][style*="gap:24px"]{flex-direction:column!important;align-items:center!important;text-align:center}
+    .glass[style*="display:flex"][style*="gap:24px"] .body-text{text-align:center}
+    .glass .grid-2{grid-template-columns:1fr!important}
+    .glass [style*="grid-template-columns:1fr auto 1fr"]{grid-template-columns:1fr!important;gap:16px;text-align:center}
+    .chi-sono-grid{grid-template-columns:1fr!important;text-align:center}
+    .chi-sono-grid>div:first-child{position:static!important;margin:0 auto}
+    .hero-photo{display:none!important}
+  }
+  @media(max-width:480px){
+    .mock-stat-row{grid-template-columns:1fr 1fr 1fr}
+    .mock-cal-grid{grid-template-columns:1fr!important}
+    .mock-cal-day:nth-child(n+3){display:none}
+    .testimonial-card{min-width:240px;max-width:240px}
+    .glass{padding:clamp(14px,4vw,20px)!important}
+  }
+  @media(min-width:769px){.show-mobile{display:none!important}}
+  @media(max-width:900px){.hero-photo{display:none!important}}
+  @media(max-width:720px){.grid-2{grid-template-columns:1fr!important}}
+</style>
 </head>
 <body>
 
@@ -283,7 +203,7 @@
 
 <!-- ===== HEADER ===== -->
 <header id="header" style="position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:padding 0.3s;border-bottom:1px solid transparent;background:rgba(8,11,16,0.97)">
-  <div style="max-width:1500px;width:100%;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between">
+  <div class="header-inner">
     <a href="#" style="text-decoration:none;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:#fff;letter-spacing:1px;position:relative">
       DAVIDE CAIAZZO
       <span style="position:absolute;bottom:-2px;left:0;width:100%;height:1px;background:linear-gradient(90deg,#D4AF37,transparent);opacity:0.3"></span>
@@ -323,7 +243,7 @@
 </div>
 
 <!-- ===== HERO ===== -->
-<section style="position:relative;overflow:hidden;padding:60px 40px 56px;display:flex;align-items:flex-start">
+<section class="section-hero">
 
   <!-- FOTO DAVIDE CAIAZZO -->
   <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/2152024008/settings_images/WKdGUgfVTdel6xcpXgaS_file.jpg"
@@ -335,10 +255,10 @@
     <!-- AUTHORITY BADGES -->
     <div class="reveal" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:28px">
       <span style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.22);border-radius:100px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);letter-spacing:0.5px">
-        <span style="color:#D4AF37;font-size:14px">&#9679;</span> 2ÃÂ TEDx Speaker
+        <span style="color:#D4AF37;font-size:14px">&#9679;</span> 2ÃÂÃÂ TEDx Speaker
       </span>
       <span style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.22);border-radius:100px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);letter-spacing:0.5px">
-        <span style="color:#D4AF37;font-size:14px">&#9679;</span> EXIT 10MÃ¢ÂÂ¬ (Zucchetti)
+        <span style="color:#D4AF37;font-size:14px">&#9679;</span> EXIT 10MÃÂ¢ÃÂÃÂ¬ (Zucchetti)
       </span>
       <span style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.22);border-radius:100px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);letter-spacing:0.5px">
         <span style="color:#D4AF37;font-size:14px">&#9679;</span> 2 Libri Feltrinelli
@@ -372,7 +292,7 @@
 <section class="section" style="position:relative">
   <div class="orb" style="width:400px;height:400px;background:#ff4444;top:50%;left:-200px;transform:translateY(-50%);opacity:0.03"></div>
   <div style="max-width:1500px;width:100%;margin:0 auto;text-align:center;position:relative;z-index:2">
-    <p class="label reveal" style="margin-bottom:16px">Lo sai giÃÂ </p>
+    <p class="label reveal" style="margin-bottom:16px">Lo sai giÃÂÃÂ </p>
     <h2 class="h-lg reveal" style="margin-bottom:32px">Stai perdendo ore ogni settimana<br>in <span style="color:#ff4444">lavoro che non dovresti fare tu.</span></h2>
     <div class="reveal" style="display:grid;gap:16px;max-width:900px;width:100%;margin:0 auto">
       <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
@@ -385,7 +305,7 @@
       </div>
       <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
         <span style="font-size:24px;flex-shrink:0">&#128222;</span>
-        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Chiamate a freddo, profilazione lead, outbound, follow-up, comment marketing. AttivitÃÂ  che funzionano ma ti mangiano le giornate.</p>
+        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Chiamate a freddo, profilazione lead, outbound, follow-up, comment marketing. AttivitÃÂÃÂ  che funzionano ma ti mangiano le giornate.</p>
       </div>
       <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
         <span style="font-size:24px;flex-shrink:0">&#128176;</span>
@@ -393,14 +313,14 @@
       </div>
       <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
         <span style="font-size:24px;flex-shrink:0">&#9889;</span>
-        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Sai che l'AI potrebbe farti risparmiare ore. Ma non hai tempo di capire come. E intanto i tuoi concorrenti lo stanno giÃÂ  facendo.</p>
+        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Sai che l'AI potrebbe farti risparmiare ore. Ma non hai tempo di capire come. E intanto i tuoi concorrenti lo stanno giÃÂÃÂ  facendo.</p>
       </div>
     </div>
     <p class="reveal" style="margin-top:32px;font-size:18px;color:rgba(255,255,255,0.7)">
-      Tutto questo <strong style="color:#fff">si puÃÂ² automatizzare</strong>. Io l'ho fatto.<br>E adesso <strong style="color:#D4AF37">lo facciamo anche per te.</strong>
+      Tutto questo <strong style="color:#fff">si puÃÂÃÂ² automatizzare</strong>. Io l'ho fatto.<br>E adesso <strong style="color:#D4AF37">lo facciamo anche per te.</strong>
     </p>
 
-    <!-- PATTERN INTERRUPT Ã¢ÂÂ righe negative potenti -->
+    <!-- PATTERN INTERRUPT ÃÂ¢ÃÂÃÂ righe negative potenti -->
     <div class="reveal" style="margin-top:48px;padding:32px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:20px">
       <p style="font-size:clamp(15px,1.4vw,19px);color:rgba(255,255,255,0.7);line-height:2;text-align:center;font-weight:300">
         Non ti insegno a usare ChatGPT.<br>
@@ -612,7 +532,7 @@
       <div class="ba-row">
         <div class="ba-before">Aprire le piattaforme ads, scaricare i dati, calcolare i costi, fare il report a mano</div>
         <div class="ba-arrow">&rarr;</div>
-        <div class="ba-after">Ogni mattina alle 6 il report arriva nella mia email, giÃÂ  pronto con grafici e analisi</div>
+        <div class="ba-after">Ogni mattina alle 6 il report arriva nella mia email, giÃÂÃÂ  pronto con grafici e analisi</div>
       </div>
       <div class="ba-row">
         <div class="ba-before">Cercare contenuti virali su LinkedIn, Instagram e TikTok, tradurli, rifare la grafica, programmarli</div>
@@ -620,14 +540,14 @@
         <div class="ba-after">L'AI li trova, li traduce, ricrea la grafica e li programma per la pubblicazione. Da sola.</div>
       </div>
       <div class="ba-row">
-        <div class="ba-before">Rispondere al telefono, qualificare il lead, capire se ÃÂ¨ in target, prenotare la call</div>
+        <div class="ba-before">Rispondere al telefono, qualificare il lead, capire se ÃÂÃÂ¨ in target, prenotare la call</div>
         <div class="ba-arrow">&rarr;</div>
         <div class="ba-after">Un'AI chiama i lead, li qualifica con domande mirate e prenota la consulenza nel mio calendario</div>
       </div>
       <div class="ba-row">
         <div class="ba-before">Analizzare email e calendario per capire dove perdo tempo</div>
         <div class="ba-arrow">&rarr;</div>
-        <div class="ba-after">Ogni lunedÃÂ¬ alle 6 ricevo un report con le attivitÃÂ  ripetitive da eliminare</div>
+        <div class="ba-after">Ogni lunedÃÂÃÂ¬ alle 6 ricevo un report con le attivitÃÂÃÂ  ripetitive da eliminare</div>
       </div>
       <div class="ba-row">
         <div class="ba-before">Scrivere script per i video social ogni volta partendo da zero</div>
@@ -654,7 +574,7 @@
   <div style="max-width:1500px;width:100%;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:48px">
       <p class="label reveal" style="margin-bottom:16px">Prove reali</p>
-      <h2 class="h-lg reveal">Questo ÃÂ¨ quello che ricevo<br><span class="gold">ogni mattina. In automatico.</span></h2>
+      <h2 class="h-lg reveal">Questo ÃÂÃÂ¨ quello che ricevo<br><span class="gold">ogni mattina. In automatico.</span></h2>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px" class="grid-2">
@@ -662,10 +582,10 @@
       <div class="reveal mock-report">
         <div class="mock-report-header">
           <div style="display:flex;align-items:center;gap:8px">
-            <span style="font-size:18px">Ã°ÂÂÂ</span>
+            <span style="font-size:18px">ÃÂ°ÃÂÃÂÃÂ</span>
             <div>
               <p style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.85)">Report Lead Gen Ads</p>
-              <p style="font-size:11px;color:rgba(255,255,255,0.3)">LunedÃÂ¬ 13 aprile 2026 &mdash; Ultimi 7 giorni</p>
+              <p style="font-size:11px;color:rgba(255,255,255,0.3)">LunedÃÂÃÂ¬ 13 aprile 2026 &mdash; Ultimi 7 giorni</p>
             </div>
           </div>
         </div>
@@ -718,17 +638,17 @@
           <p style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:20px">Ecco i 5 post pronti per oggi. <strong style="color:rgba(255,255,255,0.8)">Devi solo approvarli e pubblicarli.</strong></p>
           <div style="display:flex;flex-direction:column;gap:14px">
             <div style="border-left:3px solid #D4AF37;padding:10px 14px;background:rgba(212,175,55,0.04);border-radius:0 8px 8px 0">
-              <p style="font-size:11px;font-weight:700;color:#D4AF37;margin-bottom:4px">POST 1 Ã¢ÂÂ Leadership</p>
+              <p style="font-size:11px;font-weight:700;color:#D4AF37;margin-bottom:4px">POST 1 ÃÂ¢ÃÂÃÂ Leadership</p>
               <p style="font-size:13px;color:rgba(255,255,255,0.75);font-style:italic">"Smetti di inseguire il lavoro dei sogni."</p>
               <p style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:4px">Fonte: Cicely Sk... (11.5k like)</p>
             </div>
             <div style="border-left:3px solid #D4AF37;padding:10px 14px;background:rgba(212,175,55,0.04);border-radius:0 8px 8px 0">
-              <p style="font-size:11px;font-weight:700;color:#D4AF37;margin-bottom:4px">POST 2 Ã¢ÂÂ ProduttivitÃÂ </p>
-              <p style="font-size:13px;color:rgba(255,255,255,0.75);font-style:italic">"Il successo non ÃÂ¨ lavorare di piÃÂ¹, ÃÂ¨ lavorare meglio."</p>
+              <p style="font-size:11px;font-weight:700;color:#D4AF37;margin-bottom:4px">POST 2 ÃÂ¢ÃÂÃÂ ProduttivitÃÂÃÂ </p>
+              <p style="font-size:13px;color:rgba(255,255,255,0.75);font-style:italic">"Il successo non ÃÂÃÂ¨ lavorare di piÃÂÃÂ¹, ÃÂÃÂ¨ lavorare meglio."</p>
               <p style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:4px">Fonte: James Ro... (8.2k like)</p>
             </div>
             <div style="border-left:3px solid #D4AF37;padding:10px 14px;background:rgba(212,175,55,0.04);border-radius:0 8px 8px 0">
-              <p style="font-size:11px;font-weight:700;color:#D4AF37;margin-bottom:4px">POST 3 Ã¢ÂÂ Mindset</p>
+              <p style="font-size:11px;font-weight:700;color:#D4AF37;margin-bottom:4px">POST 3 ÃÂ¢ÃÂÃÂ Mindset</p>
               <p style="font-size:13px;color:rgba(255,255,255,0.75);font-style:italic">"Non aspettare il momento perfetto. Crealo adesso."</p>
               <p style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:4px">Fonte: Sarah Bl... (6.7k like)</p>
             </div>
@@ -793,7 +713,7 @@
         <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#BF953F,#D4AF37);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:#000;flex-shrink:0">3</div>
         <div>
           <h3 class="h-md" style="margin-bottom:8px">Ricevi il piano operativo completo</h3>
-          <p class="body-text" style="font-size:14px">Entro 48 ore ricevi un documento PDF dettagliato con: la mappa dei tuoi processi attuali, ogni automazione consigliata con prioritÃÂ  e ROI stimato, il preventivo per l'implementazione chiavi in mano e la timeline di consegna. Il documento ÃÂ¨ tuo, anche se non procedi.</p>
+          <p class="body-text" style="font-size:14px">Entro 48 ore ricevi un documento PDF dettagliato con: la mappa dei tuoi processi attuali, ogni automazione consigliata con prioritÃÂÃÂ  e ROI stimato, il preventivo per l'implementazione chiavi in mano e la timeline di consegna. Il documento ÃÂÃÂ¨ tuo, anche se non procedi.</p>
         </div>
       </div>
     </div>
@@ -885,7 +805,7 @@
     <p class="body-text reveal" style="margin-bottom:48px;max-width:900px;width:100%;margin-left:auto;margin-right:auto">Oggi paghi persone per fare lavoro ripetitivo. L'AI non sostituisce il tuo team: lo libera per fare cose che contano davvero.</p>
 
     <div class="reveal" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:40px 32px">
-      <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:24px">Quanto spendi oggi per queste attivitÃÂ </p>
+      <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:24px">Quanto spendi oggi per queste attivitÃÂÃÂ </p>
 
       <div style="display:grid;gap:12px;max-width:860px;width:100%;margin:0 auto;text-align:left">
         <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.08);border-radius:12px">
@@ -926,12 +846,12 @@
 
       <div style="margin-top:24px;padding:20px 24px;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.12);border-radius:14px;margin-bottom:16px">
         <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7">
-          <strong style="color:#D4AF37">Non devi licenziare nessuno.</strong> Automatizzi le attivitÃÂ  ripetitive e il tuo team si concentra su quello che genera fatturato: vendere, chiudere clienti, far crescere l'azienda. Oppure fai tutto senza assumere nessuno.
+          <strong style="color:#D4AF37">Non devi licenziare nessuno.</strong> Automatizzi le attivitÃÂÃÂ  ripetitive e il tuo team si concentra su quello che genera fatturato: vendere, chiudere clienti, far crescere l'azienda. Oppure fai tutto senza assumere nessuno.
         </p>
       </div>
       <div style="padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
         <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7">
-          <strong style="color:rgba(255,255,255,0.85)">Non ÃÂ¨ "copia-incolla su ChatGPT".</strong> Costruiamo sistemi che girano da soli, 24/7. L'AI scansiona le email, prepara i report, qualifica i lead, genera documenti. Tu non tocchi nulla. E il ROI lo vedi dal primo mese.
+          <strong style="color:rgba(255,255,255,0.85)">Non ÃÂÃÂ¨ "copia-incolla su ChatGPT".</strong> Costruiamo sistemi che girano da soli, 24/7. L'AI scansiona le email, prepara i report, qualifica i lead, genera documenti. Tu non tocchi nulla. E il ROI lo vedi dal primo mese.
         </p>
       </div>
     </div>
@@ -940,13 +860,13 @@
 
 <div class="gold-line"></div>
 
-<!-- ===== COSA NON SI PUÃÂ AUTOMATIZZARE ===== -->
+<!-- ===== COSA NON SI PUÃÂÃÂ AUTOMATIZZARE ===== -->
 <section class="section" style="position:relative">
   <div style="max-width:1500px;width:100%;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:48px">
-      <p class="label reveal" style="margin-bottom:16px">OnestÃÂ  totale</p>
-      <h2 class="h-lg reveal">Cosa <span style="color:#ff4444">non</span> si puÃÂ²<br><span class="gold">automatizzare?</span></h2>
-      <p class="body-text reveal" style="margin-top:16px;max-width:860px;width:100%;margin-left:auto;margin-right:auto">L'AI ÃÂ¨ potente, ma non fa tutto. Queste cose richiedono te. E sono le uniche cose su cui dovresti spendere il tuo tempo.</p>
+      <p class="label reveal" style="margin-bottom:16px">OnestÃÂÃÂ  totale</p>
+      <h2 class="h-lg reveal">Cosa <span style="color:#ff4444">non</span> si puÃÂÃÂ²<br><span class="gold">automatizzare?</span></h2>
+      <p class="body-text reveal" style="margin-top:16px;max-width:860px;width:100%;margin-left:auto;margin-right:auto">L'AI ÃÂÃÂ¨ potente, ma non fa tutto. Queste cose richiedono te. E sono le uniche cose su cui dovresti spendere il tuo tempo.</p>
     </div>
 
     <div class="reveal" style="display:grid;gap:14px;max-width:900px;width:100%;margin:0 auto">
@@ -954,7 +874,7 @@
         <span style="font-size:22px;flex-shrink:0">&#129504;</span>
         <div>
           <p style="font-size:15px;color:rgba(255,255,255,0.85);font-weight:600">Prendere decisioni strategiche</p>
-          <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:4px">Dove investire, quale mercato aggredire, chi assumere. Questo ÃÂ¨ il tuo lavoro.</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:4px">Dove investire, quale mercato aggredire, chi assumere. Questo ÃÂÃÂ¨ il tuo lavoro.</p>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
@@ -1002,9 +922,9 @@
 <section class="section" style="position:relative">
   <div style="max-width:1500px;width:100%;margin:0 auto;text-align:center;position:relative;z-index:2">
     <p class="label reveal" style="margin-bottom:16px">Ascolta</p>
-    <h2 class="h-lg reveal" style="margin-bottom:12px">Questa ÃÂ¨ <span class="gold">Stefania.</span></h2>
+    <h2 class="h-lg reveal" style="margin-bottom:12px">Questa ÃÂÃÂ¨ <span class="gold">Stefania.</span></h2>
     <p class="body-text reveal" style="margin-bottom:40px;max-width:860px;width:100%;margin-left:auto;margin-right:auto">
-      ÃÂ un'AI che chiama i nostri lead al telefono, li qualifica con domande mirate e prenota le consulenze nel calendario. In 3 minuti fa quello che un setter farebbe in 15. Questo ÃÂ¨ solo <strong style="color:#fff">uno degli esempi</strong> di automazioni che possiamo costruire per te.
+      ÃÂÃÂ un'AI che chiama i nostri lead al telefono, li qualifica con domande mirate e prenota le consulenze nel calendario. In 3 minuti fa quello che un setter farebbe in 15. Questo ÃÂÃÂ¨ solo <strong style="color:#fff">uno degli esempi</strong> di automazioni che possiamo costruire per te.
     </p>
     <div class="reveal" style="max-width:860px;width:100%;margin:0 auto">
       <audio id="stefaniaAudio" src="stefania-demo.mp3" preload="metadata"></audio>
@@ -1029,7 +949,7 @@
 
 <div class="gold-line"></div>
 
-<!-- ACCORDION RIMOSSO Ã¢ÂÂ ridondante con "Primi Video" -->
+<!-- ACCORDION RIMOSSO ÃÂ¢ÃÂÃÂ ridondante con "Primi Video" -->
 <!-- SKIP TO
 <section class="section" style="position:relative">
   <div style="max-width:1500px;width:100%;margin:0 auto;position:relative;z-index:2">
@@ -1047,7 +967,7 @@
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          Hai un PDF del fornitore? L'AI lo legge, estrae i dati (nome, importi, date, codici) e compila la fattura nel tuo gestionale. Hai 50 fatture uguali con importi diversi? Gli dai il file e te le genera tutte in 2 minuti. Tuo padre che perde ore a copiare dati dal documento alla fattura? Non deve piÃÂ¹ farlo.
+          Hai un PDF del fornitore? L'AI lo legge, estrae i dati (nome, importi, date, codici) e compila la fattura nel tuo gestionale. Hai 50 fatture uguali con importi diversi? Gli dai il file e te le genera tutte in 2 minuti. Tuo padre che perde ore a copiare dati dal documento alla fattura? Non deve piÃÂÃÂ¹ farlo.
         </div></div>
       </div>
       <div class="accordion-item" onclick="toggleAccordion(this)">
@@ -1127,7 +1047,7 @@
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          L'AI chiama i lead, li qualifica, prenota l'appuntamento e manda il messaggio di conferma. Se non rispondono, fa il follow-up dopo 24h. Tu apri il calendario e trovi gli appuntamenti giÃÂ  fissati con persone qualificate.
+          L'AI chiama i lead, li qualifica, prenota l'appuntamento e manda il messaggio di conferma. Se non rispondono, fa il follow-up dopo 24h. Tu apri il calendario e trovi gli appuntamenti giÃÂÃÂ  fissati con persone qualificate.
         </div></div>
       </div>
       <div class="accordion-item" onclick="toggleAccordion(this)">
@@ -1179,7 +1099,7 @@
     <div class="reveal" style="position:relative">
       <div style="overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)">
         <div class="testimonial-track" style="display:flex;gap:20px;animation:scrollTestimonials 45s linear infinite;width:max-content">
-          <!-- Set 1 Ã¢ÂÂ DATI REALI VERIFICABILI -->
+          <!-- Set 1 ÃÂ¢ÃÂÃÂ DATI REALI VERIFICABILI -->
           <a href="https://www.linkedin.com/in/andreapietrini/" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
             <div class="tc-header"><div class="tc-avatar">AP</div><div><h4 class="tc-name">Andrea Pietrini</h4><p class="tc-role">Presidente YourGroup</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
             <p class="tc-stat">+100 clienti premium</p>
@@ -1225,7 +1145,7 @@
           <a href="https://www.linkedin.com/in/francesca-de-caro-3b932156/" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
             <div class="tc-header"><div class="tc-avatar">FD</div><div><h4 class="tc-name">Francesca De Caro</h4><p class="tc-role">Chirurgo Ortopedico</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
             <p class="tc-stat">Video testimonianza</p>
-            <p class="tc-numbers">Nuovi pazienti acquisiti grazie alla visibilitÃÂ  su LinkedIn</p>
+            <p class="tc-numbers">Nuovi pazienti acquisiti grazie alla visibilitÃÂÃÂ  su LinkedIn</p>
             <p class="tc-link">Verifica i risultati &rarr;</p>
           </a>
           <a href="https://www.linkedin.com/in/claudiamarchi/" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
@@ -1280,7 +1200,7 @@
           <a href="https://www.linkedin.com/in/francesca-de-caro-3b932156/" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
             <div class="tc-header"><div class="tc-avatar">FD</div><div><h4 class="tc-name">Francesca De Caro</h4><p class="tc-role">Chirurgo Ortopedico</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
             <p class="tc-stat">Video testimonianza</p>
-            <p class="tc-numbers">Nuovi pazienti acquisiti grazie alla visibilitÃÂ  su LinkedIn</p>
+            <p class="tc-numbers">Nuovi pazienti acquisiti grazie alla visibilitÃÂÃÂ  su LinkedIn</p>
             <p class="tc-link">Verifica i risultati &rarr;</p>
           </a>
         </div>
@@ -1296,12 +1216,12 @@
 
 <div class="gold-line"></div>
 
-<!-- ===== CREDIBILITÃÂ (Speech + Stampa compatti) ===== -->
+<!-- ===== CREDIBILITÃÂÃÂ (Speech + Stampa compatti) ===== -->
 <section class="section" style="padding:80px 32px;position:relative">
   <div style="max-width:1500px;width:100%;margin:0 auto;text-align:center;position:relative;z-index:2">
-    <p class="label reveal" style="margin-bottom:16px">CredibilitÃÂ </p>
-    <h2 class="h-lg reveal" style="margin-bottom:12px">Non parlo di AI<br>perchÃÂ© <span class="gold">va di moda.</span></h2>
-    <p class="body-text reveal" style="margin-bottom:48px;max-width:860px;width:100%;margin-left:auto;margin-right:auto">Ne parlo perchÃÂ© la uso ogni giorno per far girare le mie aziende. E i risultati si vedono.</p>
+    <p class="label reveal" style="margin-bottom:16px">CredibilitÃÂÃÂ </p>
+    <h2 class="h-lg reveal" style="margin-bottom:12px">Non parlo di AI<br>perchÃÂÃÂ© <span class="gold">va di moda.</span></h2>
+    <p class="body-text reveal" style="margin-bottom:48px;max-width:860px;width:100%;margin-left:auto;margin-right:auto">Ne parlo perchÃÂÃÂ© la uso ogni giorno per far girare le mie aziende. E i risultati si vedono.</p>
 
     <!-- Stats compatte -->
     <div class="reveal grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px">
@@ -1415,7 +1335,7 @@
             <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#2a4a3a,#1a6a4a);border:2px solid rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,0.6);margin-left:-4px">M</div>
             <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#3a2a4a,#5a3a6a);border:2px solid rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,0.6);margin-left:-4px">G</div>
           </div>
-          <p style="font-size:12px;color:rgba(255,255,255,0.4)"><span style="color:rgba(255,255,255,0.7);font-weight:600">47 aziende</span> hanno giÃÂ  prenotato la loro analisi</p>
+          <p style="font-size:12px;color:rgba(255,255,255,0.4)"><span style="color:rgba(255,255,255,0.7);font-weight:600">47 aziende</span> hanno giÃÂÃÂ  prenotato la loro analisi</p>
         </div>
         <a href="#" onclick="openCalendly(event)" class="btn-gold" style="width:100%;justify-content:center;font-size:14px;padding:22px 48px"><span>PRENOTA LA TUA ANALISI &rarr;</span></a>
         <p style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:12px">497&euro; + IVA &middot; Pagamento sicuro &middot; Scegli giorno e orario su Calendly</p>
@@ -1426,31 +1346,31 @@
 
 <div class="gold-line"></div>
 
-<!-- ===== PER CHI ÃÂ / PER CHI NON ÃÂ ===== -->
+<!-- ===== PER CHI ÃÂÃÂ / PER CHI NON ÃÂÃÂ ===== -->
 <section class="section" style="position:relative">
   <div style="max-width:1500px;width:100%;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:40px">
       <p class="label reveal" style="margin-bottom:16px">Chiarezza totale</p>
-      <h2 class="h-lg reveal">Questo <span class="gold">non ÃÂ¨ per tutti.</span></h2>
+      <h2 class="h-lg reveal">Questo <span class="gold">non ÃÂÃÂ¨ per tutti.</span></h2>
     </div>
     <div class="reveal grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
       <div style="background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.15);border-radius:20px;padding:32px">
-        <p style="font-size:14px;font-weight:700;color:#22c55e;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px">&#10003; Per chi ÃÂ¨</p>
+        <p style="font-size:14px;font-weight:700;color:#22c55e;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px">&#10003; Per chi ÃÂÃÂ¨</p>
         <div style="display:flex;flex-direction:column;gap:16px">
-          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Imprenditori e professionisti che perdono ore in attivitÃÂ  ripetitive</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Imprenditori e professionisti che perdono ore in attivitÃÂÃÂ  ripetitive</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi ha un team e vuole liberare tempo alle persone chiave</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi perde giornate in compiti ad alta concentrazione: bandi, contratti, due diligence, fatturazione</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi vuole risultati pratici, non teoria sull'intelligenza artificiale</p></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi sa che il futuro ÃÂ¨ l'automazione e vuole arrivarci prima dei concorrenti</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi sa che il futuro ÃÂÃÂ¨ l'automazione e vuole arrivarci prima dei concorrenti</p></div>
         </div>
       </div>
       <div style="background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.15);border-radius:20px;padding:32px">
-        <p style="font-size:14px;font-weight:700;color:#ff4444;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px">&#10007; Per chi NON ÃÂ¨</p>
+        <p style="font-size:14px;font-weight:700;color:#ff4444;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px">&#10007; Per chi NON ÃÂÃÂ¨</p>
         <div style="display:flex;flex-direction:column;gap:16px">
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi cerca corsi teorici sull'AI senza applicazione pratica</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi vuole solo informarsi senza implementare nulla</p></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi non ha attivitÃÂ  ripetitive da automatizzare (beato te)</p></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi pensa che 497&euro; sia "tanto" ma butta migliaia in stipendi per attivitÃÂ  ripetitive</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi non ha attivitÃÂÃÂ  ripetitive da automatizzare (beato te)</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi pensa che 497&euro; sia "tanto" ma butta migliaia in stipendi per attivitÃÂÃÂ  ripetitive</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi aspetta il "momento giusto" invece di agire adesso</p></div>
         </div>
       </div>
@@ -1477,13 +1397,13 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:24px">
         <p style="font-size:17px;color:rgba(255,255,255,0.7);line-height:1.9;font-weight:300">
-          CEO di 4 aziende attive, ho costruito My Governance e l'ho ceduta a Zucchetti per oltre 10 milioni di euro. Ho scritto due libri pubblicati con il Gruppo Feltrinelli Ã¢ÂÂ <em style="color:rgba(255,255,255,0.85)">Il Potere di LinkedIn</em> e <em style="color:rgba(255,255,255,0.85)">L'Intelligenza Artificiale per il Business</em> Ã¢ÂÂ e sono intervenuto come relatore alla Camera dei Deputati, al Senato della Repubblica e in centinaia di conferenze, formando migliaia di professionisti e manager in tutta Italia.
+          CEO di 4 aziende attive, ho costruito My Governance e l'ho ceduta a Zucchetti per oltre 10 milioni di euro. Ho scritto due libri pubblicati con il Gruppo Feltrinelli ÃÂ¢ÃÂÃÂ <em style="color:rgba(255,255,255,0.85)">Il Potere di LinkedIn</em> e <em style="color:rgba(255,255,255,0.85)">L'Intelligenza Artificiale per il Business</em> ÃÂ¢ÃÂÃÂ e sono intervenuto come relatore alla Camera dei Deputati, al Senato della Repubblica e in centinaia di conferenze, formando migliaia di professionisti e manager in tutta Italia.
         </p>
         <p style="font-size:17px;color:rgba(255,255,255,0.7);line-height:1.9;font-weight:300">
           2 volte TEDx Speaker. Citato da Il Sole 24 Ore, Vanity Fair, Leggo, Affaritaliani e decine di altre testate. 232.000 follower su LinkedIn. Ho vinto il premio "Impresa Etica e Innovativa" e gli Oscar del FinTech con il Sole 24 Ore.
         </p>
         <p style="font-size:17px;color:rgba(255,255,255,0.7);line-height:1.9;font-weight:300">
-          Oggi uso l'intelligenza artificiale ogni giorno per automatizzare tutto quello che posso nella mia vita lavorativa. Non parlo di teoria. Ogni automazione che costruiamo per i clienti ÃÂ¨ qualcosa che uso io, nelle mie aziende, ogni singolo giorno.
+          Oggi uso l'intelligenza artificiale ogni giorno per automatizzare tutto quello che posso nella mia vita lavorativa. Non parlo di teoria. Ogni automazione che costruiamo per i clienti ÃÂÃÂ¨ qualcosa che uso io, nelle mie aziende, ogni singolo giorno.
         </p>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px">
           <div style="text-align:center;padding:18px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
@@ -1491,11 +1411,11 @@
             <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px;line-height:1.4">Aziende fondate</p>
           </div>
           <div style="text-align:center;padding:18px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
-            <p style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#D4AF37">10MÃ¢ÂÂ¬</p>
+            <p style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#D4AF37">10MÃÂ¢ÃÂÃÂ¬</p>
             <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px;line-height:1.4">EXIT (Zucchetti)</p>
           </div>
           <div style="text-align:center;padding:18px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
-            <p style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#D4AF37">2ÃÂ</p>
+            <p style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#D4AF37">2ÃÂÃÂ</p>
             <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px;line-height:1.4">TEDx Speaker</p>
           </div>
           <div style="text-align:center;padding:18px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
@@ -1533,7 +1453,7 @@
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          Dopo il pagamento fissiamo una sessione da 45 a 90 minuti in cui un nostro esperto analizza i tuoi processi aziendali. Mappiamo ogni attivitÃÂ  ripetitiva, calcoliamo il tempo perso e identifichiamo le automazioni ad alto impatto. Ricevi un documento completo con la mappatura e il preventivo dettagliato.
+          Dopo il pagamento fissiamo una sessione da 45 a 90 minuti in cui un nostro esperto analizza i tuoi processi aziendali. Mappiamo ogni attivitÃÂÃÂ  ripetitiva, calcoliamo il tempo perso e identifichiamo le automazioni ad alto impatto. Ricevi un documento completo con la mappatura e il preventivo dettagliato.
         </div></div>
       </div>
 
@@ -1544,7 +1464,7 @@
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          L'analisi funzionale ÃÂ¨ pensata per qualsiasi professionista o imprenditore che ha attivitÃÂ  ripetitive: fatture, email, report, gestione clienti, contenuti, bandi, contratti. Se perdi tempo a fare cose che si ripetono, funziona per te.
+          L'analisi funzionale ÃÂÃÂ¨ pensata per qualsiasi professionista o imprenditore che ha attivitÃÂÃÂ  ripetitive: fatture, email, report, gestione clienti, contenuti, bandi, contratti. Se perdi tempo a fare cose che si ripetono, funziona per te.
         </div></div>
       </div>
 
@@ -1562,11 +1482,11 @@
       <div class="accordion-item" onclick="toggleAccordion(this)">
         <div class="accordion-header">
           <div class="accordion-check"></div>
-          <span class="accordion-title">PerchÃÂ© costa 497&euro;?</span>
+          <span class="accordion-title">PerchÃÂÃÂ© costa 497&euro;?</span>
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          PerchÃÂ© una sola automazione ben fatta ti fa risparmiare ore ogni settimana. Se il tuo tempo vale anche solo 50&euro;/ora, l'analisi si ripaga in pochi giorni. E se procedi con l'implementazione, i 497&euro; sono inclusi nel prezzo.
+          PerchÃÂÃÂ© una sola automazione ben fatta ti fa risparmiare ore ogni settimana. Se il tuo tempo vale anche solo 50&euro;/ora, l'analisi si ripaga in pochi giorni. E se procedi con l'implementazione, i 497&euro; sono inclusi nel prezzo.
         </div></div>
       </div>
 
@@ -1688,7 +1608,7 @@
 
 <script>
 // ===== PARTICLE CANVAS =====
-// Particles Ã¢ÂÂ static dots, no animation loop (performance)
+// Particles ÃÂ¢ÃÂÃÂ static dots, no animation loop (performance)
 const canvas=document.getElementById('particleCanvas');const ctx=canvas.getContext('2d');
 function drawParticles(){canvas.width=window.innerWidth;canvas.height=document.body.scrollHeight;const n=Math.min(30,Math.floor(window.innerWidth/40));for(let i=0;i<n;i++){const x=Math.random()*canvas.width,y=Math.random()*canvas.height,s=Math.random()*1.2+0.3,o=Math.random()*0.15+0.03;ctx.beginPath();ctx.arc(x,y,s,0,Math.PI*2);ctx.fillStyle='rgba(212,175,55,'+o+')';ctx.fill()}}
 drawParticles();window.addEventListener('resize',drawParticles);
@@ -1731,7 +1651,7 @@ let menuOpen=false;
 function toggleMenu(){menuOpen=!menuOpen;document.getElementById('mobileMenu').style.transform=menuOpen?'translateX(0)':'translateX(100%)';const b1=document.getElementById('mb1'),b2=document.getElementById('mb2'),b3=document.getElementById('mb3');if(menuOpen){b1.style.transform='rotate(45deg) translate(5px,5px)';b2.style.opacity='0';b3.style.transform='rotate(-45deg) translate(5px,-5px)'}else{b1.style.transform='';b2.style.opacity='1';b3.style.transform=''}}
 function closeMenu(){menuOpen=false;document.getElementById('mobileMenu').style.transform='translateX(100%)';document.getElementById('mb1').style.transform='';document.getElementById('mb2').style.opacity='1';document.getElementById('mb3').style.transform=''}
 
-// Countdown removed Ã¢ÂÂ single purchase, no deadline
+// Countdown removed ÃÂ¢ÃÂÃÂ single purchase, no deadline
 
 // ===== ACCORDION =====
 function toggleAccordion(el){
