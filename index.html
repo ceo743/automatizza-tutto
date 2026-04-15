@@ -182,15 +182,52 @@
     #calendlyModal .calendly-inline-widget{width:100%;height:100%}
 
     /* ===== RESPONSIVE ===== */
-    /* Tablet layout adjustments (up to 1024px) â nav stays desktop */
+    /* Tablet layout adjustments (up to 1024px) Ã¢ÂÂ nav stays desktop */
+    /* ========================================
+       RESPONSIVE SYSTEM — 27" / 15" / 13"
+       ======================================== */
+
+    /* Fluid section padding */
+    .section{padding:clamp(48px,5vw,80px) clamp(24px,5vw,100px)}
+
+    /* Containers */
+    .wrap{max-width:clamp(900px,82vw,1280px)}
+    .wrap-sm{max-width:clamp(600px,60vw,760px)}
+
+    /* Large desktop 1280-1600px (13" e 15") */
+    @media(min-width:1280px){
+      .section-inner-md{max-width:1200px!important}
+      .section-inner-lg{max-width:1400px!important}
+    }
+
+    /* XL desktop 1600-2100px */
+    @media(min-width:1600px){
+      .wrap{max-width:1400px}
+    }
+
+    /* 2K/4K 2100px+ (27") */
+    @media(min-width:2100px){
+      .wrap{max-width:1700px}
+      [style*="max-width:680px"]{max-width:min(820px,100%)!important}
+      [style*="max-width:860px"]{max-width:min(1100px,100%)!important}
+      [style*="max-width:900px"]:not([id]){max-width:min(1140px,100%)!important}
+    }
+
+    /* Tablet 769-1024px */
+    @media(min-width:769px) and (max-width:1024px){
+      .show-mobile{display:none!important}
+      .grid-3{grid-template-columns:repeat(2,1fr)!important}
+      .grid-4{grid-template-columns:repeat(2,1fr)!important}
+      .section{padding:52px 32px}
+    }
+
     @media(max-width:1024px){
       .grid-3{grid-template-columns:repeat(2,1fr)!important}
     }
-    /* Mobile/Tablet (up to 768px) â switch to hamburger nav */
+
     @media(max-width:768px){
       .hide-mobile{display:none!important}
       .show-mobile{display:block!important}
-      .section{padding:56px 20px}
       .grid-2{grid-template-columns:1fr!important}
       .grid-3{grid-template-columns:1fr!important}
       .grid-4{grid-template-columns:1fr!important}
@@ -206,20 +243,15 @@
       .testimonial-card{min-width:260px;max-width:260px}
       .chi-sono-grid{grid-template-columns:1fr!important;text-align:center}
       .chi-sono-grid>div:first-child{position:static!important;margin:0 auto}
-      /* Glass cards: reduce padding on mobile */
       .glass{padding:20px 16px!important;border-radius:16px}
-      /* "Come Funziona" step cards: stack circle + text vertically */
       .glass[style*="display:flex"][style*="gap:24px"]{flex-direction:column!important;align-items:center!important;text-align:center}
       .glass[style*="display:flex"][style*="gap:24px"] .body-text{text-align:center}
-      /* Esempio PRIMA/DOPO internal grids: ensure 1 column */
       .glass .grid-2{grid-template-columns:1fr!important}
-      /* Confronto costi grid fix */
       .glass [style*="grid-template-columns:1fr auto 1fr"]{grid-template-columns:1fr!important;gap:16px;text-align:center}
     }
-    /* Small mobile */
+
     @media(max-width:480px){
-      .section{padding:48px 16px}
-      .h-hero{font-size:32px}
+      .h-hero{font-size:clamp(28px,8vw,36px)}
       .mock-stat-row{grid-template-columns:1fr 1fr 1fr}
       .mock-stat-num{font-size:20px!important}
       .mock-stat{padding:10px!important}
@@ -227,28 +259,13 @@
       .mock-cal-day:nth-child(n+3){display:none}
       .testimonial-card{min-width:240px;max-width:240px}
       .price-amount{font-size:48px}
-      /* Glass cards: even tighter on small screens */
       .glass{padding:16px 12px!important}
-      /* Smaller font for example descriptions */
       .glass p[style*="font-size:14px"]{font-size:13px!important}
     }
+
     @media(min-width:769px){.show-mobile{display:none!important}}
-    @media(max-width:720px){
-      .grid-2{grid-template-columns:1fr!important}
-    }
-    @media(min-width:1280px){
-      .section{padding:60px 60px}
-      .section-inner-md{max-width:1200px!important}
-      .section-inner-lg{max-width:1400px!important}
-    }
-    @media(min-width:1600px){
-      .section{padding:60px 80px}
-      .wrap{max-width:1400px}
-    }
-    @media(min-width:2100px){
-      .section{padding:60px 100px}
-      .wrap{max-width:1700px}
-    }
+    @media(max-width:720px){.grid-2{grid-template-columns:1fr!important}}
+
     .btn-gold{white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
     @media(max-width:900px){.hero-photo{display:none!important}}
   </style>
@@ -318,10 +335,10 @@
     <!-- AUTHORITY BADGES -->
     <div class="reveal" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:28px">
       <span style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.22);border-radius:100px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);letter-spacing:0.5px">
-        <span style="color:#D4AF37;font-size:14px">&#9679;</span> 2Ã TEDx Speaker
+        <span style="color:#D4AF37;font-size:14px">&#9679;</span> 2ÃÂ TEDx Speaker
       </span>
       <span style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.22);border-radius:100px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);letter-spacing:0.5px">
-        <span style="color:#D4AF37;font-size:14px">&#9679;</span> EXIT 10Mâ¬ (Zucchetti)
+        <span style="color:#D4AF37;font-size:14px">&#9679;</span> EXIT 10MÃ¢ÂÂ¬ (Zucchetti)
       </span>
       <span style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.22);border-radius:100px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);letter-spacing:0.5px">
         <span style="color:#D4AF37;font-size:14px">&#9679;</span> 2 Libri Feltrinelli
@@ -355,7 +372,7 @@
 <section class="section" style="position:relative">
   <div class="orb" style="width:400px;height:400px;background:#ff4444;top:50%;left:-200px;transform:translateY(-50%);opacity:0.03"></div>
   <div style="max-width:1500px;width:100%;margin:0 auto;text-align:center;position:relative;z-index:2">
-    <p class="label reveal" style="margin-bottom:16px">Lo sai giÃ </p>
+    <p class="label reveal" style="margin-bottom:16px">Lo sai giÃÂ </p>
     <h2 class="h-lg reveal" style="margin-bottom:32px">Stai perdendo ore ogni settimana<br>in <span style="color:#ff4444">lavoro che non dovresti fare tu.</span></h2>
     <div class="reveal" style="display:grid;gap:16px;max-width:900px;width:100%;margin:0 auto">
       <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
@@ -368,7 +385,7 @@
       </div>
       <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
         <span style="font-size:24px;flex-shrink:0">&#128222;</span>
-        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Chiamate a freddo, profilazione lead, outbound, follow-up, comment marketing. AttivitÃ  che funzionano ma ti mangiano le giornate.</p>
+        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Chiamate a freddo, profilazione lead, outbound, follow-up, comment marketing. AttivitÃÂ  che funzionano ma ti mangiano le giornate.</p>
       </div>
       <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
         <span style="font-size:24px;flex-shrink:0">&#128176;</span>
@@ -376,14 +393,14 @@
       </div>
       <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:14px">
         <span style="font-size:24px;flex-shrink:0">&#9889;</span>
-        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Sai che l'AI potrebbe farti risparmiare ore. Ma non hai tempo di capire come. E intanto i tuoi concorrenti lo stanno giÃ  facendo.</p>
+        <p style="font-size:15px;color:rgba(255,255,255,0.6);text-align:left">Sai che l'AI potrebbe farti risparmiare ore. Ma non hai tempo di capire come. E intanto i tuoi concorrenti lo stanno giÃÂ  facendo.</p>
       </div>
     </div>
     <p class="reveal" style="margin-top:32px;font-size:18px;color:rgba(255,255,255,0.7)">
-      Tutto questo <strong style="color:#fff">si puÃ² automatizzare</strong>. Io l'ho fatto.<br>E adesso <strong style="color:#D4AF37">lo facciamo anche per te.</strong>
+      Tutto questo <strong style="color:#fff">si puÃÂ² automatizzare</strong>. Io l'ho fatto.<br>E adesso <strong style="color:#D4AF37">lo facciamo anche per te.</strong>
     </p>
 
-    <!-- PATTERN INTERRUPT â righe negative potenti -->
+    <!-- PATTERN INTERRUPT Ã¢ÂÂ righe negative potenti -->
     <div class="reveal" style="margin-top:48px;padding:32px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:20px">
       <p style="font-size:clamp(15px,1.4vw,19px);color:rgba(255,255,255,0.7);line-height:2;text-align:center;font-weight:300">
         Non ti insegno a usare ChatGPT.<br>
@@ -595,7 +612,7 @@
       <div class="ba-row">
         <div class="ba-before">Aprire le piattaforme ads, scaricare i dati, calcolare i costi, fare il report a mano</div>
         <div class="ba-arrow">&rarr;</div>
-        <div class="ba-after">Ogni mattina alle 6 il report arriva nella mia email, giÃ  pronto con grafici e analisi</div>
+        <div class="ba-after">Ogni mattina alle 6 il report arriva nella mia email, giÃÂ  pronto con grafici e analisi</div>
       </div>
       <div class="ba-row">
         <div class="ba-before">Cercare contenuti virali su LinkedIn, Instagram e TikTok, tradurli, rifare la grafica, programmarli</div>
@@ -603,14 +620,14 @@
         <div class="ba-after">L'AI li trova, li traduce, ricrea la grafica e li programma per la pubblicazione. Da sola.</div>
       </div>
       <div class="ba-row">
-        <div class="ba-before">Rispondere al telefono, qualificare il lead, capire se Ã¨ in target, prenotare la call</div>
+        <div class="ba-before">Rispondere al telefono, qualificare il lead, capire se ÃÂ¨ in target, prenotare la call</div>
         <div class="ba-arrow">&rarr;</div>
         <div class="ba-after">Un'AI chiama i lead, li qualifica con domande mirate e prenota la consulenza nel mio calendario</div>
       </div>
       <div class="ba-row">
         <div class="ba-before">Analizzare email e calendario per capire dove perdo tempo</div>
         <div class="ba-arrow">&rarr;</div>
-        <div class="ba-after">Ogni lunedÃ¬ alle 6 ricevo un report con le attivitÃ  ripetitive da eliminare</div>
+        <div class="ba-after">Ogni lunedÃÂ¬ alle 6 ricevo un report con le attivitÃÂ  ripetitive da eliminare</div>
       </div>
       <div class="ba-row">
         <div class="ba-before">Scrivere script per i video social ogni volta partendo da zero</div>
@@ -637,7 +654,7 @@
   <div style="max-width:1500px;width:100%;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:48px">
       <p class="label reveal" style="margin-bottom:16px">Prove reali</p>
-      <h2 class="h-lg reveal">Questo Ã¨ quello che ricevo<br><span class="gold">ogni mattina. In automatico.</span></h2>
+      <h2 class="h-lg reveal">Questo ÃÂ¨ quello che ricevo<br><span class="gold">ogni mattina. In automatico.</span></h2>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px" class="grid-2">
@@ -645,10 +662,10 @@
       <div class="reveal mock-report">
         <div class="mock-report-header">
           <div style="display:flex;align-items:center;gap:8px">
-            <span style="font-size:18px">ð</span>
+            <span style="font-size:18px">Ã°ÂÂÂ</span>
             <div>
               <p style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.85)">Report Lead Gen Ads</p>
-              <p style="font-size:11px;color:rgba(255,255,255,0.3)">LunedÃ¬ 13 aprile 2026 &mdash; Ultimi 7 giorni</p>
+              <p style="font-size:11px;color:rgba(255,255,255,0.3)">LunedÃÂ¬ 13 aprile 2026 &mdash; Ultimi 7 giorni</p>
             </div>
           </div>
         </div>
@@ -701,17 +718,17 @@
           <p style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:20px">Ecco i 5 post pronti per oggi. <strong style="color:rgba(255,255,255,0.8)">Devi solo approvarli e pubblicarli.</strong></p>
           <div style="display:flex;flex-direction:column;gap:14px">
             <div style="border-left:3px solid #D4AF37;padding:10px 14px;background:rgba(212,175,55,0.04);border-radius:0 8px 8px 0">
-              <p style="font-size:11px;font-weight:700;color:#D4AF37;margin-bottom:4px">POST 1 â Leadership</p>
+              <p style="font-size:11px;font-weight:700;color:#D4AF37;margin-bottom:4px">POST 1 Ã¢ÂÂ Leadership</p>
               <p style="font-size:13px;color:rgba(255,255,255,0.75);font-style:italic">"Smetti di inseguire il lavoro dei sogni."</p>
               <p style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:4px">Fonte: Cicely Sk... (11.5k like)</p>
             </div>
             <div style="border-left:3px solid #D4AF37;padding:10px 14px;background:rgba(212,175,55,0.04);border-radius:0 8px 8px 0">
-              <p style="font-size:11px;font-weight:700;color:#D4AF37;margin-bottom:4px">POST 2 â ProduttivitÃ </p>
-              <p style="font-size:13px;color:rgba(255,255,255,0.75);font-style:italic">"Il successo non Ã¨ lavorare di piÃ¹, Ã¨ lavorare meglio."</p>
+              <p style="font-size:11px;font-weight:700;color:#D4AF37;margin-bottom:4px">POST 2 Ã¢ÂÂ ProduttivitÃÂ </p>
+              <p style="font-size:13px;color:rgba(255,255,255,0.75);font-style:italic">"Il successo non ÃÂ¨ lavorare di piÃÂ¹, ÃÂ¨ lavorare meglio."</p>
               <p style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:4px">Fonte: James Ro... (8.2k like)</p>
             </div>
             <div style="border-left:3px solid #D4AF37;padding:10px 14px;background:rgba(212,175,55,0.04);border-radius:0 8px 8px 0">
-              <p style="font-size:11px;font-weight:700;color:#D4AF37;margin-bottom:4px">POST 3 â Mindset</p>
+              <p style="font-size:11px;font-weight:700;color:#D4AF37;margin-bottom:4px">POST 3 Ã¢ÂÂ Mindset</p>
               <p style="font-size:13px;color:rgba(255,255,255,0.75);font-style:italic">"Non aspettare il momento perfetto. Crealo adesso."</p>
               <p style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:4px">Fonte: Sarah Bl... (6.7k like)</p>
             </div>
@@ -776,7 +793,7 @@
         <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#BF953F,#D4AF37);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:#000;flex-shrink:0">3</div>
         <div>
           <h3 class="h-md" style="margin-bottom:8px">Ricevi il piano operativo completo</h3>
-          <p class="body-text" style="font-size:14px">Entro 48 ore ricevi un documento PDF dettagliato con: la mappa dei tuoi processi attuali, ogni automazione consigliata con prioritÃ  e ROI stimato, il preventivo per l'implementazione chiavi in mano e la timeline di consegna. Il documento Ã¨ tuo, anche se non procedi.</p>
+          <p class="body-text" style="font-size:14px">Entro 48 ore ricevi un documento PDF dettagliato con: la mappa dei tuoi processi attuali, ogni automazione consigliata con prioritÃÂ  e ROI stimato, il preventivo per l'implementazione chiavi in mano e la timeline di consegna. Il documento ÃÂ¨ tuo, anche se non procedi.</p>
         </div>
       </div>
     </div>
@@ -868,7 +885,7 @@
     <p class="body-text reveal" style="margin-bottom:48px;max-width:900px;width:100%;margin-left:auto;margin-right:auto">Oggi paghi persone per fare lavoro ripetitivo. L'AI non sostituisce il tuo team: lo libera per fare cose che contano davvero.</p>
 
     <div class="reveal" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:40px 32px">
-      <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:24px">Quanto spendi oggi per queste attivitÃ </p>
+      <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:24px">Quanto spendi oggi per queste attivitÃÂ </p>
 
       <div style="display:grid;gap:12px;max-width:860px;width:100%;margin:0 auto;text-align:left">
         <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.08);border-radius:12px">
@@ -909,12 +926,12 @@
 
       <div style="margin-top:24px;padding:20px 24px;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.12);border-radius:14px;margin-bottom:16px">
         <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7">
-          <strong style="color:#D4AF37">Non devi licenziare nessuno.</strong> Automatizzi le attivitÃ  ripetitive e il tuo team si concentra su quello che genera fatturato: vendere, chiudere clienti, far crescere l'azienda. Oppure fai tutto senza assumere nessuno.
+          <strong style="color:#D4AF37">Non devi licenziare nessuno.</strong> Automatizzi le attivitÃÂ  ripetitive e il tuo team si concentra su quello che genera fatturato: vendere, chiudere clienti, far crescere l'azienda. Oppure fai tutto senza assumere nessuno.
         </p>
       </div>
       <div style="padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
         <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7">
-          <strong style="color:rgba(255,255,255,0.85)">Non Ã¨ "copia-incolla su ChatGPT".</strong> Costruiamo sistemi che girano da soli, 24/7. L'AI scansiona le email, prepara i report, qualifica i lead, genera documenti. Tu non tocchi nulla. E il ROI lo vedi dal primo mese.
+          <strong style="color:rgba(255,255,255,0.85)">Non ÃÂ¨ "copia-incolla su ChatGPT".</strong> Costruiamo sistemi che girano da soli, 24/7. L'AI scansiona le email, prepara i report, qualifica i lead, genera documenti. Tu non tocchi nulla. E il ROI lo vedi dal primo mese.
         </p>
       </div>
     </div>
@@ -923,13 +940,13 @@
 
 <div class="gold-line"></div>
 
-<!-- ===== COSA NON SI PUÃ AUTOMATIZZARE ===== -->
+<!-- ===== COSA NON SI PUÃÂ AUTOMATIZZARE ===== -->
 <section class="section" style="position:relative">
   <div style="max-width:1500px;width:100%;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:48px">
-      <p class="label reveal" style="margin-bottom:16px">OnestÃ  totale</p>
-      <h2 class="h-lg reveal">Cosa <span style="color:#ff4444">non</span> si puÃ²<br><span class="gold">automatizzare?</span></h2>
-      <p class="body-text reveal" style="margin-top:16px;max-width:860px;width:100%;margin-left:auto;margin-right:auto">L'AI Ã¨ potente, ma non fa tutto. Queste cose richiedono te. E sono le uniche cose su cui dovresti spendere il tuo tempo.</p>
+      <p class="label reveal" style="margin-bottom:16px">OnestÃÂ  totale</p>
+      <h2 class="h-lg reveal">Cosa <span style="color:#ff4444">non</span> si puÃÂ²<br><span class="gold">automatizzare?</span></h2>
+      <p class="body-text reveal" style="margin-top:16px;max-width:860px;width:100%;margin-left:auto;margin-right:auto">L'AI ÃÂ¨ potente, ma non fa tutto. Queste cose richiedono te. E sono le uniche cose su cui dovresti spendere il tuo tempo.</p>
     </div>
 
     <div class="reveal" style="display:grid;gap:14px;max-width:900px;width:100%;margin:0 auto">
@@ -937,7 +954,7 @@
         <span style="font-size:22px;flex-shrink:0">&#129504;</span>
         <div>
           <p style="font-size:15px;color:rgba(255,255,255,0.85);font-weight:600">Prendere decisioni strategiche</p>
-          <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:4px">Dove investire, quale mercato aggredire, chi assumere. Questo Ã¨ il tuo lavoro.</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:4px">Dove investire, quale mercato aggredire, chi assumere. Questo ÃÂ¨ il tuo lavoro.</p>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
@@ -985,9 +1002,9 @@
 <section class="section" style="position:relative">
   <div style="max-width:1500px;width:100%;margin:0 auto;text-align:center;position:relative;z-index:2">
     <p class="label reveal" style="margin-bottom:16px">Ascolta</p>
-    <h2 class="h-lg reveal" style="margin-bottom:12px">Questa Ã¨ <span class="gold">Stefania.</span></h2>
+    <h2 class="h-lg reveal" style="margin-bottom:12px">Questa ÃÂ¨ <span class="gold">Stefania.</span></h2>
     <p class="body-text reveal" style="margin-bottom:40px;max-width:860px;width:100%;margin-left:auto;margin-right:auto">
-      Ã un'AI che chiama i nostri lead al telefono, li qualifica con domande mirate e prenota le consulenze nel calendario. In 3 minuti fa quello che un setter farebbe in 15. Questo Ã¨ solo <strong style="color:#fff">uno degli esempi</strong> di automazioni che possiamo costruire per te.
+      ÃÂ un'AI che chiama i nostri lead al telefono, li qualifica con domande mirate e prenota le consulenze nel calendario. In 3 minuti fa quello che un setter farebbe in 15. Questo ÃÂ¨ solo <strong style="color:#fff">uno degli esempi</strong> di automazioni che possiamo costruire per te.
     </p>
     <div class="reveal" style="max-width:860px;width:100%;margin:0 auto">
       <audio id="stefaniaAudio" src="stefania-demo.mp3" preload="metadata"></audio>
@@ -1012,7 +1029,7 @@
 
 <div class="gold-line"></div>
 
-<!-- ACCORDION RIMOSSO â ridondante con "Primi Video" -->
+<!-- ACCORDION RIMOSSO Ã¢ÂÂ ridondante con "Primi Video" -->
 <!-- SKIP TO
 <section class="section" style="position:relative">
   <div style="max-width:1500px;width:100%;margin:0 auto;position:relative;z-index:2">
@@ -1030,7 +1047,7 @@
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          Hai un PDF del fornitore? L'AI lo legge, estrae i dati (nome, importi, date, codici) e compila la fattura nel tuo gestionale. Hai 50 fatture uguali con importi diversi? Gli dai il file e te le genera tutte in 2 minuti. Tuo padre che perde ore a copiare dati dal documento alla fattura? Non deve piÃ¹ farlo.
+          Hai un PDF del fornitore? L'AI lo legge, estrae i dati (nome, importi, date, codici) e compila la fattura nel tuo gestionale. Hai 50 fatture uguali con importi diversi? Gli dai il file e te le genera tutte in 2 minuti. Tuo padre che perde ore a copiare dati dal documento alla fattura? Non deve piÃÂ¹ farlo.
         </div></div>
       </div>
       <div class="accordion-item" onclick="toggleAccordion(this)">
@@ -1110,7 +1127,7 @@
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          L'AI chiama i lead, li qualifica, prenota l'appuntamento e manda il messaggio di conferma. Se non rispondono, fa il follow-up dopo 24h. Tu apri il calendario e trovi gli appuntamenti giÃ  fissati con persone qualificate.
+          L'AI chiama i lead, li qualifica, prenota l'appuntamento e manda il messaggio di conferma. Se non rispondono, fa il follow-up dopo 24h. Tu apri il calendario e trovi gli appuntamenti giÃÂ  fissati con persone qualificate.
         </div></div>
       </div>
       <div class="accordion-item" onclick="toggleAccordion(this)">
@@ -1162,7 +1179,7 @@
     <div class="reveal" style="position:relative">
       <div style="overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)">
         <div class="testimonial-track" style="display:flex;gap:20px;animation:scrollTestimonials 45s linear infinite;width:max-content">
-          <!-- Set 1 â DATI REALI VERIFICABILI -->
+          <!-- Set 1 Ã¢ÂÂ DATI REALI VERIFICABILI -->
           <a href="https://www.linkedin.com/in/andreapietrini/" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
             <div class="tc-header"><div class="tc-avatar">AP</div><div><h4 class="tc-name">Andrea Pietrini</h4><p class="tc-role">Presidente YourGroup</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
             <p class="tc-stat">+100 clienti premium</p>
@@ -1208,7 +1225,7 @@
           <a href="https://www.linkedin.com/in/francesca-de-caro-3b932156/" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
             <div class="tc-header"><div class="tc-avatar">FD</div><div><h4 class="tc-name">Francesca De Caro</h4><p class="tc-role">Chirurgo Ortopedico</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
             <p class="tc-stat">Video testimonianza</p>
-            <p class="tc-numbers">Nuovi pazienti acquisiti grazie alla visibilitÃ  su LinkedIn</p>
+            <p class="tc-numbers">Nuovi pazienti acquisiti grazie alla visibilitÃÂ  su LinkedIn</p>
             <p class="tc-link">Verifica i risultati &rarr;</p>
           </a>
           <a href="https://www.linkedin.com/in/claudiamarchi/" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
@@ -1263,7 +1280,7 @@
           <a href="https://www.linkedin.com/in/francesca-de-caro-3b932156/" target="_blank" class="testimonial-card" style="text-decoration:none;color:inherit">
             <div class="tc-header"><div class="tc-avatar">FD</div><div><h4 class="tc-name">Francesca De Caro</h4><p class="tc-role">Chirurgo Ortopedico</p></div><div style="color:#D4AF37;font-size:11px;letter-spacing:2px;margin-left:auto">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
             <p class="tc-stat">Video testimonianza</p>
-            <p class="tc-numbers">Nuovi pazienti acquisiti grazie alla visibilitÃ  su LinkedIn</p>
+            <p class="tc-numbers">Nuovi pazienti acquisiti grazie alla visibilitÃÂ  su LinkedIn</p>
             <p class="tc-link">Verifica i risultati &rarr;</p>
           </a>
         </div>
@@ -1279,12 +1296,12 @@
 
 <div class="gold-line"></div>
 
-<!-- ===== CREDIBILITÃ (Speech + Stampa compatti) ===== -->
+<!-- ===== CREDIBILITÃÂ (Speech + Stampa compatti) ===== -->
 <section class="section" style="padding:80px 32px;position:relative">
   <div style="max-width:1500px;width:100%;margin:0 auto;text-align:center;position:relative;z-index:2">
-    <p class="label reveal" style="margin-bottom:16px">CredibilitÃ </p>
-    <h2 class="h-lg reveal" style="margin-bottom:12px">Non parlo di AI<br>perchÃ© <span class="gold">va di moda.</span></h2>
-    <p class="body-text reveal" style="margin-bottom:48px;max-width:860px;width:100%;margin-left:auto;margin-right:auto">Ne parlo perchÃ© la uso ogni giorno per far girare le mie aziende. E i risultati si vedono.</p>
+    <p class="label reveal" style="margin-bottom:16px">CredibilitÃÂ </p>
+    <h2 class="h-lg reveal" style="margin-bottom:12px">Non parlo di AI<br>perchÃÂ© <span class="gold">va di moda.</span></h2>
+    <p class="body-text reveal" style="margin-bottom:48px;max-width:860px;width:100%;margin-left:auto;margin-right:auto">Ne parlo perchÃÂ© la uso ogni giorno per far girare le mie aziende. E i risultati si vedono.</p>
 
     <!-- Stats compatte -->
     <div class="reveal grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px">
@@ -1398,7 +1415,7 @@
             <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#2a4a3a,#1a6a4a);border:2px solid rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,0.6);margin-left:-4px">M</div>
             <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#3a2a4a,#5a3a6a);border:2px solid rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,0.6);margin-left:-4px">G</div>
           </div>
-          <p style="font-size:12px;color:rgba(255,255,255,0.4)"><span style="color:rgba(255,255,255,0.7);font-weight:600">47 aziende</span> hanno giÃ  prenotato la loro analisi</p>
+          <p style="font-size:12px;color:rgba(255,255,255,0.4)"><span style="color:rgba(255,255,255,0.7);font-weight:600">47 aziende</span> hanno giÃÂ  prenotato la loro analisi</p>
         </div>
         <a href="#" onclick="openCalendly(event)" class="btn-gold" style="width:100%;justify-content:center;font-size:14px;padding:22px 48px"><span>PRENOTA LA TUA ANALISI &rarr;</span></a>
         <p style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:12px">497&euro; + IVA &middot; Pagamento sicuro &middot; Scegli giorno e orario su Calendly</p>
@@ -1409,31 +1426,31 @@
 
 <div class="gold-line"></div>
 
-<!-- ===== PER CHI Ã / PER CHI NON Ã ===== -->
+<!-- ===== PER CHI ÃÂ / PER CHI NON ÃÂ ===== -->
 <section class="section" style="position:relative">
   <div style="max-width:1500px;width:100%;margin:0 auto;position:relative;z-index:2">
     <div style="text-align:center;margin-bottom:40px">
       <p class="label reveal" style="margin-bottom:16px">Chiarezza totale</p>
-      <h2 class="h-lg reveal">Questo <span class="gold">non Ã¨ per tutti.</span></h2>
+      <h2 class="h-lg reveal">Questo <span class="gold">non ÃÂ¨ per tutti.</span></h2>
     </div>
     <div class="reveal grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
       <div style="background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.15);border-radius:20px;padding:32px">
-        <p style="font-size:14px;font-weight:700;color:#22c55e;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px">&#10003; Per chi Ã¨</p>
+        <p style="font-size:14px;font-weight:700;color:#22c55e;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px">&#10003; Per chi ÃÂ¨</p>
         <div style="display:flex;flex-direction:column;gap:16px">
-          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Imprenditori e professionisti che perdono ore in attivitÃ  ripetitive</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Imprenditori e professionisti che perdono ore in attivitÃÂ  ripetitive</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi ha un team e vuole liberare tempo alle persone chiave</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi perde giornate in compiti ad alta concentrazione: bandi, contratti, due diligence, fatturazione</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi vuole risultati pratici, non teoria sull'intelligenza artificiale</p></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi sa che il futuro Ã¨ l'automazione e vuole arrivarci prima dei concorrenti</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:2px">&#10003;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi sa che il futuro ÃÂ¨ l'automazione e vuole arrivarci prima dei concorrenti</p></div>
         </div>
       </div>
       <div style="background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.15);border-radius:20px;padding:32px">
-        <p style="font-size:14px;font-weight:700;color:#ff4444;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px">&#10007; Per chi NON Ã¨</p>
+        <p style="font-size:14px;font-weight:700;color:#ff4444;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px">&#10007; Per chi NON ÃÂ¨</p>
         <div style="display:flex;flex-direction:column;gap:16px">
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi cerca corsi teorici sull'AI senza applicazione pratica</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi vuole solo informarsi senza implementare nulla</p></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi non ha attivitÃ  ripetitive da automatizzare (beato te)</p></div>
-          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi pensa che 497&euro; sia "tanto" ma butta migliaia in stipendi per attivitÃ  ripetitive</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi non ha attivitÃÂ  ripetitive da automatizzare (beato te)</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi pensa che 497&euro; sia "tanto" ma butta migliaia in stipendi per attivitÃÂ  ripetitive</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Chi aspetta il "momento giusto" invece di agire adesso</p></div>
         </div>
       </div>
@@ -1460,13 +1477,13 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:24px">
         <p style="font-size:17px;color:rgba(255,255,255,0.7);line-height:1.9;font-weight:300">
-          CEO di 4 aziende attive, ho costruito My Governance e l'ho ceduta a Zucchetti per oltre 10 milioni di euro. Ho scritto due libri pubblicati con il Gruppo Feltrinelli â <em style="color:rgba(255,255,255,0.85)">Il Potere di LinkedIn</em> e <em style="color:rgba(255,255,255,0.85)">L'Intelligenza Artificiale per il Business</em> â e sono intervenuto come relatore alla Camera dei Deputati, al Senato della Repubblica e in centinaia di conferenze, formando migliaia di professionisti e manager in tutta Italia.
+          CEO di 4 aziende attive, ho costruito My Governance e l'ho ceduta a Zucchetti per oltre 10 milioni di euro. Ho scritto due libri pubblicati con il Gruppo Feltrinelli Ã¢ÂÂ <em style="color:rgba(255,255,255,0.85)">Il Potere di LinkedIn</em> e <em style="color:rgba(255,255,255,0.85)">L'Intelligenza Artificiale per il Business</em> Ã¢ÂÂ e sono intervenuto come relatore alla Camera dei Deputati, al Senato della Repubblica e in centinaia di conferenze, formando migliaia di professionisti e manager in tutta Italia.
         </p>
         <p style="font-size:17px;color:rgba(255,255,255,0.7);line-height:1.9;font-weight:300">
           2 volte TEDx Speaker. Citato da Il Sole 24 Ore, Vanity Fair, Leggo, Affaritaliani e decine di altre testate. 232.000 follower su LinkedIn. Ho vinto il premio "Impresa Etica e Innovativa" e gli Oscar del FinTech con il Sole 24 Ore.
         </p>
         <p style="font-size:17px;color:rgba(255,255,255,0.7);line-height:1.9;font-weight:300">
-          Oggi uso l'intelligenza artificiale ogni giorno per automatizzare tutto quello che posso nella mia vita lavorativa. Non parlo di teoria. Ogni automazione che costruiamo per i clienti Ã¨ qualcosa che uso io, nelle mie aziende, ogni singolo giorno.
+          Oggi uso l'intelligenza artificiale ogni giorno per automatizzare tutto quello che posso nella mia vita lavorativa. Non parlo di teoria. Ogni automazione che costruiamo per i clienti ÃÂ¨ qualcosa che uso io, nelle mie aziende, ogni singolo giorno.
         </p>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px">
           <div style="text-align:center;padding:18px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
@@ -1474,11 +1491,11 @@
             <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px;line-height:1.4">Aziende fondate</p>
           </div>
           <div style="text-align:center;padding:18px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
-            <p style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#D4AF37">10Mâ¬</p>
+            <p style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#D4AF37">10MÃ¢ÂÂ¬</p>
             <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px;line-height:1.4">EXIT (Zucchetti)</p>
           </div>
           <div style="text-align:center;padding:18px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
-            <p style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#D4AF37">2Ã</p>
+            <p style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#D4AF37">2ÃÂ</p>
             <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px;line-height:1.4">TEDx Speaker</p>
           </div>
           <div style="text-align:center;padding:18px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
@@ -1516,7 +1533,7 @@
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          Dopo il pagamento fissiamo una sessione da 45 a 90 minuti in cui un nostro esperto analizza i tuoi processi aziendali. Mappiamo ogni attivitÃ  ripetitiva, calcoliamo il tempo perso e identifichiamo le automazioni ad alto impatto. Ricevi un documento completo con la mappatura e il preventivo dettagliato.
+          Dopo il pagamento fissiamo una sessione da 45 a 90 minuti in cui un nostro esperto analizza i tuoi processi aziendali. Mappiamo ogni attivitÃÂ  ripetitiva, calcoliamo il tempo perso e identifichiamo le automazioni ad alto impatto. Ricevi un documento completo con la mappatura e il preventivo dettagliato.
         </div></div>
       </div>
 
@@ -1527,7 +1544,7 @@
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          L'analisi funzionale Ã¨ pensata per qualsiasi professionista o imprenditore che ha attivitÃ  ripetitive: fatture, email, report, gestione clienti, contenuti, bandi, contratti. Se perdi tempo a fare cose che si ripetono, funziona per te.
+          L'analisi funzionale ÃÂ¨ pensata per qualsiasi professionista o imprenditore che ha attivitÃÂ  ripetitive: fatture, email, report, gestione clienti, contenuti, bandi, contratti. Se perdi tempo a fare cose che si ripetono, funziona per te.
         </div></div>
       </div>
 
@@ -1545,11 +1562,11 @@
       <div class="accordion-item" onclick="toggleAccordion(this)">
         <div class="accordion-header">
           <div class="accordion-check"></div>
-          <span class="accordion-title">PerchÃ© costa 497&euro;?</span>
+          <span class="accordion-title">PerchÃÂ© costa 497&euro;?</span>
           <span class="accordion-arrow">&#9660;</span>
         </div>
         <div class="accordion-body"><div class="accordion-body-inner">
-          PerchÃ© una sola automazione ben fatta ti fa risparmiare ore ogni settimana. Se il tuo tempo vale anche solo 50&euro;/ora, l'analisi si ripaga in pochi giorni. E se procedi con l'implementazione, i 497&euro; sono inclusi nel prezzo.
+          PerchÃÂ© una sola automazione ben fatta ti fa risparmiare ore ogni settimana. Se il tuo tempo vale anche solo 50&euro;/ora, l'analisi si ripaga in pochi giorni. E se procedi con l'implementazione, i 497&euro; sono inclusi nel prezzo.
         </div></div>
       </div>
 
@@ -1671,7 +1688,7 @@
 
 <script>
 // ===== PARTICLE CANVAS =====
-// Particles â static dots, no animation loop (performance)
+// Particles Ã¢ÂÂ static dots, no animation loop (performance)
 const canvas=document.getElementById('particleCanvas');const ctx=canvas.getContext('2d');
 function drawParticles(){canvas.width=window.innerWidth;canvas.height=document.body.scrollHeight;const n=Math.min(30,Math.floor(window.innerWidth/40));for(let i=0;i<n;i++){const x=Math.random()*canvas.width,y=Math.random()*canvas.height,s=Math.random()*1.2+0.3,o=Math.random()*0.15+0.03;ctx.beginPath();ctx.arc(x,y,s,0,Math.PI*2);ctx.fillStyle='rgba(212,175,55,'+o+')';ctx.fill()}}
 drawParticles();window.addEventListener('resize',drawParticles);
@@ -1714,7 +1731,7 @@ let menuOpen=false;
 function toggleMenu(){menuOpen=!menuOpen;document.getElementById('mobileMenu').style.transform=menuOpen?'translateX(0)':'translateX(100%)';const b1=document.getElementById('mb1'),b2=document.getElementById('mb2'),b3=document.getElementById('mb3');if(menuOpen){b1.style.transform='rotate(45deg) translate(5px,5px)';b2.style.opacity='0';b3.style.transform='rotate(-45deg) translate(5px,-5px)'}else{b1.style.transform='';b2.style.opacity='1';b3.style.transform=''}}
 function closeMenu(){menuOpen=false;document.getElementById('mobileMenu').style.transform='translateX(100%)';document.getElementById('mb1').style.transform='';document.getElementById('mb2').style.opacity='1';document.getElementById('mb3').style.transform=''}
 
-// Countdown removed â single purchase, no deadline
+// Countdown removed Ã¢ÂÂ single purchase, no deadline
 
 // ===== ACCORDION =====
 function toggleAccordion(el){
