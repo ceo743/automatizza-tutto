@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet"/>
   <style>
-    :root{--gold:#D4AF37;--gold2:#BF953F;--red:#ff4444;--bg:#080b10;--ctr:clamp(320px,94vw,1560px);--ctr-text:clamp(300px,74vw,1000px);--ctr-sm:clamp(280px,56vw,760px);--sec-x:clamp(20px,5vw,100px);--sec-y:clamp(44px,5.5vw,88px);--gap-xs:clamp(8px,1vw,14px);--gap-sm:clamp(12px,1.5vw,20px);--gap-md:clamp(20px,2.5vw,36px);--gap-lg:clamp(32px,4vw,64px);--t-hero:clamp(32px,5.5vw,82px);--t-h2:clamp(26px,3.8vw,56px);--t-h3:clamp(17px,1.8vw,25px);--t-body:clamp(15px,1.1vw,21px);--t-sm:clamp(13px,.85vw,17px);--t-label:clamp(11px,.7vw,14px)}
+    :root{--gold:#D4AF37;--gold2:#BF953F;--red:#ff4444;--bg:#080b10;--ctr:clamp(320px,94vw,1560px);--ctr-text:clamp(300px,74vw,1000px);--ctr-sm:clamp(280px,56vw,760px);--sec-x:clamp(20px,5vw,100px);--sec-y:clamp(44px,5.5vw,88px);--gap-xs:clamp(8px,1vw,14px);--gap-sm:clamp(12px,1.5vw,20px);--gap-md:clamp(20px,2.5vw,36px);--gap-lg:clamp(32px,4vw,64px);--t-hero:clamp(32px,5.5vw,82px);--t-h2:clamp(26px,3.8vw,56px);--t-h3:clamp(17px,1.8vw,25px);--t-body:clamp(16px,1.1vw,24px);--t-sm:clamp(14px,.85vw,20px);--t-label:clamp(12px,.7vw,16px)}
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth;scroll-padding-top:80px;overflow-x:hidden}
     body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
@@ -72,8 +72,8 @@
     .mock-stat{background:rgba(255,255,255,.04);border-radius:12px;padding:clamp(10px,1.2vw,16px);text-align:center}
     .mock-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap-sm)}
     .mock-stat-num{font-family:'Playfair Display',serif;font-size:clamp(20px,2.2vw,28px);font-weight:800}
-    .mock-stat-label{font-size:clamp(9px,.8vw,11px);text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.35);margin-top:4px}
-    .mock-table th{font-size:clamp(9px,.8vw,11px);text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.3);text-align:left;padding:8px clamp(8px,1vw,12px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .mock-stat-label{font-size:clamp(11px,.8vw,14px);text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.35);margin-top:4px}
+    .mock-table th{font-size:clamp(11px,.8vw,14px);text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.3);text-align:left;padding:8px clamp(8px,1vw,12px);border-bottom:1px solid rgba(255,255,255,.06)}
     .mock-table td{padding:clamp(8px,1vw,12px);font-size:var(--t-sm);border-bottom:1px solid rgba(255,255,255,.03)}
     .mock-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:var(--t-sm);font-weight:700}
     .mock-cal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:8px}
@@ -222,14 +222,14 @@
       <p style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:rgba(212,175,55,0.7);text-align:center;margin-bottom:20px">Calcola quanto ti costa non automatizzare</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
         <div>
-          <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:8px">Persone che fanno attività ripetitive</label>
+          <label style="font-size:var(--t-sm);color:rgba(255,255,255,0.5);display:block;margin-bottom:8px">Persone che fanno attività ripetitive</label>
           <div style="display:flex;align-items:center;gap:12px">
             <input type="range" id="roiPeople" min="1" max="20" value="3" oninput="calcRoi()" style="flex:1;accent-color:#D4AF37;cursor:pointer">
             <span id="roiPeopleVal" style="font-size:20px;font-weight:800;color:#fff;min-width:28px;text-align:right">3</span>
           </div>
         </div>
         <div>
-          <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:8px">Costo mensile per persona (€)</label>
+          <label style="font-size:var(--t-sm);color:rgba(255,255,255,0.5);display:block;margin-bottom:8px">Costo mensile per persona (€)</label>
           <div style="display:flex;align-items:center;gap:12px">
             <input type="range" id="roiSalary" min="800" max="5000" value="2000" step="100" oninput="calcRoi()" style="flex:1;accent-color:#D4AF37;cursor:pointer">
             <span id="roiSalaryVal" style="font-size:20px;font-weight:800;color:#fff;min-width:64px;text-align:right">€2.000</span>
@@ -374,23 +374,23 @@
   <div style="max-width:1500px;width:100%;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:24px;text-align:center">
     <div>
       <p class="stat-num" data-target="10" data-suffix="M€" style="font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,44px);font-weight:900;color:#D4AF37;line-height:1">0</p>
-      <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:6px;text-transform:uppercase;letter-spacing:2px">Exit (Zucchetti)</p>
+      <p style="font-size:var(--t-label);color:rgba(255,255,255,0.4);margin-top:6px;text-transform:uppercase;letter-spacing:2px">Exit (Zucchetti)</p>
     </div>
     <div>
       <p class="stat-num" data-target="232" data-suffix="K" style="font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,44px);font-weight:900;color:#D4AF37;line-height:1">0</p>
-      <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:6px;text-transform:uppercase;letter-spacing:2px">Follower LinkedIn</p>
+      <p style="font-size:var(--t-label);color:rgba(255,255,255,0.4);margin-top:6px;text-transform:uppercase;letter-spacing:2px">Follower LinkedIn</p>
     </div>
     <div>
       <p class="stat-num" data-target="100" data-suffix="+" style="font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,44px);font-weight:900;color:#D4AF37;line-height:1">0</p>
-      <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:6px;text-transform:uppercase;letter-spacing:2px">Clienti seguiti</p>
+      <p style="font-size:var(--t-label);color:rgba(255,255,255,0.4);margin-top:6px;text-transform:uppercase;letter-spacing:2px">Clienti seguiti</p>
     </div>
     <div>
       <p class="stat-num" data-target="50" data-suffix="+" style="font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,44px);font-weight:900;color:#D4AF37;line-height:1">0</p>
-      <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:6px;text-transform:uppercase;letter-spacing:2px">Speech istituzionali</p>
+      <p style="font-size:var(--t-label);color:rgba(255,255,255,0.4);margin-top:6px;text-transform:uppercase;letter-spacing:2px">Speech istituzionali</p>
     </div>
     <div>
       <p class="stat-num" data-target="2" data-suffix=" libri" style="font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,44px);font-weight:900;color:#D4AF37;line-height:1">0</p>
-      <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:6px;text-transform:uppercase;letter-spacing:2px">Feltrinelli</p>
+      <p style="font-size:var(--t-label);color:rgba(255,255,255,0.4);margin-top:6px;text-transform:uppercase;letter-spacing:2px">Feltrinelli</p>
     </div>
   </div>
 </div>
