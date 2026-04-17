@@ -120,7 +120,7 @@
     .hero-photo{position:absolute;right:0;top:0;bottom:0;width:40%;height:100%;object-fit:cover;object-position:center top;z-index:1;pointer-events:none;-webkit-mask-image:linear-gradient(to left,rgba(0,0,0,.8) 0%,rgba(0,0,0,.5) 50%,transparent 100%);mask-image:linear-gradient(to left,rgba(0,0,0,.8) 0%,rgba(0,0,0,.5) 50%,transparent 100%)}
     @media(min-width:769px) and (max-width:1024px){.show-mobile{display:none!important}.grid-3{grid-template-columns:repeat(2,1fr)!important}.grid-4{grid-template-columns:repeat(2,1fr)!important}}
     @media(max-width:1024px){.grid-3{grid-template-columns:repeat(2,1fr)!important}}
-    @media(max-width:768px){.hide-mobile{display:none!important}.show-mobile{display:block!important}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr!important}.ba-row{grid-template-columns:1fr;gap:8px;text-align:center}.ba-before,.ba-after{text-align:center}.mock-stat-row{grid-template-columns:1fr 1fr}.mock-cal-grid{grid-template-columns:repeat(2,1fr)!important}.mock-cal-day:nth-child(5){display:none}.check-group{grid-template-columns:1fr}.glass{padding:clamp(16px,4vw,24px)!important;border-radius:16px}.glass[style*="display:flex"][style*="gap:24px"]{flex-direction:column!important;align-items:center!important;text-align:center}.glass[style*="display:flex"][style*="gap:24px"] .body-text{text-align:center}.glass .grid-2{grid-template-columns:1fr!important}.chi-sono-grid{grid-template-columns:1fr!important;text-align:center}.chi-sono-grid>div:first-child{position:static!important;margin:0 auto}.hero-photo{display:none!important}.grid-2{grid-template-columns:1fr!important}}
+    @media(max-width:768px){.hide-mobile{display:none!important}.show-mobile{display:block!important}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr!important}.roi-sliders{grid-template-columns:1fr!important}.roi-results{grid-template-columns:1fr!important}.ba-row{grid-template-columns:1fr;gap:8px;text-align:center}.ba-before,.ba-after{text-align:center}.mock-stat-row{grid-template-columns:1fr 1fr}.mock-cal-grid{grid-template-columns:repeat(2,1fr)!important}.mock-cal-day:nth-child(5){display:none}.check-group{grid-template-columns:1fr}.glass{padding:clamp(16px,4vw,24px)!important;border-radius:16px}.glass[style*="display:flex"][style*="gap:24px"]{flex-direction:column!important;align-items:center!important;text-align:center}.glass[style*="display:flex"][style*="gap:24px"] .body-text{text-align:center}.glass .grid-2{grid-template-columns:1fr!important}.chi-sono-grid{grid-template-columns:1fr!important;text-align:center}.chi-sono-grid>div:first-child{position:static!important;margin:0 auto}.hero-photo{display:none!important}.grid-2{grid-template-columns:1fr!important}}
     @media(max-width:480px){.mock-stat-row{grid-template-columns:1fr 1fr 1fr}.mock-cal-grid{grid-template-columns:1fr!important}.mock-cal-day:nth-child(n+3){display:none}.testimonial-card{min-width:240px;}}
     @media(min-width:769px){.show-mobile{display:none!important}}
 
@@ -272,7 +272,7 @@
     <!-- ROI CALCULATOR -->
     <div class="reveal" style="background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.18);border-radius:20px;padding:24px 32px;margin-bottom:32px;max-width:680px;width:100%;margin-left:auto;margin-right:auto">
       <p style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:rgba(212,175,55,0.7);text-align:center;margin-bottom:20px">Calcola quanto ti costa non automatizzare</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+      <div class="roi-sliders" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
         <div>
           <label style="font-size:var(--t-sm);color:rgba(255,255,255,0.5);display:block;margin-bottom:8px">Persone che fanno attività ripetitive</label>
           <div style="display:flex;align-items:center;gap:12px">
@@ -288,7 +288,7 @@
           </div>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;border-top:1px solid rgba(255,255,255,0.06);padding-top:20px">
+      <div class="roi-results" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;border-top:1px solid rgba(255,255,255,0.06);padding-top:20px">
         <div style="text-align:center;padding:14px;background:rgba(255,68,68,0.06);border-radius:12px;border:1px solid rgba(255,68,68,0.12)">
           <p style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.4);margin-bottom:6px">Costo team/mese</p>
           <p id="roiTotal" style="font-size:clamp(20px,2.5vw,30px);font-weight:900;color:rgba(255,68,68,0.85);line-height:1">€6.000</p>
@@ -325,7 +325,7 @@
       <strong style="color:rgba(212,175,55,0.8)">Analisi Funzionale 497&euro; + IVA</strong> / Call 45-90 min + documento PDF / Tuo per sempre, anche se non procedi
     </p>
 
-    <a href="#" onclick="openCalendly(event)" class="btn-gold reveal" style="font-size:14px;padding:20px 48px">
+    <a href="#" onclick="openCalendly(event)" class="btn-gold reveal" style="font-size:14px;padding:20px 48px;white-space:normal;text-align:center;max-width:100%">
       <span id="roiCtaText">I tuoi 497€ rientrano in 6 giorni. Prenota l'analisi →</span>
     </a>
 
