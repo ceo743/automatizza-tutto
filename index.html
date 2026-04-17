@@ -123,6 +123,56 @@
     @media(max-width:768px){.hide-mobile{display:none!important}.show-mobile{display:block!important}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr!important}.ba-row{grid-template-columns:1fr;gap:8px;text-align:center}.ba-before,.ba-after{text-align:center}.mock-stat-row{grid-template-columns:1fr 1fr}.mock-cal-grid{grid-template-columns:repeat(2,1fr)!important}.mock-cal-day:nth-child(5){display:none}.check-group{grid-template-columns:1fr}.glass{padding:clamp(16px,4vw,24px)!important;border-radius:16px}.glass[style*="display:flex"][style*="gap:24px"]{flex-direction:column!important;align-items:center!important;text-align:center}.glass[style*="display:flex"][style*="gap:24px"] .body-text{text-align:center}.glass .grid-2{grid-template-columns:1fr!important}.chi-sono-grid{grid-template-columns:1fr!important;text-align:center}.chi-sono-grid>div:first-child{position:static!important;margin:0 auto}.hero-photo{display:none!important}.grid-2{grid-template-columns:1fr!important}}
     @media(max-width:480px){.mock-stat-row{grid-template-columns:1fr 1fr 1fr}.mock-cal-grid{grid-template-columns:1fr!important}.mock-cal-day:nth-child(n+3){display:none}.testimonial-card{min-width:240px;}}
     @media(min-width:769px){.show-mobile{display:none!important}}
+
+    /* ===== RESOURCE CARDS ===== */
+    .res-card{
+      position:relative;overflow:hidden;border-radius:16px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(212,175,55,0.12);
+      cursor:pointer;transition:border-color .3s,transform .1s;
+      transform-style:preserve-3d;
+      animation-delay:var(--delay,0ms);
+    }
+    .res-card:hover{border-color:rgba(212,175,55,0.45);}
+    .res-card-inner{padding:32px;position:relative;z-index:1;}
+    .res-tag{
+      display:inline-block;font-size:10px;letter-spacing:2.5px;
+      text-transform:uppercase;color:#D4AF37;font-weight:600;
+      background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);
+      padding:4px 10px;border-radius:20px;margin-bottom:20px;font-family:'Inter',sans-serif;
+    }
+    .res-icon{
+      width:48px;height:48px;border-radius:12px;
+      background:linear-gradient(135deg,rgba(212,175,55,0.15),rgba(212,175,55,0.05));
+      border:1px solid rgba(212,175,55,0.2);
+      display:flex;align-items:center;justify-content:center;
+      color:#D4AF37;margin-bottom:16px;
+      transition:transform .3s,background .3s;
+    }
+    .res-card:hover .res-icon{transform:scale(1.1) rotate(5deg);background:linear-gradient(135deg,rgba(212,175,55,0.25),rgba(212,175,55,0.1));}
+    .res-title{font-size:18px;font-weight:700;font-family:'Playfair Display',serif;margin-bottom:10px;line-height:1.3;}
+    .res-desc{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.65;margin-bottom:24px;}
+    .res-cta{
+      font-size:13px;font-weight:600;color:#D4AF37;
+      display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;letter-spacing:.5px;
+    }
+    .res-arrow{transition:transform .3s;display:inline-block;}
+    .res-card:hover .res-arrow{transform:translateX(5px);}
+    /* scan line effect */
+    .res-scan{
+      position:absolute;top:-100%;left:0;right:0;height:60%;
+      background:linear-gradient(180deg,transparent,rgba(212,175,55,0.04),transparent);
+      pointer-events:none;transition:top .6s ease;
+    }
+    .res-card:hover .res-scan{top:140%;}
+    /* glow bottom on hover */
+    .res-card::after{
+      content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(212,175,55,0.5),transparent);
+      opacity:0;transition:opacity .3s;
+    }
+    .res-card:hover::after{opacity:1;}
+    @media(max-width:640px){#resourceGrid{grid-template-columns:1fr!important}}
   </style>
 </head>
 <body>
@@ -1590,6 +1640,137 @@
   </div>
 </section>
 
+<!-- ===== RISORSE GRATUITE ===== -->
+<section id="risorse" class="section" style="position:relative;overflow:hidden;padding-top:100px;padding-bottom:100px">
+  <!-- Background grid futuristico -->
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:0.03">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+          <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#D4AF37" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+    </svg>
+  </div>
+  <!-- Orb glow -->
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(212,175,55,0.05) 0%,transparent 70%);pointer-events:none"></div>
+
+  <div class="container" style="position:relative;z-index:1">
+    <!-- Header sezione -->
+    <div class="reveal" style="text-align:center;margin-bottom:64px">
+      <p style="font-size:12px;letter-spacing:4px;color:#D4AF37;text-transform:uppercase;margin-bottom:16px;font-family:'Inter',sans-serif;font-weight:600">// Accesso libero</p>
+      <h2 style="font-size:clamp(28px,4vw,44px);font-family:'Playfair Display',serif;font-weight:700;margin-bottom:16px">
+        7 risorse gratuite.<br><span style="color:#D4AF37">Usale adesso.</span>
+      </h2>
+      <p style="font-size:16px;color:rgba(255,255,255,0.55);max-width:520px;margin:0 auto">Sistemi, guide e framework che uso con i clienti — disponibili subito, senza opt-in.</p>
+    </div>
+
+    <!-- Grid card -->
+    <div id="resourceGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;perspective:1200px">
+
+      <!-- Card 1 -->
+      <div class="res-card reveal" data-url="https://clienti.davidecaiazzo.it/" style="--delay:0ms">
+        <div class="res-card-inner">
+          <div class="res-tag">LinkedIn · Clienti</div>
+          <div class="res-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="res-title">Clienti su Richiesta</h3>
+          <p class="res-desc">Il metodo che ha generato 1.2M€ in 4 mesi usando LinkedIn come canale di acquisizione.</p>
+          <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
+        </div>
+        <div class="res-scan"></div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="res-card reveal" data-url="https://guida41.davidecaiazzo.it/" style="--delay:60ms">
+        <div class="res-card-inner">
+          <div class="res-tag">Automazioni · Azienda</div>
+          <div class="res-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+          <h3 class="res-title">41 Automazioni per 8 Reparti</h3>
+          <p class="res-desc">41 processi mappati con ore risparmiate, costi eliminati e ROI a 90 giorni per ogni reparto.</p>
+          <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
+        </div>
+        <div class="res-scan"></div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="res-card reveal" data-url="http://guida60.davidecaiazzo.it/" style="--delay:120ms">
+        <div class="res-card-inner">
+          <div class="res-tag">LinkedIn · Appuntamenti</div>
+          <div class="res-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3 class="res-title">60+ Appuntamenti in 3 Giorni</h3>
+          <p class="res-desc">Il sistema esatto — con Claude AI — per generare appuntamenti qualificati su LinkedIn partendo da zero.</p>
+          <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
+        </div>
+        <div class="res-scan"></div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="res-card reveal" data-url="https://guida-seo.davidecaiazzo.it/" style="--delay:180ms">
+        <div class="res-card-inner">
+          <div class="res-tag">SEO · Google</div>
+          <div class="res-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><polyline points="8 11 11 14 16 9"/></svg>
+          </div>
+          <h3 class="res-title">Numero 1 su Google con l'AI</h3>
+          <p class="res-desc">Sistema con Claude AI per dominare la SEO senza agenzie — setup in 15 minuti, risultati duraturi.</p>
+          <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
+        </div>
+        <div class="res-scan"></div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="res-card reveal" data-url="https://guida-blog.davidecaiazzo.it/" style="--delay:240ms">
+        <div class="res-card-inner">
+          <div class="res-tag">WordPress · Content</div>
+          <div class="res-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h3 class="res-title">Blog WordPress in Autopilot</h3>
+          <p class="res-desc">Pubblica articoli settimanali automaticamente. Setup una volta, poi gira da solo con l'AI.</p>
+          <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
+        </div>
+        <div class="res-scan"></div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="res-card reveal" data-url="http://guida-skills.davidecaiazzo.it/" style="--delay:300ms">
+        <div class="res-card-inner">
+          <div class="res-tag">Claude AI · Marketing</div>
+          <div class="res-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3 class="res-title">35 Marketing Skills per Claude</h3>
+          <p class="res-desc">Sistema completo per automatizzare il marketing con AI — CRO, Cold Email, SEO e 32 altre skills.</p>
+          <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
+        </div>
+        <div class="res-scan"></div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="res-card reveal" data-url="http://guida.davidecaiazzo.it/" style="--delay:360ms">
+        <div class="res-card-inner">
+          <div class="res-tag">Lead Gen · AI</div>
+          <div class="res-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <h3 class="res-title">60+ Appuntamenti con 300€</h3>
+          <p class="res-desc">Il framework per generare appuntamenti qualificati in 3 giorni con un budget minimo e Claude AI.</p>
+          <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
+        </div>
+        <div class="res-scan"></div>
+      </div>
+
+    </div><!-- /grid -->
+  </div><!-- /container -->
+</section>
+
 <div class="gold-line"></div>
 
 <!-- ===== ANALISI FUNZIONALE + FORM ===== -->
@@ -2095,6 +2276,33 @@ window.addEventListener('scroll',()=>{
 </script>
 <!-- DC Academy Chatbot Widget -->
 <script src="https://dc-chatbot-vswb.onrender.com/widget.js" data-bot="automazioni" data-auto-open="false"></script>
+
+<script>
+// ===== RESOURCE CARDS: 3D TILT + CLICK =====
+(function(){
+  document.querySelectorAll('.res-card').forEach(function(card){
+    // click → open URL
+    card.addEventListener('click',function(){
+      var url=card.getAttribute('data-url');
+      if(url) window.open(url,'_blank','noopener');
+    });
+    // 3D tilt on mouse move
+    card.addEventListener('mousemove',function(e){
+      var rect=card.getBoundingClientRect();
+      var x=(e.clientX-rect.left)/rect.width-0.5;
+      var y=(e.clientY-rect.top)/rect.height-0.5;
+      card.style.transform='perspective(800px) rotateY('+x*12+'deg) rotateX('+(-y*12)+'deg) scale3d(1.03,1.03,1.03)';
+    });
+    card.addEventListener('mouseleave',function(){
+      card.style.transform='perspective(800px) rotateY(0) rotateX(0) scale3d(1,1,1)';
+      card.style.transition='transform .5s ease';
+    });
+    card.addEventListener('mouseenter',function(){
+      card.style.transition='transform .1s ease';
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
