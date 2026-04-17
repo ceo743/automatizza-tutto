@@ -265,14 +265,17 @@
       document.getElementById('roiWaste').textContent='€'+waste.toLocaleString('it-IT');
       var payback=days<=1?'1 giorno':days<=30?days+' giorni':Math.round(days/30)+' mesi';
       document.getElementById('roiPayback').textContent=payback;
+      document.getElementById('roiCtaText').textContent='I tuoi 497€ rientrano in '+payback+'. Prenota l\'analisi →';
     }
     </script>
 
-    <p class="reveal" style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:32px;text-align:center">
+    <p class="reveal" style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px;text-align:center">
       <strong style="color:rgba(212,175,55,0.8)">Analisi Funzionale 497&euro; + IVA</strong> &middot; Call 45–90 min + documento PDF · Tuo per sempre, anche se non procedi
     </p>
 
-    <a href="#" onclick="openCalendly(event)" class="btn-gold reveal" style="font-size:14px;padding:20px 48px"><span>PRENOTA LA TUA ANALISI &rarr;</span></a>
+    <a href="#" onclick="openCalendly(event)" class="btn-gold reveal" style="font-size:14px;padding:20px 48px">
+      <span id="roiCtaText">I tuoi 497€ rientrano in 6 giorni. Prenota l'analisi →</span>
+    </a>
 
     <!-- COSA SUCCEDE DOPO -->
     <div class="reveal" style="margin-top:36px;max-width:520px;width:100%;margin-left:auto;margin-right:auto;text-align:left">
