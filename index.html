@@ -172,7 +172,9 @@
       opacity:0;transition:opacity .3s;
     }
     .res-card:hover::after{opacity:1;}
-    @media(max-width:640px){#resourceGrid{grid-template-columns:1fr!important}}
+    #resTrack::-webkit-scrollbar{display:none}
+    #resPrev:hover,#resNext:hover{background:rgba(212,175,55,0.25)!important}
+    @media(max-width:640px){#resTrack{padding:12px 40px 20px!important} #resPrev{left:4px!important} #resNext{right:4px!important}}
   </style>
 </head>
 <body>
@@ -1642,105 +1644,100 @@
 
 <!-- ===== RISORSE GRATUITE ===== -->
 <section id="risorse" class="section" style="position:relative;overflow:hidden;padding-top:100px;padding-bottom:100px">
-  <!-- Background grid futuristico -->
   <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:0.03">
-    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-          <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#D4AF37" stroke-width="0.5"/>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grid)"/>
-    </svg>
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#D4AF37" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg>
   </div>
-  <!-- Orb glow -->
   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(212,175,55,0.05) 0%,transparent 70%);pointer-events:none"></div>
 
-  <div class="container" style="position:relative;z-index:1">
-    <!-- Header sezione -->
-    <div class="reveal" style="text-align:center;margin-bottom:64px">
+  <div style="position:relative;z-index:1">
+    <!-- Header -->
+    <div class="reveal" style="text-align:center;margin-bottom:56px;padding:0 32px">
       <p style="font-size:12px;letter-spacing:4px;color:#D4AF37;text-transform:uppercase;margin-bottom:16px;font-family:'Inter',sans-serif;font-weight:600">// Accesso libero</p>
       <h2 style="font-size:clamp(28px,4vw,44px);font-family:'Playfair Display',serif;font-weight:700;margin-bottom:16px">
-        5 risorse gratuite.<br><span style="color:#D4AF37">Usale adesso.</span>
+        Risorse gratuite.<br><span style="color:#D4AF37">Usale adesso.</span>
       </h2>
       <p style="font-size:16px;color:rgba(255,255,255,0.55);max-width:520px;margin:0 auto">Sistemi, guide e framework che uso con i clienti — disponibili subito, senza opt-in.</p>
     </div>
 
-    <!-- Grid card -->
-    <div id="resourceGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;perspective:1200px">
+    <!-- Carousel wrapper -->
+    <div style="position:relative">
+      <!-- Fade edges -->
+      <div style="position:absolute;top:0;left:0;bottom:0;width:80px;background:linear-gradient(90deg,var(--bg),transparent);z-index:2;pointer-events:none"></div>
+      <div style="position:absolute;top:0;right:0;bottom:0;width:80px;background:linear-gradient(270deg,var(--bg),transparent);z-index:2;pointer-events:none"></div>
 
-      <!-- Card 2 -->
-      <div class="res-card reveal" data-url="https://guida41.davidecaiazzo.it/" style="--delay:60ms">
-        <div class="res-card-inner">
-          <div class="res-tag">Automazioni · Azienda</div>
-          <div class="res-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      <!-- Arrow prev -->
+      <button id="resPrev" aria-label="Precedente" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);color:#D4AF37;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;font-size:18px;line-height:1">
+        ‹
+      </button>
+      <!-- Arrow next -->
+      <button id="resNext" aria-label="Successivo" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);color:#D4AF37;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;font-size:18px;line-height:1">
+        ›
+      </button>
+
+      <!-- Track -->
+      <div id="resTrack" style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:12px 80px 20px;cursor:grab">
+
+        <div class="res-card" data-url="https://guida41.davidecaiazzo.it/" style="flex:0 0 300px;scroll-snap-align:start">
+          <div class="res-card-inner">
+            <div class="res-tag">Automazioni · Azienda</div>
+            <div class="res-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+            <h3 class="res-title">41 Automazioni per 8 Reparti</h3>
+            <p class="res-desc">41 processi mappati con ore risparmiate, costi eliminati e ROI a 90 giorni per ogni reparto.</p>
+            <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
           </div>
-          <h3 class="res-title">41 Automazioni per 8 Reparti</h3>
-          <p class="res-desc">41 processi mappati con ore risparmiate, costi eliminati e ROI a 90 giorni per ogni reparto.</p>
-          <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
+          <div class="res-scan"></div>
         </div>
-        <div class="res-scan"></div>
-      </div>
 
-      <!-- Card 3 -->
-      <div class="res-card reveal" data-url="http://guida60.davidecaiazzo.it/" style="--delay:120ms">
-        <div class="res-card-inner">
-          <div class="res-tag">LinkedIn · Appuntamenti</div>
-          <div class="res-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <div class="res-card" data-url="http://guida60.davidecaiazzo.it/" style="flex:0 0 300px;scroll-snap-align:start">
+          <div class="res-card-inner">
+            <div class="res-tag">LinkedIn · Appuntamenti</div>
+            <div class="res-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <h3 class="res-title">60+ Appuntamenti in 3 Giorni</h3>
+            <p class="res-desc">Il sistema esatto — con Claude AI — per generare appuntamenti qualificati su LinkedIn partendo da zero.</p>
+            <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
           </div>
-          <h3 class="res-title">60+ Appuntamenti in 3 Giorni</h3>
-          <p class="res-desc">Il sistema esatto — con Claude AI — per generare appuntamenti qualificati su LinkedIn partendo da zero.</p>
-          <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
+          <div class="res-scan"></div>
         </div>
-        <div class="res-scan"></div>
-      </div>
 
-      <!-- Card 4 -->
-      <div class="res-card reveal" data-url="https://guida-seo.davidecaiazzo.it/" style="--delay:180ms">
-        <div class="res-card-inner">
-          <div class="res-tag">SEO · Google</div>
-          <div class="res-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><polyline points="8 11 11 14 16 9"/></svg>
+        <div class="res-card" data-url="https://guida-seo.davidecaiazzo.it/" style="flex:0 0 300px;scroll-snap-align:start">
+          <div class="res-card-inner">
+            <div class="res-tag">SEO · Google</div>
+            <div class="res-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><polyline points="8 11 11 14 16 9"/></svg></div>
+            <h3 class="res-title">Numero 1 su Google con l'AI</h3>
+            <p class="res-desc">Sistema con Claude AI per dominare la SEO senza agenzie — setup in 15 minuti, risultati duraturi.</p>
+            <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
           </div>
-          <h3 class="res-title">Numero 1 su Google con l'AI</h3>
-          <p class="res-desc">Sistema con Claude AI per dominare la SEO senza agenzie — setup in 15 minuti, risultati duraturi.</p>
-          <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
+          <div class="res-scan"></div>
         </div>
-        <div class="res-scan"></div>
-      </div>
 
-      <!-- Card 6 -->
-      <div class="res-card reveal" data-url="http://guida-skills.davidecaiazzo.it/" style="--delay:300ms">
-        <div class="res-card-inner">
-          <div class="res-tag">Claude AI · Marketing</div>
-          <div class="res-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <div class="res-card" data-url="http://guida-skills.davidecaiazzo.it/" style="flex:0 0 300px;scroll-snap-align:start">
+          <div class="res-card-inner">
+            <div class="res-tag">Claude AI · Marketing</div>
+            <div class="res-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+            <h3 class="res-title">35 Marketing Skills per Claude</h3>
+            <p class="res-desc">Sistema completo per automatizzare il marketing con AI — CRO, Cold Email, SEO e 32 altre skills.</p>
+            <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
           </div>
-          <h3 class="res-title">35 Marketing Skills per Claude</h3>
-          <p class="res-desc">Sistema completo per automatizzare il marketing con AI — CRO, Cold Email, SEO e 32 altre skills.</p>
-          <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
+          <div class="res-scan"></div>
         </div>
-        <div class="res-scan"></div>
-      </div>
 
-      <!-- Card 7 -->
-      <div class="res-card reveal" data-url="http://guida.davidecaiazzo.it/" style="--delay:360ms">
-        <div class="res-card-inner">
-          <div class="res-tag">Lead Gen · AI</div>
-          <div class="res-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div class="res-card" data-url="http://guida.davidecaiazzo.it/" style="flex:0 0 300px;scroll-snap-align:start">
+          <div class="res-card-inner">
+            <div class="res-tag">Lead Gen · AI</div>
+            <div class="res-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <h3 class="res-title">60+ Appuntamenti con 300€</h3>
+            <p class="res-desc">Il framework per generare appuntamenti qualificati in 3 giorni con un budget minimo e Claude AI.</p>
+            <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
           </div>
-          <h3 class="res-title">60+ Appuntamenti con 300€</h3>
-          <p class="res-desc">Il framework per generare appuntamenti qualificati in 3 giorni con un budget minimo e Claude AI.</p>
-          <div class="res-cta">Accedi gratis <span class="res-arrow">→</span></div>
+          <div class="res-scan"></div>
         </div>
-        <div class="res-scan"></div>
-      </div>
 
-    </div><!-- /grid -->
-  </div><!-- /container -->
+      </div><!-- /track -->
+
+      <!-- Dots -->
+      <div id="resDots" style="display:flex;justify-content:center;gap:8px;margin-top:8px"></div>
+    </div>
+  </div>
 </section>
 
 <div class="gold-line"></div>
@@ -2250,28 +2247,75 @@ window.addEventListener('scroll',()=>{
 <script src="https://dc-chatbot-vswb.onrender.com/widget.js" data-bot="automazioni" data-auto-open="false"></script>
 
 <script>
-// ===== RESOURCE CARDS: 3D TILT + CLICK =====
+// ===== RESOURCE CAROUSEL =====
 (function(){
-  document.querySelectorAll('.res-card').forEach(function(card){
-    // click → open URL
-    card.addEventListener('click',function(){
-      var url=card.getAttribute('data-url');
-      if(url) window.open(url,'_blank','noopener');
+  var track = document.getElementById('resTrack');
+  var prev  = document.getElementById('resPrev');
+  var next  = document.getElementById('resNext');
+  var dots  = document.getElementById('resDots');
+  if(!track) return;
+
+  var cards = track.querySelectorAll('.res-card');
+  var cardW = 300 + 20; // card width + gap
+  var total = cards.length;
+  var current = 0;
+
+  // Build dots
+  cards.forEach(function(_,i){
+    var d = document.createElement('span');
+    d.style.cssText='display:inline-block;width:6px;height:6px;border-radius:50%;background:rgba(212,175,55,'+(i===0?'1':'0.25')+');transition:background .3s;cursor:pointer';
+    d.addEventListener('click',function(){ goTo(i); });
+    dots.appendChild(d);
+  });
+
+  function goTo(idx){
+    current = Math.max(0, Math.min(idx, total-1));
+    track.scrollTo({ left: current * cardW, behavior: 'smooth' });
+    dots.querySelectorAll('span').forEach(function(d,i){
+      d.style.background = i===current ? 'rgba(212,175,55,1)' : 'rgba(212,175,55,0.25)';
+      d.style.width = i===current ? '18px' : '6px';
+      d.style.borderRadius = '3px';
     });
-    // 3D tilt on mouse move
+  }
+
+  prev.addEventListener('click',function(){ goTo(current-1); });
+  next.addEventListener('click',function(){ goTo(current+1); });
+
+  // Sync dots on manual scroll
+  track.addEventListener('scroll',function(){
+    var idx = Math.round(track.scrollLeft / cardW);
+    if(idx !== current){ current=idx; dots.querySelectorAll('span').forEach(function(d,i){
+      d.style.background = i===current ? 'rgba(212,175,55,1)' : 'rgba(212,175,55,0.25)';
+      d.style.width = i===current ? '18px' : '6px';
+      d.style.borderRadius = '3px';
+    }); }
+  });
+
+  // Drag to scroll
+  var dragging=false, startX=0, scrollStart=0;
+  track.addEventListener('mousedown',function(e){ dragging=true; startX=e.pageX; scrollStart=track.scrollLeft; track.style.cursor='grabbing'; track.style.userSelect='none'; });
+  document.addEventListener('mousemove',function(e){ if(!dragging)return; track.scrollLeft=scrollStart-(e.pageX-startX); });
+  document.addEventListener('mouseup',function(){
+    if(!dragging)return; dragging=false; track.style.cursor='grab'; track.style.userSelect='';
+    var idx=Math.round(track.scrollLeft/cardW); goTo(idx);
+  });
+
+  // Click on card (only if not dragged)
+  cards.forEach(function(card){
+    var moved=false;
+    card.addEventListener('mousedown',function(){ moved=false; });
+    card.addEventListener('mousemove',function(){ moved=true; });
+    card.addEventListener('mouseup',function(){
+      if(!moved){ var url=card.getAttribute('data-url'); if(url) window.open(url,'_blank','noopener'); }
+    });
+    // 3D tilt
     card.addEventListener('mousemove',function(e){
-      var rect=card.getBoundingClientRect();
-      var x=(e.clientX-rect.left)/rect.width-0.5;
-      var y=(e.clientY-rect.top)/rect.height-0.5;
-      card.style.transform='perspective(800px) rotateY('+x*12+'deg) rotateX('+(-y*12)+'deg) scale3d(1.03,1.03,1.03)';
+      var r=card.getBoundingClientRect();
+      var x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
+      card.style.transform='perspective(800px) rotateY('+x*10+'deg) rotateX('+(-y*10)+'deg) scale3d(1.03,1.03,1.03)';
     });
-    card.addEventListener('mouseleave',function(){
-      card.style.transform='perspective(800px) rotateY(0) rotateX(0) scale3d(1,1,1)';
-      card.style.transition='transform .5s ease';
-    });
-    card.addEventListener('mouseenter',function(){
-      card.style.transition='transform .1s ease';
-    });
+    card.addEventListener('mouseleave',function(){ card.style.transition='transform .5s'; card.style.transform=''; });
+    card.addEventListener('mouseenter',function(){ card.style.transition='transform .1s'; });
   });
 })();
 </script>
