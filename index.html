@@ -1650,29 +1650,27 @@
   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(212,175,55,0.05) 0%,transparent 70%);pointer-events:none"></div>
 
   <div style="position:relative;z-index:1">
-    <!-- Header -->
-    <div class="reveal" style="text-align:center;margin-bottom:56px;padding:0 32px">
-      <p style="font-size:12px;letter-spacing:4px;color:#D4AF37;text-transform:uppercase;margin-bottom:16px;font-family:'Inter',sans-serif;font-weight:600">// Accesso libero</p>
-      <h2 style="font-size:clamp(28px,4vw,44px);font-family:'Playfair Display',serif;font-weight:700;margin-bottom:16px">
-        Risorse gratuite.<br><span style="color:#D4AF37">Usale adesso.</span>
-      </h2>
-      <p style="font-size:16px;color:rgba(255,255,255,0.55);max-width:520px;margin:0 auto">Sistemi, guide e framework che uso con i clienti — disponibili subito, senza opt-in.</p>
+    <!-- Header con frecce -->
+    <div class="reveal" style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;padding:0 32px;flex-wrap:wrap;gap:24px">
+      <div>
+        <p style="font-size:12px;letter-spacing:4px;color:#D4AF37;text-transform:uppercase;margin-bottom:16px;font-family:'Inter',sans-serif;font-weight:600">// Accesso libero</p>
+        <h2 style="font-size:clamp(28px,4vw,44px);font-family:'Playfair Display',serif;font-weight:700;margin-bottom:12px">
+          Risorse gratuite.<br><span style="color:#D4AF37">Usale adesso.</span>
+        </h2>
+        <p style="font-size:16px;color:rgba(255,255,255,0.55);max-width:480px">Sistemi, guide e framework che uso con i clienti — senza opt-in.</p>
+      </div>
+      <!-- Frecce -->
+      <div style="display:flex;gap:12px;flex-shrink:0">
+        <button id="resPrev" aria-label="Precedente" style="width:48px;height:48px;border-radius:50%;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);color:#D4AF37;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;font-size:22px;line-height:1">‹</button>
+        <button id="resNext" aria-label="Successivo" style="width:48px;height:48px;border-radius:50%;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);color:#D4AF37;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;font-size:22px;line-height:1">›</button>
+      </div>
     </div>
 
     <!-- Carousel wrapper -->
     <div style="position:relative">
       <!-- Fade edges -->
-      <div style="position:absolute;top:0;left:0;bottom:0;width:80px;background:linear-gradient(90deg,var(--bg),transparent);z-index:2;pointer-events:none"></div>
-      <div style="position:absolute;top:0;right:0;bottom:0;width:80px;background:linear-gradient(270deg,var(--bg),transparent);z-index:2;pointer-events:none"></div>
-
-      <!-- Arrow prev -->
-      <button id="resPrev" aria-label="Precedente" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);color:#D4AF37;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;font-size:18px;line-height:1">
-        ‹
-      </button>
-      <!-- Arrow next -->
-      <button id="resNext" aria-label="Successivo" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);color:#D4AF37;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;font-size:18px;line-height:1">
-        ›
-      </button>
+      <div style="position:absolute;top:0;left:0;bottom:0;width:60px;background:linear-gradient(90deg,var(--bg),transparent);z-index:2;pointer-events:none"></div>
+      <div style="position:absolute;top:0;right:0;bottom:0;width:60px;background:linear-gradient(270deg,var(--bg),transparent);z-index:2;pointer-events:none"></div>
 
       <!-- Track -->
       <div id="resTrack" style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:12px 80px 20px;cursor:grab">
