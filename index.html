@@ -277,9 +277,31 @@
 </section>
 
 <!-- ===== LOGO WALL ===== -->
-<div style="background:#080b10;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);padding:20px 0;overflow:hidden;position:relative">
-  <p style="text-align:center;font-size:11px;text-transform:uppercase;letter-spacing:3px;color:rgba(255,255,255,0.25);margin-bottom:16px">Hanno già lavorato con Davide</p>
-  <div style="position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)">
+<div style="background:#080b10;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:40px 0;overflow:hidden;position:relative">
+  <p style="text-align:center;font-size:11px;text-transform:uppercase;letter-spacing:4px;color:rgba(255,255,255,0.2);margin-bottom:28px">Hanno già lavorato con Davide</p>
+
+  <!-- RIGA 1 → sinistra -->
+  <div style="position:relative;overflow:hidden;margin-bottom:14px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)">
+    <div style="display:flex;gap:14px;width:max-content;animation:scrollLeft 35s linear infinite">
+      <!-- set 1 -->
+      <div class="lc">MONCLER</div><div class="lc">Prada</div><div class="lc">KPMG</div><div class="lc">Samsung</div><div class="lc">Huawei</div><div class="lc">Heineken</div><div class="lc">PwC</div><div class="lc">Swarovski</div><div class="lc">BNL BNP Paribas</div><div class="lc">Hyundai</div><div class="lc">Mediobanca</div><div class="lc">Colgate-Palmolive</div><div class="lc">Santander</div><div class="lc">Giochi Preziosi</div><div class="lc">Mediaset</div>
+      <!-- set 2 duplicate -->
+      <div class="lc">MONCLER</div><div class="lc">Prada</div><div class="lc">KPMG</div><div class="lc">Samsung</div><div class="lc">Huawei</div><div class="lc">Heineken</div><div class="lc">PwC</div><div class="lc">Swarovski</div><div class="lc">BNL BNP Paribas</div><div class="lc">Hyundai</div><div class="lc">Mediobanca</div><div class="lc">Colgate-Palmolive</div><div class="lc">Santander</div><div class="lc">Giochi Preziosi</div><div class="lc">Mediaset</div>
+    </div>
+  </div>
+
+  <!-- RIGA 2 → destra (opposta) -->
+  <div style="position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)">
+    <div style="display:flex;gap:14px;width:max-content;animation:scrollRight 38s linear infinite">
+      <!-- set 1 -->
+      <div class="lc">Humanitas</div><div class="lc">AlmavivA</div><div class="lc">Liu Jo</div><div class="lc">GSK</div><div class="lc">Bambino Gesù</div><div class="lc">NTT Data</div><div class="lc">S.S. Lazio</div><div class="lc">CONI</div><div class="lc">Azimut Benetti</div><div class="lc">De Nora</div><div class="lc">OVS</div><div class="lc">Schlumberger</div><div class="lc">DiaSorin</div><div class="lc">PAM Gruppo</div><div class="lc">Automobile Club d'Italia</div>
+      <!-- set 2 duplicate -->
+      <div class="lc">Humanitas</div><div class="lc">AlmavivA</div><div class="lc">Liu Jo</div><div class="lc">GSK</div><div class="lc">Bambino Gesù</div><div class="lc">NTT Data</div><div class="lc">S.S. Lazio</div><div class="lc">CONI</div><div class="lc">Azimut Benetti</div><div class="lc">De Nora</div><div class="lc">OVS</div><div class="lc">Schlumberger</div><div class="lc">DiaSorin</div><div class="lc">PAM Gruppo</div><div class="lc">Automobile Club d'Italia</div>
+    </div>
+  </div>
+
+  <!-- old track placeholder for legacy -->
+  <div style="display:none">
     <div id="logoTrack" style="display:flex;gap:48px;width:max-content;animation:scrollLogos 40s linear infinite">
       <!-- Row 1 -->
       <span style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.5);white-space:nowrap;letter-spacing:0.5px">MONCLER</span>
@@ -402,6 +424,10 @@
 
 <style>
 @keyframes scrollLogos{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes scrollLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes scrollRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+.lc{display:inline-flex;align-items:center;padding:12px 24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:16px;font-weight:600;color:rgba(255,255,255,0.55);white-space:nowrap;letter-spacing:0.3px;transition:all 0.3s;flex-shrink:0}
+.lc:hover{background:rgba(212,175,55,0.06);border-color:rgba(212,175,55,0.25);color:rgba(255,255,255,0.85)}
 </style>
 
 <div class="gold-line"></div>
