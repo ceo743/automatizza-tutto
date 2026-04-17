@@ -219,43 +219,50 @@
 
     <!-- ROI CALCULATOR -->
     <div class="reveal" style="background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.18);border-radius:20px;padding:24px 32px;margin-bottom:32px;max-width:680px;width:100%;margin-left:auto;margin-right:auto">
-      <p style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:rgba(212,175,55,0.7);text-align:center;margin-bottom:20px">Calcola quanto stai perdendo</p>
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:rgba(212,175,55,0.7);text-align:center;margin-bottom:20px">Calcola quanto ti costa non automatizzare</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
         <div>
-          <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:8px">Ore ripetitive / settimana</label>
+          <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:8px">Persone che fanno attività ripetitive</label>
           <div style="display:flex;align-items:center;gap:12px">
-            <input type="range" id="roiHours" min="2" max="60" value="20" oninput="calcRoi()" style="flex:1;accent-color:#D4AF37;cursor:pointer">
-            <span id="roiHoursVal" style="font-size:20px;font-weight:800;color:#fff;min-width:36px;text-align:right">20</span>
+            <input type="range" id="roiPeople" min="1" max="20" value="3" oninput="calcRoi()" style="flex:1;accent-color:#D4AF37;cursor:pointer">
+            <span id="roiPeopleVal" style="font-size:20px;font-weight:800;color:#fff;min-width:28px;text-align:right">3</span>
           </div>
         </div>
         <div>
-          <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:8px">Valore della tua ora (€)</label>
+          <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:8px">Costo mensile per persona (€)</label>
           <div style="display:flex;align-items:center;gap:12px">
-            <input type="range" id="roiRate" min="20" max="500" value="50" step="10" oninput="calcRoi()" style="flex:1;accent-color:#D4AF37;cursor:pointer">
-            <span id="roiRateVal" style="font-size:20px;font-weight:800;color:#fff;min-width:52px;text-align:right">€50</span>
+            <input type="range" id="roiSalary" min="800" max="5000" value="2000" step="100" oninput="calcRoi()" style="flex:1;accent-color:#D4AF37;cursor:pointer">
+            <span id="roiSalaryVal" style="font-size:20px;font-weight:800;color:#fff;min-width:64px;text-align:right">€2.000</span>
           </div>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:1px solid rgba(255,255,255,0.06);padding-top:20px">
-        <div style="text-align:center;padding:16px;background:rgba(255,68,68,0.06);border-radius:12px;border:1px solid rgba(255,68,68,0.12)">
-          <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.4);margin-bottom:6px">Perdi ogni mese</p>
-          <p id="roiMonthly" style="font-size:clamp(26px,3vw,38px);font-weight:900;color:rgba(255,68,68,0.85);line-height:1">€4.000</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;border-top:1px solid rgba(255,255,255,0.06);padding-top:20px">
+        <div style="text-align:center;padding:14px;background:rgba(255,68,68,0.06);border-radius:12px;border:1px solid rgba(255,68,68,0.12)">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.4);margin-bottom:6px">Costo team/mese</p>
+          <p id="roiTotal" style="font-size:clamp(20px,2.5vw,30px);font-weight:900;color:rgba(255,68,68,0.85);line-height:1">€6.000</p>
         </div>
-        <div style="text-align:center;padding:16px;background:rgba(212,175,55,0.06);border-radius:12px;border:1px solid rgba(212,175,55,0.15)">
-          <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.4);margin-bottom:6px">L'analisi si ripaga in</p>
-          <p id="roiPayback" style="font-size:clamp(26px,3vw,38px);font-weight:900;color:#D4AF37;line-height:1">4 giorni</p>
+        <div style="text-align:center;padding:14px;background:rgba(255,68,68,0.04);border-radius:12px;border:1px solid rgba(255,68,68,0.08)">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.4);margin-bottom:6px">Quota ripetitiva (~40%)</p>
+          <p id="roiWaste" style="font-size:clamp(20px,2.5vw,30px);font-weight:900;color:rgba(255,100,100,0.7);line-height:1">€2.400</p>
+        </div>
+        <div style="text-align:center;padding:14px;background:rgba(212,175,55,0.06);border-radius:12px;border:1px solid rgba(212,175,55,0.15)">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.4);margin-bottom:6px">Analisi si ripaga in</p>
+          <p id="roiPayback" style="font-size:clamp(20px,2.5vw,30px);font-weight:900;color:#D4AF37;line-height:1">6 giorni</p>
         </div>
       </div>
+      <p style="font-size:11px;color:rgba(255,255,255,0.25);text-align:center;margin-top:12px">* Stima conservativa: il 40% del tempo di un dipendente medio è occupato da attività ripetitive automatizzabili</p>
     </div>
     <script>
     function calcRoi(){
-      var h=parseInt(document.getElementById('roiHours').value);
-      var r=parseInt(document.getElementById('roiRate').value);
-      document.getElementById('roiHoursVal').textContent=h;
-      document.getElementById('roiRateVal').textContent='€'+r;
-      var monthly=h*r*4;
-      document.getElementById('roiMonthly').textContent='€'+monthly.toLocaleString('it-IT');
-      var days=Math.round(497/((h*r)/5));
+      var p=parseInt(document.getElementById('roiPeople').value);
+      var s=parseInt(document.getElementById('roiSalary').value);
+      document.getElementById('roiPeopleVal').textContent=p;
+      document.getElementById('roiSalaryVal').textContent='€'+s.toLocaleString('it-IT');
+      var total=p*s;
+      var waste=Math.round(total*0.4);
+      var days=Math.round(497/(waste/30));
+      document.getElementById('roiTotal').textContent='€'+total.toLocaleString('it-IT');
+      document.getElementById('roiWaste').textContent='€'+waste.toLocaleString('it-IT');
       var payback=days<=1?'1 giorno':days<=30?days+' giorni':Math.round(days/30)+' mesi';
       document.getElementById('roiPayback').textContent=payback;
     }
