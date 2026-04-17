@@ -936,16 +936,64 @@
         <div>
           <h3 class="h-md" style="margin-bottom:8px">Ricevi il piano operativo completo</h3>
           <p class="body-text" style="font-size:14px;margin-bottom:20px">Entro 48 ore ricevi un documento PDF dettagliato con: la mappa dei tuoi processi attuali, ogni automazione consigliata con priorità e ROI stimato, il preventivo per l'implementazione chiavi in mano e la timeline di consegna. Il documento è tuo, anche se non procedi.</p>
-          <!-- MOCK PDF -->
-          <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:20px 24px;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.9">
-            <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:rgba(212,175,55,0.6);margin-bottom:14px">📄 Indice del documento, esempio reale</p>
-            <p>1. Mappa dei processi attuali (diagramma visivo)</p>
-            <p>2. Processi automatizzabili, priorità alta / media / bassa</p>
-            <p>3. Per ogni automazione: ore risparmiate/settimana / ROI mensile stimato</p>
-            <p>4. Stack tecnico consigliato (tool, API, costi mensili)</p>
-            <p>5. Preventivo chiavi in mano, voce per voce</p>
-            <p>6. Timeline di consegna, da firma a sistema live</p>
+          <!-- MOCK PDF — basato su documento reale, anonimizzato -->
+          <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(212,175,55,0.2);box-shadow:0 20px 60px rgba(0,0,0,0.4);max-width:480px;font-family:'Inter',sans-serif">
+            <!-- Cover -->
+            <div style="background:#C9A227;padding:10px 18px;display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:10px;font-weight:700;letter-spacing:2px;color:#000;text-transform:uppercase">DC ACADEMY</span>
+              <span style="font-size:9px;color:rgba(0,0,0,0.6);letter-spacing:1px">RISERVATO</span>
+            </div>
+            <div style="background:#1a1008;padding:20px 18px 16px">
+              <p style="font-size:9px;letter-spacing:2px;color:rgba(212,175,55,0.7);text-transform:uppercase;margin-bottom:6px">Piano di Progetto</p>
+              <p style="font-size:17px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:4px">Automazione Processi Aziendali</p>
+              <p style="font-size:11px;color:rgba(255,255,255,0.35)">Cliente: [Azienda] &nbsp;·&nbsp; Aprile 2026</p>
+            </div>
+            <!-- Sections index -->
+            <div style="background:#0f0c07;padding:14px 18px;border-top:1px solid rgba(212,175,55,0.1)">
+              <p style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(212,175,55,0.5);margin-bottom:10px">Indice</p>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.5)"><span>1. Panoramica e obiettivi</span><span style="color:rgba(212,175,55,0.4)">2</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.5)"><span>2. Mappa processi attuali (as-is)</span><span style="color:rgba(212,175,55,0.4)">4</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.7);font-weight:600"><span>3. Automazioni consigliate con ROI</span><span style="color:rgba(212,175,55,0.6)">6</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.5)"><span>4. Stack tecnico e tool consigliati</span><span style="color:rgba(212,175,55,0.4)">9</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.5)"><span>5. Fasi di sviluppo e timeline</span><span style="color:rgba(212,175,55,0.4)">11</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.5)"><span>6. Investimento e modalità di pagamento</span><span style="color:rgba(212,175,55,0.4)">13</span></div>
+              </div>
+            </div>
+            <!-- ROI sample row -->
+            <div style="background:#0a0804;padding:12px 18px;border-top:1px solid rgba(255,255,255,0.05)">
+              <p style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(212,175,55,0.5);margin-bottom:8px">Estratto — Automazioni ad alto impatto</p>
+              <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:4px;font-size:10px">
+                <div style="color:rgba(255,255,255,0.25);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.06)">Processo</div>
+                <div style="color:rgba(255,255,255,0.25);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right">Ore/sett.</div>
+                <div style="color:rgba(255,255,255,0.25);padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right">ROI/mese</div>
+                <div style="color:rgba(255,255,255,0.6);padding:5px 0">Gestione ordini clienti</div>
+                <div style="color:#4ade80;text-align:right;padding:5px 0">−8 ore</div>
+                <div style="color:#4ade80;text-align:right;padding:5px 0">+€1.600</div>
+                <div style="color:rgba(255,255,255,0.6);padding:5px 0">Report settimanali</div>
+                <div style="color:#4ade80;text-align:right;padding:5px 0">−4 ore</div>
+                <div style="color:#4ade80;text-align:right;padding:5px 0">+€800</div>
+                <div style="color:rgba(255,255,255,0.6);padding:5px 0">Follow-up commerciale</div>
+                <div style="color:#4ade80;text-align:right;padding:5px 0">−6 ore</div>
+                <div style="color:#4ade80;text-align:right;padding:5px 0">+€1.200</div>
+              </div>
+            </div>
+            <!-- Investment highlight -->
+            <div style="background:rgba(212,175,55,0.06);border-top:1px solid rgba(212,175,55,0.15);padding:12px 18px;display:flex;align-items:center;justify-content:space-between">
+              <div>
+                <p style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(212,175,55,0.6)">Investimento stimato</p>
+                <p style="font-size:16px;font-weight:800;color:#D4AF37;margin-top:2px">€X.XXX <span style="font-size:10px;font-weight:400;color:rgba(255,255,255,0.3)">+ IVA</span></p>
+              </div>
+              <div style="text-align:right">
+                <p style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.3)">Payback stimato</p>
+                <p style="font-size:14px;font-weight:700;color:#fff;margin-top:2px">X settimane</p>
+              </div>
+            </div>
+            <div style="background:#080503;padding:8px 18px;text-align:center">
+              <p style="font-size:9px;color:rgba(255,255,255,0.15);letter-spacing:1px">Documento Riservato · DC Academy S.r.l.</p>
+            </div>
           </div>
+          <p style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:10px;font-style:italic">Esempio reale, dati anonimizzati. Il tuo documento rispecchia i tuoi processi specifici.</p>
         </div>
       </div>
     </div>
