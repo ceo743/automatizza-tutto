@@ -314,6 +314,9 @@
           <p id="roiPayback" style="font-size:clamp(20px,2.5vw,30px);font-weight:900;color:#D4AF37;line-height:1">6 giorni</p>
         </div>
       </div>
+      <div style="margin-top:12px;padding:10px 16px;background:rgba(255,68,68,0.06);border:1px solid rgba(255,68,68,0.12);border-radius:10px;text-align:center">
+        <p style="font-size:12px;color:rgba(255,255,255,0.5)">Ogni anno che rimandi: <strong id="roiAnnual" style="color:rgba(255,100,100,0.9)">€28.800</strong> di ore di lavoro che potrebbero non esistere.</p>
+      </div>
       <p style="font-size:11px;color:rgba(255,255,255,0.25);text-align:center;margin-top:12px;font-family:var(--mono)">* Dato rilevato su oltre 47 analisi funzionali completate. Il 40% è la media: varia tra il 25% e il 60% in base al settore e alla struttura del team.</p>
     </div>
     <script>
@@ -324,9 +327,11 @@
       document.getElementById('roiSalaryVal').textContent='€'+s.toLocaleString('it-IT');
       var total=p*s;
       var waste=Math.round(total*0.4);
+      var annual=waste*12;
       var days=Math.round(497/(waste/30));
       document.getElementById('roiTotal').textContent='€'+total.toLocaleString('it-IT');
       document.getElementById('roiWaste').textContent='€'+waste.toLocaleString('it-IT');
+      document.getElementById('roiAnnual').textContent='€'+annual.toLocaleString('it-IT');
       var payback=days<=1?'1 giorno':days<=30?days+' giorni':Math.round(days/30)+' mesi';
       document.getElementById('roiPayback').textContent=payback;
       document.getElementById('roiCtaText').textContent='I tuoi 497€ rientrano in '+payback+'. Prenota l\'analisi →';
@@ -2156,6 +2161,37 @@
 
 <div class="gold-line"></div>
 
+<!-- ===== FUTURE PACING ===== -->
+<section class="section" style="position:relative;overflow:hidden">
+  <div class="ctr-text" style="margin:0 auto;text-align:center">
+    <div class="reveal" style="padding:40px;background:rgba(212,175,55,0.04);border:1px solid rgba(212,175,55,0.1);border-radius:24px">
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:rgba(212,175,55,0.7);margin-bottom:20px">Tra 90 giorni</p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,36px);font-weight:800;line-height:1.2;margin-bottom:24px;color:#fff">
+        Il tuo team non farà più<br>quello che fa oggi a mano.
+      </h3>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px" class="grid-3">
+        <div style="padding:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
+          <p style="font-size:20px;margin-bottom:8px">📄</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6">I report si generano da soli ogni settimana</p>
+        </div>
+        <div style="padding:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
+          <p style="font-size:20px;margin-bottom:8px">📨</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6">Le email ripetitive escono senza che nessuno le scriva</p>
+        </div>
+        <div style="padding:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:14px">
+          <p style="font-size:20px;margin-bottom:8px">🕐</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6">Le ore recuperate tornano al lavoro che genera valore</p>
+        </div>
+      </div>
+      <p style="font-size:15px;color:rgba(255,255,255,0.5);line-height:1.8;max-width:560px;margin:0 auto">
+        Non è fantascienza. È quello che succede nelle aziende che fanno l'analisi e procedono con l'implementazione. Il punto di partenza è capire <em style="color:rgba(255,255,255,0.75)">quali processi nella tua azienda</em> valgono l'investimento.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
 <!-- ===== ANALISI FUNZIONALE + FORM ===== -->
 <section id="abbonati" class="section" style="position:relative;overflow:hidden">
   <div class="orb" style="width:600px;height:600px;background:#D4AF37;top:-200px;left:50%;transform:translateX(-50%);opacity:0.05"></div>
@@ -2242,7 +2278,7 @@
             <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#2a4a3a,#1a6a4a);border:2px solid rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,0.6);margin-left:-4px">M</div>
             <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#3a2a4a,#5a3a6a);border:2px solid rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,0.6);margin-left:-4px">G</div>
           </div>
-          <p style="font-size:12px;color:rgba(255,255,255,0.4)"><span style="color:rgba(255,255,255,0.7);font-weight:600">47 aziende</span> hanno già prenotato la loro analisi</p>
+          <p style="font-size:12px;color:rgba(255,255,255,0.4)"><span style="color:rgba(255,255,255,0.7);font-weight:600">47 aziende</span> hanno già prenotato — studi legali, agenzie immobiliari, commercialisti, PMI industriali, cliniche, e-commerce</p>
         </div>
         <a href="#" onclick="openCalendly(event)" class="btn-gold" style="width:100%;justify-content:center;font-size:14px;padding:22px 48px"><span>PRENOTA LA TUA ANALISI &rarr;</span></a>
         <p style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:12px">497&euro; + IVA / Se procedi, i 497&euro; vengono scalati dal costo di implementazione / Pagamento sicuro</p>
@@ -2279,6 +2315,7 @@
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Hai bisogno di approvazioni di terzi per investire 497€: il processo decisionale si blocca prima ancora di iniziare</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Aspetti il "momento giusto": non esiste, e ogni settimana che passa è un costo che continua</p></div>
           <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Vuoi solo informarti senza nessuna intenzione di cambiare come lavora la tua azienda</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="color:#ff4444;font-size:16px;flex-shrink:0;margin-top:2px">&#10007;</span><p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Cerchi una soluzione pronta in 24 ore senza call e senza analisi. Quelle esistono, ma producono automazioni generiche che si rompono al primo caso edge. Non è il nostro lavoro.</p></div>
         </div>
       </div>
     </div>
