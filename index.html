@@ -64,6 +64,10 @@
     @keyframes auroraB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-5vw,-4vh) scale(1.14)}}
     @media(prefers-reduced-motion:reduce){#ambient span{animation:none}}
     .section-hero h1 .gold{text-shadow:0 0 44px rgba(212,175,55,.22)}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.65}}
+    .trust-badges{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-top:18px}
+    .trust-badge{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:100px;font-size:12px;color:rgba(255,255,255,0.5);white-space:nowrap}
+    .trust-badge svg{flex-shrink:0;opacity:.6}
     .ba-row{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--gap-md);align-items:center;padding:clamp(16px,2vw,24px) 0;border-bottom:1px solid rgba(255,255,255,.04)}
     .ba-before{text-align:right;color:rgba(255,255,255,.4);font-size:var(--t-body);text-decoration:line-through;text-decoration-color:rgba(255,68,68,.5)}
     .ba-after{text-align:left;color:rgba(255,255,255,.85);font-size:var(--t-body);font-weight:500}
@@ -206,8 +210,11 @@
 
 <!-- ===== STICKY CTA BAR ===== -->
 <div id="stickyCta" style="position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(8,11,16,0.97);border-top:1px solid rgba(212,175,55,0.15);padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:20px;transform:translateY(100%);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)">
-  <p style="font-size:14px;color:rgba(255,255,255,0.6);font-weight:500" class="hide-mobile"><span class="gold" style="font-weight:700">Analisi Funzionale</span> / 497&euro; + IVA / Call da 45 a 90 minuti + documento PDF completo</p>
-  <a href="#" onclick="openCalendly(event)" class="btn-gold" style="padding:12px 28px;font-size:11px"><span>PRENOTA ORA &rarr;</span></a>
+  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center">
+    <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.3);border-radius:100px;font-size:11px;font-weight:700;color:#22c55e;letter-spacing:0.5px;animation:pulse 2.5s ease-in-out infinite" class="hide-mobile">&#9679; 3 posti disponibili questo mese</span>
+    <p style="font-size:13px;color:rgba(255,255,255,0.5);font-weight:500" class="hide-mobile"><span class="gold" style="font-weight:700">497€ + IVA</span> · Documento tuo anche se non procedi · I 497€ vengono scalati dall'implementazione</p>
+  </div>
+  <a href="#" onclick="openCalendly(event)" class="btn-gold" style="padding:12px 28px;font-size:11px;white-space:nowrap"><span>PRENOTA ORA &rarr;</span></a>
 </div>
 
 <!-- ===== HEADER ===== -->
@@ -356,6 +363,12 @@
     <a href="#" onclick="openCalendly(event)" class="btn-gold reveal" style="font-size:14px;padding:20px 48px;white-space:normal;text-align:center;max-width:100%">
       <span id="roiCtaText">I tuoi 497€ rientrano in 6 giorni. Scopri quanto recuperi →</span>
     </a>
+    <div class="trust-badges reveal">
+      <span class="trust-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Documento tuo anche se non procedi</span>
+      <span class="trust-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Pagamento sicuro</span>
+      <span class="trust-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Risultato in 48 ore</span>
+      <span class="trust-badge" style="border-color:rgba(34,197,94,0.25);color:#22c55e">&#9679; 3 posti disponibili</span>
+    </div>
 
     <!-- COSA SUCCEDE DOPO -->
     <div class="reveal" style="margin-top:36px;max-width:520px;width:100%;margin-left:auto;margin-right:auto;text-align:left">
@@ -2203,6 +2216,36 @@
 
 <div class="gold-line"></div>
 
+<!-- ===== SOCIAL PROOF BAR LAST MILE ===== -->
+<div style="position:relative;z-index:2;padding:28px 24px;border-top:1px solid rgba(212,175,55,0.08);border-bottom:1px solid rgba(212,175,55,0.08);background:rgba(212,175,55,0.03)">
+  <div style="max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:20px 40px">
+    <div style="text-align:center">
+      <p style="font-family:'Playfair Display',serif;font-size:clamp(22px,2.5vw,32px);font-weight:900;color:#D4AF37;line-height:1">47</p>
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.35);margin-top:4px">Analisi completate</p>
+    </div>
+    <div style="width:1px;height:36px;background:rgba(255,255,255,0.06)" class="hide-mobile"></div>
+    <div style="text-align:center">
+      <p style="font-family:'Playfair Display',serif;font-size:clamp(22px,2.5vw,32px);font-weight:900;color:#D4AF37;line-height:1">11</p>
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.35);margin-top:4px">Settori automatizzati</p>
+    </div>
+    <div style="width:1px;height:36px;background:rgba(255,255,255,0.06)" class="hide-mobile"></div>
+    <div style="text-align:center">
+      <p style="font-family:'Playfair Display',serif;font-size:clamp(22px,2.5vw,32px);font-weight:900;color:#D4AF37;line-height:1">40%</p>
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.35);margin-top:4px">Ore recuperate in media</p>
+    </div>
+    <div style="width:1px;height:36px;background:rgba(255,255,255,0.06)" class="hide-mobile"></div>
+    <div style="text-align:center">
+      <p style="font-family:'Playfair Display',serif;font-size:clamp(22px,2.5vw,32px);font-weight:900;color:#D4AF37;line-height:1">&lt;6gg</p>
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.35);margin-top:4px">Payback medio analisi</p>
+    </div>
+    <div style="width:1px;height:36px;background:rgba(255,255,255,0.06)" class="hide-mobile"></div>
+    <div style="text-align:center">
+      <p style="font-family:'Playfair Display',serif;font-size:clamp(22px,2.5vw,32px);font-weight:900;color:#D4AF37;line-height:1">48h</p>
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.35);margin-top:4px">Consegna documento</p>
+    </div>
+  </div>
+</div>
+
 <!-- ===== ANALISI FUNZIONALE + FORM ===== -->
 <section id="abbonati" class="section" style="position:relative;overflow:hidden">
   <div class="orb" style="width:600px;height:600px;background:#D4AF37;top:-200px;left:50%;transform:translateX(-50%);opacity:0.05"></div>
@@ -2214,8 +2257,11 @@
 
     <div class="reveal price-card" style="margin-bottom:48px">
       <!-- SCARCITY BANNER -->
-      <div style="margin:-32px -32px 28px -32px;padding:12px 24px;background:linear-gradient(135deg,rgba(212,175,55,0.15),rgba(212,175,55,0.06));border-bottom:1px solid rgba(212,175,55,0.2);border-radius:20px 20px 0 0;text-align:center">
-        <p style="font-size:12px;font-weight:700;color:#D4AF37;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">&#128276; Massimo 8 analisi al mese</p>
+      <div style="margin:-32px -32px 28px -32px;padding:14px 24px;background:linear-gradient(135deg,rgba(212,175,55,0.15),rgba(212,175,55,0.06));border-bottom:1px solid rgba(212,175,55,0.2);border-radius:20px 20px 0 0;text-align:center">
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px">
+          <span style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.35);border-radius:100px;font-size:11px;font-weight:700;color:#22c55e;letter-spacing:0.5px;animation:pulse 2.5s ease-in-out infinite">&#9679; 3 posti disponibili questo mese</span>
+          <span style="font-size:12px;font-weight:700;color:rgba(212,175,55,0.9);letter-spacing:1px;text-transform:uppercase">su 8 totali</span>
+        </div>
         <p style="font-size:12px;color:rgba(255,255,255,0.5)">Ogni sessione richiede 3–4 ore di lavoro del nostro team prima ancora della call. Non possiamo fare di più senza scendere sulla qualità.</p>
       </div>
       <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:8px;text-transform:uppercase;letter-spacing:2px">Pagamento unico</p>
@@ -2291,8 +2337,12 @@
           </div>
           <p style="font-size:12px;color:rgba(255,255,255,0.4)"><span style="color:rgba(255,255,255,0.7);font-weight:600">47 aziende</span> hanno già prenotato — studi legali, agenzie immobiliari, commercialisti, PMI industriali, cliniche, e-commerce</p>
         </div>
-        <a href="#" onclick="openCalendly(event)" class="btn-gold" style="width:100%;justify-content:center;font-size:14px;padding:22px 48px"><span>PRENOTA LA TUA ANALISI &rarr;</span></a>
-        <p style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:12px">497&euro; + IVA / Se procedi, i 497&euro; vengono scalati dal costo di implementazione / Pagamento sicuro</p>
+        <a href="#" onclick="openCalendly(event)" class="btn-gold" style="width:100%;justify-content:center;font-size:15px;padding:22px 48px"><span>PRENOTA LA TUA ANALISI &rarr;</span></a>
+        <div class="trust-badges" style="justify-content:center;margin-top:16px">
+          <span class="trust-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Documento tuo anche se non procedi</span>
+          <span class="trust-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Pagamento sicuro</span>
+          <span class="trust-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>497€ scalati dall'implementazione</span>
+        </div>
       </div>
     </div>
   </div>
